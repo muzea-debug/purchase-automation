@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 테스트용 발주서 원본 (1.4GB, NAS 볼륨에서 마운트)
+통합발주서원본_test/
+
+# 로컬 임시 데이터
+uploads/
+output/
+발주서_output/
+구글 시트 대체용/
+
+# 개발 도구
+.git/
+.gitignore
+.env
+*.bat
+tests/
+docs/

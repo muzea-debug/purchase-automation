@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>발주 실행</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Malgun Gothic', sans-serif; background: #f5f5f5; color: #333; }
+    .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 24px; }
+    .nav-header {
+      background: #1a1a2e;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-header strong { color: #fff; font-size: 15px; }
+    .nav-left { display: flex; align-items: center; gap: 10px; }
+    .nav-dash { color: #7ec8ff !important; font-weight: 700; text-decoration: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; border: 1px solid rgba(74,158,255,.35); }
+    .nav-dash:hover { background: rgba(74,158,255,.15) !important; }
+    .nav-tabs-custom { display: flex; gap: 4px; }
+    .nav-tabs-custom a {
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .nav-tabs-custom a.active { background: #4a4a8a; color: #fff; }
+    .nav-tabs-custom a.inactive { background: rgba(255,255,255,0.15); color: #ccc; }
+
+    /* ── 입력 카드 ── */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .card h2 { font-size: 15px; font-weight: 600; margin-bottom: 14px; color: #555; }
+
+    .row-input { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .row-input input {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+    .row-input input:focus { border-color: #3b82f6; }
+    .input-barcode { flex: 2; }
+    .input-qty { flex: 1; max-width: 110px; }
+    .input-사유 { flex: 1; min-width: 120px; }
+    .bulk-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding: 8px 10px;
+      background: #f9fafb;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
+    .bulk-bar label { font-size: 13px; color: #555; white-space: nowrap; }
+    .bulk-bar input {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 13px;
+      outline: none;
+      width: 160px;
+    }
+    .bulk-bar input:focus { border-color: #3b82f6; }
+    .btn-remove {
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px 8px;
+      line-height: 1;
+    }
+    .btn-remove:hover { color: #e53e3e; }
+
+    /* ── 버튼 공통 ── */
+    .btn {
+      display: inline-block;
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: #3b82f6; color: #fff; }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-secondary { background: #e5e7eb; color: #374151; }
+    .btn-secondary:hover { background: #d1d5db; }
+    .btn-success { background: #10b981; color: #fff; }
+    .btn-success:hover { background: #059669; }
+    .btn-sm { padding: 6px 12px; font-size: 13px; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .btn-row { display: flex; gap: 8px; margin-top: 10px; }
+
+    /* ── 옵션 ── */
+    .options { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+    .options label { font-size: 14px; color: #555; display: flex; align-items: center; gap: 6px; }
+    .options select, .options input[type="text"] {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 14px;
+    }
+
+    /* ── 조회 결과 ── */
+    #result-area { display: none; }
+    .unconfirmed {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+    .unconfirmed strong { color: #b45309; }
+
+    /* ── 그룹 카드 ── */
+    .group-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .group-title { font-size: 15px; font-weight: 600; }
+    .po-row { display: flex; align-items: center; gap: 8px; }
+    .po-row label { font-size: 13px; color: #555; white-space: nowrap; }
+    .po-input {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      width: 140px;
+    }
+    .po-input:focus { border-color: #3b82f6; outline: none; }
+
+    .items-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .items-table th {
+      background: #f9fafb;
+      padding: 7px 10px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      color: #6b7280;
+      font-weight: 600;
+    }
+    .items-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .items-table tr:last-child td { border-bottom: none; }
+
+    /* ── 입력 탭 ── */
+    .input-tabs { display: flex; gap: 0; margin-bottom: 14px; border-bottom: 2px solid #e5e7eb; }
+    .input-tab {
+      padding: 7px 18px; font-size: 13px; font-weight: 600; cursor: pointer;
+      border: none; background: none; color: #9ca3af; border-bottom: 2px solid transparent; margin-bottom: -2px;
+    }
+    .input-tab.active { color: #3b82f6; border-bottom-color: #3b82f6; }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* ── 엑셀 업로드 ── */
+    .xl-drop {
+      border: 2px dashed #93c5fd; border-radius: 8px; padding: 24px;
+      text-align: center; cursor: pointer; background: #f0f9ff; transition: background .15s;
+    }
+    .xl-drop:hover, .xl-drop.over { background: #dbeafe; border-color: #3b82f6; }
+    .xl-drop .xl-icon { font-size: 28px; margin-bottom: 6px; }
+    .xl-drop p { font-size: 13px; color: #4b5563; margin: 0; }
+    .xl-drop small { font-size: 11px; color: #9ca3af; }
+    .xl-preview { margin-top: 10px; }
+    .xl-preview table { width: 100%; font-size: 12px; border-collapse: collapse; }
+    .xl-preview th { background: #f9fafb; padding: 5px 8px; text-align: left; border-bottom: 1px solid #e5e7eb; color: #6b7280; font-weight: 600; }
+    .xl-preview td { padding: 5px 8px; border-bottom: 1px solid #f3f4f6; }
+    .xl-errors { margin-top: 6px; font-size: 12px; color: #dc2626; }
+
+    /* ── 완료 메시지 ── */
+    #done-area { display: none; }
+    .done-card {
+      background: #ecfdf5;
+      border: 1px solid #6ee7b7;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .done-card .done-title { font-weight: 600; margin-bottom: 8px; color: #065f46; }
+    .done-card .done-meta { font-size: 13px; color: #047857; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      margin-left: 6px;
+    }
+    .tag-ok { background: #d1fae5; color: #065f46; }
+    .tag-skip { background: #f3f4f6; color: #6b7280; }
+    .tag-fail { background: #fee2e2; color: #b91c1c; }
+
+    /* ── 이메일 발송 박스 ── */
+    .email-box {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .email-box span { font-size: 13px; color: #6b7280; flex: 1; }
+    /* ── 이메일 수신자 설정 박스 ── */
+    .email-cfg-box {
+      background: #f8faff;
+      border: 1px solid #dbeafe;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 8px;
+    }
+    .email-cfg-box h4 { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 10px; }
+    .email-cfg-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .email-cfg-row label { font-size: 12px; color: #555; width: 60px; flex-shrink: 0; }
+    .email-cfg-row input { flex: 1; border: 1px solid #ddd; border-radius: 4px; padding: 5px 9px; font-size: 12px; }
+    .email-cfg-row .hint { font-size: 11px; color: #aaa; }
+
+    /* ── DB 카드 ── */
+    .db-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .db-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+    .db-card-header h2 { font-size: 15px; font-weight: 600; color: #555; margin: 0; }
+    .db-summary { font-size: 13px; color: #6b7280; margin-left: 10px; }
+    .db-body { margin-top: 12px; display: none; }
+    .db-body.open { display: block; }
+    .db-file-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 13px;
+    }
+    .db-file-row:last-child { border-bottom: none; }
+    .db-file-name { color: #374151; word-break: break-all; }
+    .db-file-count { color: #6b7280; white-space: nowrap; margin-left: 12px; }
+    .db-empty { color: #9ca3af; font-size: 13px; }
+    .chevron { font-size: 12px; color: #9ca3af; margin-left: 8px; transition: transform 0.2s; }
+    .chevron.open { transform: rotate(180deg); }
+
+    /* ── 자동완성 ── */
+    .autocomplete-wrap { position: relative; flex: 2; }
+    .autocomplete-wrap input { width: 100%; }
+    .ac-list {
+      position: absolute;
+      top: calc(100% + 2px); left: 0; right: 0;
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      z-index: 200;
+      max-height: 220px;
+      overflow-y: auto;
+      display: none;
+    }
+    .ac-list.show { display: block; }
+    .ac-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .ac-item:last-child { border-bottom: none; }
+    .ac-item:hover, .ac-item.ac-active { background: #eff6ff; }
+    .ac-name { color: #374151; font-weight: 500; flex: 1; }
+    .ac-bc { color: #9ca3af; font-size: 12px; white-space: nowrap; }
+    .ac-empty { padding: 10px 12px; color: #9ca3af; font-size: 13px; }
+
+    /* ── 스피너 ── */
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid #ccc;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .msg-error { color: #dc2626; font-size: 14px; margin-top: 8px; }
+
+    /* ── PO 대시보드 ── */
+    .po-dashboard {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .po-dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .po-dashboard-header h2 { font-size: 14px; font-weight: 600; color: #555; margin: 0; }
+    .po-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+    .po-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .po-badge:hover { background: #e0f2fe; }
+    .po-badge.full { background: #fef2f2; border-color: #fca5a5; }
+    .po-badge .badge-name { color: #6b7280; font-size: 11px; }
+    .po-badge .badge-code { font-weight: 700; color: #1d4ed8; }
+    .po-badge.full .badge-code { color: #dc2626; }
+    .po-badge .badge-num { color: #374151; }
+    .po-badge .badge-max { color: #9ca3af; font-size: 11px; }
+    .po-edit-popover {
+      display: none;
+      position: absolute;
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      z-index: 300;
+      min-width: 200px;
+    }
+    .po-edit-popover.show { display: block; }
+    .po-edit-popover label { font-size: 12px; color: #6b7280; display: block; margin-bottom: 6px; }
+    .po-edit-popover input {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      margin-bottom: 8px;
+      outline: none;
+    }
+    .po-edit-popover input:focus { border-color: #3b82f6; }
+    .po-edit-actions { display: flex; gap: 6px; }
+
+    /* ── 신규 알림 토스트 ── */
+    #toast-area {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      background: #1d4ed8;
+      color: #fff;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 13px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      pointer-events: all;
+      animation: slideDown 0.3s ease;
+      max-width: 420px;
+    }
+    .toast strong { display: block; font-size: 12px; opacity: 0.8; margin-bottom: 2px; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 신규 발주서 알림 토스트 영역 -->
+<div id="toast-area"></div>
+
+<div class="nav-header">
+  <div class="nav-left">
+    <strong>발주 자동화</strong>
+    <a href="/dashboard" class="nav-dash">재고 대시보드</a>
+  </div>
+  <div class="nav-tabs-custom">
+    <a href="/" class="inactive">원본 발주서 생성</a>
+    <a href="/발주" class="active">발주 실행</a>
+    <a href="/재고현황" class="inactive">재고현황판</a>
+    <a href="/pi" class="inactive">선금계약서 관리</a>
+  </div>
+</div>
+<div class="container">
+
+  <!-- ── PO 코드 대시보드 ── -->
+  <div class="po-dashboard" style="position:relative;">
+    <div class="po-dashboard-header">
+      <h2>PO 코드 현황</h2>
+      <button class="btn btn-secondary btn-sm" onclick="loadPoDashboard()" style="font-size:12px; padding:4px 10px;">
+        새로고침
+      </button>
+      <button class="btn btn-sm" onclick="신규유형추가모달열기()" style="font-size:12px; padding:4px 10px; background:#2e7d32; color:#fff; border:none; margin-left:6px;">
+        + 신규 유형 추가
+      </button>
+    </div>
+    <!-- 신규 유형 추가 모달 -->
+    <div id="po-new-type-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center">
+      <div style="background:#fff;border-radius:10px;padding:22px;width:340px;box-shadow:0 8px 24px rgba(0,0,0,.2)">
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:14px">신규 PO 유형 추가</h3>
+        <div style="margin-bottom:10px">
+          <label style="font-size:12px;font-weight:600;color:#555;display:block;margin-bottom:4px">대상 품목 유형</label>
+          <select id="po-new-category" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:6px 9px;font-size:13px">
+            <option value="브랜드">브랜드 (일반 상품)</option>
+            <option value="부자재">부자재</option>
+          </select>
+        </div>
+        <div style="margin-bottom:10px">
+          <label style="font-size:12px;font-weight:600;color:#555;display:block;margin-bottom:4px">코드 base <span style="font-weight:400;color:#999">(예: NCA, FA, EI)</span></label>
+          <input id="po-new-base" type="text" placeholder="예: NCA" maxlength="6"
+                 style="width:100%;border:1px solid #ddd;border-radius:4px;padding:6px 9px;font-size:13px;text-transform:uppercase">
+        </div>
+        <div style="margin-bottom:10px">
+          <label style="font-size:12px;font-weight:600;color:#555;display:block;margin-bottom:4px">표시 이름 <span style="font-weight:400;color:#999">(예: 누아트ACC)</span></label>
+          <input id="po-new-name" type="text" placeholder="예: 누아트ACC"
+                 style="width:100%;border:1px solid #ddd;border-radius:4px;padding:6px 9px;font-size:13px">
+        </div>
+        <p id="po-new-msg" style="font-size:12px;min-height:16px;margin-bottom:8px"></p>
+        <div style="display:flex;gap:8px">
+          <button onclick="신규유형저장()" style="flex:1;padding:8px;background:#1a1a2e;color:#fff;border:none;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer">추가</button>
+          <button onclick="신규유형추가모달닫기()" style="flex:1;padding:8px;background:#eee;color:#333;border:none;border-radius:5px;font-size:13px;cursor:pointer">취소</button>
+        </div>
+      </div>
+    </div>
+    <div class="po-badges" id="po-badges">
+      <span style="font-size:12px; color:#9ca3af;">로드 중...</span>
+    </div>
+    <!-- 수정 팝오버 (공유) -->
+    <div class="po-edit-popover" id="po-popover">
+      <label id="po-popover-label">현재 번호 수정</label>
+      <input type="number" id="po-popover-input" min="0" max="999">
+      <div class="po-edit-actions">
+        <button class="btn btn-primary btn-sm" onclick="savePo()">저장</button>
+        <button class="btn btn-secondary btn-sm" onclick="closePoPopover()">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 바코드 입력 ── -->
+  <div class="card">
+    <h2>바코드 + 수량 입력</h2>
+    <!-- 탭 -->
+    <div class="input-tabs">
+      <button class="input-tab active" onclick="switchTab('manual')">개별 입력</button>
+      <button class="input-tab" onclick="switchTab('excel')">엑셀 업로드</button>
+    </div>
+
+    <!-- 개별 입력 탭 -->
+    <div class="tab-pane active" id="tab-manual">
+      <div class="bulk-bar">
+        <label>사유 일괄</label>
+        <div class="autocomplete-wrap" style="flex:1; max-width:200px;">
+          <input id="bulk-사유" type="text" placeholder="사유 선택 또는 입력" autocomplete="off"
+                 oninput="onBulkSayuInput(this)" onkeydown="onBulkSayuKey(event)"
+                 onfocus="onSayuFocus(this, 'bulk')"
+                 onblur="hideAc('bulk', 150)">
+          <div class="ac-list" id="ac-bulk"></div>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="applyBulkSayu()">전체 적용</button>
+      </div>
+      <div id="rows-area"></div>
+      <div class="btn-row">
+        <button class="btn btn-secondary btn-sm" onclick="addRow()">+ 행 추가</button>
+        <button class="btn btn-primary" id="btn-search" onclick="doSearch()" disabled>상품 조회</button>
+      </div>
+    </div>
+
+    <!-- 엑셀 업로드 탭 -->
+    <div class="tab-pane" id="tab-excel">
+      <div style="display:flex; gap:8px; align-items:center; margin-bottom:10px;">
+        <a href="/api/발주/양식_다운로드" download="발주입력_양식.xlsx"
+           class="btn btn-secondary btn-sm" style="text-decoration:none;">양식 다운로드</a>
+        <span style="font-size:12px; color:#9ca3af;">바코드 / 수량 / 발주유형 컬럼</span>
+      </div>
+      <div class="xl-drop" id="xl-drop"
+           onclick="document.getElementById('xl-file').click()"
+           ondragover="xlOver(event)" ondragleave="xlLeave()" ondrop="xlDrop(event)">
+        <div class="xl-icon">📂</div>
+        <p>파일을 드래그하거나 클릭해 업로드</p>
+        <small>.xlsx / .xls</small>
+        <input type="file" id="xl-file" accept=".xlsx,.xls" style="display:none" onchange="xlUpload(this.files[0])">
+      </div>
+      <div id="xl-preview"></div>
+      <div class="btn-row" style="margin-top:10px;">
+        <button class="btn btn-primary" id="btn-xl-search" onclick="doXlSearch()" disabled>상품 조회</button>
+      </div>
+    </div>
+
+    <div id="search-error" class="msg-error"></div>
+  </div>
+
+  <!-- ── 조회 결과 ── -->
+  <div id="result-area">
+    <div id="unconfirmed-area"></div>
+    <div id="groups-area"></div>
+    <div class="btn-row" style="margin-bottom:16px;">
+      <button class="btn btn-success" id="btn-execute" onclick="doExecute()">발주 실행</button>
+      <button class="btn btn-secondary" onclick="resetAll()">초기화</button>
+    </div>
+    <div id="execute-error" class="msg-error"></div>
+  </div>
+
+  <!-- ── 완료 ── -->
+  <div id="done-area">
+    <div class="card" style="background:#ecfdf5; border:1px solid #6ee7b7;">
+      <h2 style="color:#065f46;">발주 완료</h2>
+    </div>
+    <div id="done-results"></div>
+    <!-- 이메일 발송 -->
+    <div class="email-box" id="email-box" style="display:none;">
+      <span id="email-status">발주서를 이메일로 발송할 수 있습니다.</span>
+      <button class="btn btn-primary btn-sm" id="btn-email" onclick="sendEmail()">이메일 발송</button>
+      <button id="pi-gen-btn" style="display:none;margin-left:6px" class="btn btn-sm" onclick="openPIModal()">선금계약서 생성</button>
+    </div>
+    <!-- 이메일 수신자 설정 -->
+    <div class="email-cfg-box">
+      <h4>이메일 수신자 설정</h4>
+      <div class="email-cfg-row">
+        <label>수신자</label>
+        <input type="email" id="cfg-to" placeholder="example@domain.com">
+      </div>
+      <div class="email-cfg-row">
+        <label>참조 (CC)</label>
+        <input type="text" id="cfg-cc" placeholder="여러 명이면 쉼표로 구분">
+      </div>
+      <div class="email-cfg-row" style="justify-content:flex-end;">
+        <span id="cfg-msg" style="font-size:12px;color:#16a34a;display:none;">저장되었습니다.</span>
+        <button class="btn btn-secondary btn-sm" onclick="saveEmailCfg()">저장</button>
+      </div>
+    </div>
+    <div class="btn-row" style="margin-top:12px;">
+      <button class="btn btn-secondary" onclick="resetAll()">새 발주</button>
+    </div>
+  </div>
+
+  <!-- ── 제조사-계좌 매칭 현황 ── -->
+  <div class="db-card" style="margin-bottom:16px;">
+    <div class="db-card-header" onclick="toggleMatchReport()">
+      <div style="display:flex;align-items:center;">
+        <h2>제조사-계좌 매칭 현황</h2>
+        <span class="db-summary" id="match-summary"></span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="btn btn-secondary btn-sm" id="btn-match-refresh"
+                onclick="event.stopPropagation(); loadMatchReport()" style="font-size:12px;padding:4px 12px;">
+          분석 실행
+        </button>
+        <span class="chevron" id="match-chevron">▼</span>
+      </div>
+    </div>
+    <div class="db-body" id="match-body">
+      <div id="match-result"></div>
+    </div>
+  </div>
+
+  <!-- ── 원본발주서 DB (하단) ── -->
+  <div class="db-card">
+    <div class="db-card-header" onclick="toggleDb()">
+      <div style="display:flex; align-items:center;">
+        <h2>원본발주서 DB</h2>
+        <span class="db-summary" id="db-summary"></span>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button class="btn btn-secondary btn-sm" id="btn-db-refresh"
+                onclick="event.stopPropagation(); refreshDb()" style="font-size:12px; padding:4px 12px;">
+          DB 업데이트
+        </button>
+        <span class="chevron" id="db-chevron">▼</span>
+      </div>
+    </div>
+    <div class="db-body" id="db-body">
+      <div id="db-files"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── 상태 ──────────────────────────────────────────
+let searchGroups = [];
+let dbOpen = false;
+let _바코드사유맵 = {};
+let _이메일준비 = null;
+let _xlItems = [];
+let _poPopoverTarget = null;  // {prefix, badgeEl}
+let _계좌목록 = [];
+
+async function _계좌_로드() {
+  try {
+    const r = await fetch('/api/계좌/목록').then(r => r.json());
+    _계좌목록 = r.data || [];
+  } catch {}
+}
+
+function _계좌_매칭(제조사명, 계좌id) {
+  if (!_계좌목록.length) return null;
+  // 발주서에 계좌id가 저장된 경우 직접 매칭
+  if (계좌id) {
+    const byId = _계좌목록.find(a => String(a.id) === String(계좌id));
+    if (byId) return byId;
+  }
+  if (!제조사명) return null;
+  const key = 제조사명.toLowerCase().trim();
+  const exact = _계좌목록.find(a =>
+    (a.회사명_발주서||'').toLowerCase().trim() === key ||
+    (a.회사명_영문||'').toLowerCase().trim() === key
+  );
+  if (exact) return exact;
+  return _계좌목록.find(a => {
+    const b = (a.회사명_발주서||'').toLowerCase().trim();
+    const e = (a.회사명_영문||'').toLowerCase().trim();
+    return (b && (key.includes(b) || b.includes(key))) ||
+           (e && (key.includes(e) || e.includes(key)));
+  }) || null;
+}
+
+// ── 입력 탭 전환 ──────────────────────────────────
+function switchTab(tab) {
+  document.querySelectorAll('.input-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.currentTarget.classList.add('active');
+  document.getElementById('search-error').textContent = '';
+}
+
+// ── 엑셀 업로드 ──────────────────────────────────
+function xlOver(e) { e.preventDefault(); document.getElementById('xl-drop').classList.add('over'); }
+function xlLeave() { document.getElementById('xl-drop').classList.remove('over'); }
+function xlDrop(e) { e.preventDefault(); xlLeave(); if (e.dataTransfer.files[0]) xlUpload(e.dataTransfer.files[0]); }
+
+async function xlUpload(file) {
+  if (!file) return;
+  document.getElementById('xl-preview').innerHTML = '<span style="font-size:12px;color:#6b7280;">파싱 중...</span>';
+  document.getElementById('btn-xl-search').disabled = true;
+  _xlItems = [];
+  const fd = new FormData();
+  fd.append('file', file);
+  try {
+    const res = await fetch('/api/발주/엑셀_파싱', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (!data.success) {
+      document.getElementById('xl-preview').innerHTML = `<div class="xl-errors">${escHtml(data.error)}</div>`;
+      return;
+    }
+    _xlItems = data.items || [];
+    const rows = _xlItems.slice(0, 10).map(it => `
+      <tr>
+        <td>${escHtml(it.barcode)}</td>
+        <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escHtml(it.이름||'-')}</td>
+        <td style="text-align:right">${it.quantity.toLocaleString()}</td>
+        <td>${escHtml(it.사유||'')}</td>
+      </tr>
+    `).join('');
+    const more = _xlItems.length > 10 ? `<div style="font-size:11px;color:#9ca3af;margin-top:4px;">... 외 ${_xlItems.length - 10}행</div>` : '';
+    const errs = data.errors?.length ? `<div class="xl-errors">${data.errors.map(escHtml).join('<br>')}</div>` : '';
+    document.getElementById('xl-preview').innerHTML = `
+      <div class="xl-preview">
+        <div style="font-size:12px;color:#374151;margin-bottom:6px;font-weight:600;">총 ${_xlItems.length}행 파싱됨</div>
+        <table><thead><tr><th>바코드</th><th>제품명</th><th>수량</th><th>발주유형</th></tr></thead><tbody>${rows}</tbody></table>
+        ${more}${errs}
+      </div>`;
+    document.getElementById('btn-xl-search').disabled = _xlItems.length === 0;
+  } catch(e) {
+    document.getElementById('xl-preview').innerHTML = `<div class="xl-errors">서버 오류: ${escHtml(e.message)}</div>`;
+  }
+}
+
+async function doXlSearch() {
+  if (!_xlItems.length) return;
+  _바코드사유맵 = {};
+  _xlItems.forEach(it => { _바코드사유맵[it.barcode] = it.사유 || '정기발주'; });
+  document.getElementById('search-error').textContent = '';
+  const btn = document.getElementById('btn-xl-search');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>조회 중...';
+  try {
+    const res = await fetch('/api/발주/조회', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: _xlItems }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      document.getElementById('search-error').textContent = data.error || '조회 실패';
+      return;
+    }
+    renderSearchResult(data);
+  } catch(e) {
+    document.getElementById('search-error').textContent = '서버 오류: ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '상품 조회';
+  }
+}
+
+// ── 원본발주서 DB ──────────────────────────────────
+function toggleDb() {
+  dbOpen = !dbOpen;
+  document.getElementById('db-body').classList.toggle('open', dbOpen);
+  document.getElementById('db-chevron').classList.toggle('open', dbOpen);
+}
+
+async function refreshDb() {
+  const btn = document.getElementById('btn-db-refresh');
+  const summary = document.getElementById('db-summary');
+  btn.disabled = true;
+  btn.textContent = '스캔 중...';
+  summary.textContent = '';
+  try {
+    const res = await fetch('/api/발주/카탈로그');
+    const data = await res.json();
+    if (!data.success) { summary.textContent = '오류'; return; }
+
+    summary.textContent = `파일 ${data.파일수}개 · 상품 ${data.총_상품수}개`;
+
+    const filesEl = document.getElementById('db-files');
+    if (!data.files.length) {
+      filesEl.innerHTML = '<div class="db-empty">통합발주서원본/ 폴더에 xlsx 파일이 없습니다.</div>';
+    } else {
+      filesEl.innerHTML = data.files.map(f => `
+        <div class="db-file-row">
+          <span class="db-file-name">${escHtml(f.파일명)}</span>
+          <span class="db-file-count">${f.상품수}개 상품</span>
+        </div>
+      `).join('');
+    }
+  } catch(e) {
+    summary.textContent = '서버 오류';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'DB 업데이트';
+  }
+}
+
+// ── PO 대시보드 ───────────────────────────────────
+async function loadPoDashboard() {
+  const area = document.getElementById('po-badges');
+  area.innerHTML = '<span style="font-size:12px;color:#9ca3af;">로드 중...</span>';
+  try {
+    const res = await fetch('/api/발주/po_대시보드');
+    const data = await res.json();
+    if (!data.success || !data.series) { area.innerHTML = '<span style="font-size:12px;color:#9ca3af;">조회 실패</span>'; return; }
+
+    area.innerHTML = data.series.map(s => {
+      const fullClass = s.full ? ' full' : '';
+      const warnIcon = s.full ? ' ⚠' : '';
+      return `<div class="po-badge${fullClass}" data-prefix="${escHtml(s.prefix)}" data-current="${s.current}"
+                   onclick="openPoPopover(this, '${escHtml(s.prefix)}', ${s.current}, '${escHtml(s.name)}')">
+        <span class="badge-name">${escHtml(s.name)}</span>
+        <span class="badge-code">${escHtml(s.prefix)}${warnIcon}</span>
+        <span class="badge-num">${s.current}</span>
+        <span class="badge-max">/ ${s.max}</span>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    area.innerHTML = '<span style="font-size:12px;color:#dc2626;">오류</span>';
+  }
+}
+
+function openPoPopover(badgeEl, prefix, current, name) {
+  const popover = document.getElementById('po-popover');
+  document.getElementById('po-popover-label').textContent = `${name} (${prefix}) 현재 번호 수정`;
+  document.getElementById('po-popover-input').value = current;
+  _poPopoverTarget = { prefix, badgeEl };
+
+  // 팝오버 위치 설정
+  const rect = badgeEl.getBoundingClientRect();
+  const container = document.querySelector('.po-dashboard');
+  const containerRect = container.getBoundingClientRect();
+  popover.style.top = (rect.bottom - containerRect.top + 6) + 'px';
+  popover.style.left = (rect.left - containerRect.left) + 'px';
+  popover.classList.add('show');
+  document.getElementById('po-popover-input').focus();
+}
+
+function closePoPopover() {
+  document.getElementById('po-popover').classList.remove('show');
+  _poPopoverTarget = null;
+}
+
+async function savePo() {
+  if (!_poPopoverTarget) return;
+  const { prefix } = _poPopoverTarget;
+  const current = parseInt(document.getElementById('po-popover-input').value, 10);
+  if (isNaN(current) || current < 0) return;
+  try {
+    await fetch('/api/발주/po_대시보드', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prefix, current }),
+    });
+    closePoPopover();
+    loadPoDashboard();
+  } catch(e) {
+    alert('저장 실패: ' + e.message);
+  }
+}
+
+// 팝오버 외부 클릭 시 닫기
+document.addEventListener('click', e => {
+  const popover = document.getElementById('po-popover');
+  if (popover.classList.contains('show') && !popover.contains(e.target) && !e.target.closest('.po-badge')) {
+    closePoPopover();
+  }
+});
+
+// ── 신규 PO 유형 추가 ──────────────────────────────
+function 신규유형추가모달열기(){
+  document.getElementById('po-new-base').value='';
+  document.getElementById('po-new-name').value='';
+  document.getElementById('po-new-msg').textContent='';
+  document.getElementById('po-new-type-overlay').style.display='flex';
+}
+function 신규유형추가모달닫기(){document.getElementById('po-new-type-overlay').style.display='none';}
+async function 신규유형저장(){
+  const base=document.getElementById('po-new-base').value.trim().toUpperCase();
+  const name=document.getElementById('po-new-name').value.trim();
+  const category=document.getElementById('po-new-category').value;
+  const msg=document.getElementById('po-new-msg');
+  if(!base||!name){msg.style.color='#e53935';msg.textContent='코드 base와 이름을 모두 입력해 주세요.';return;}
+  try{
+    const d=await(await fetch('/api/발주/po_시리즈_추가',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({base,name,category})})).json();
+    if(d.success){msg.style.color='#2e7d32';msg.textContent='추가 완료!';setTimeout(()=>{신규유형추가모달닫기();loadPoDashboard();},800);}
+    else{msg.style.color='#e53935';msg.textContent='오류: '+(d.error||'실패');}
+  }catch(e){msg.style.color='#e53935';msg.textContent='요청 실패: '+e.message;}
+}
+
+// ── 초기화 ────────────────────────────────────────
+function init() {
+  loadPoDashboard();
+  _계좌_로드();
+  addRow();
+  startAlarmPolling();
+  loadEmailCfg();
+}
+
+let _rowId = 0;
+
+function addRow() {
+  const area = document.getElementById('rows-area');
+  const id = ++_rowId;
+  const div = document.createElement('div');
+  div.className = 'row-input';
+  div.dataset.rowId = id;
+  div.innerHTML = `
+    <div class="autocomplete-wrap">
+      <input class="input-barcode" type="text" placeholder="바코드 또는 제품명 검색"
+             autocomplete="off" oninput="onBarcodeInput(this, ${id})" onkeydown="onBarcodeKey(event, ${id})"
+             onblur="hideAc(${id}, 150)">
+      <div class="ac-list" id="ac-${id}"></div>
+    </div>
+    <input class="input-qty" type="number" placeholder="수량" min="1" value=""
+           oninput="updateSearchBtn()">
+    <div class="autocomplete-wrap" style="flex:1; min-width:110px;">
+      <input class="input-사유" type="text" placeholder="사유 선택/입력" autocomplete="off"
+             oninput="onSayuInput(this, 'r${id}')" onkeydown="onSayuKey(event, 'r${id}')"
+             onfocus="onSayuFocus(this, 'r${id}')"
+             onblur="hideAc('r${id}', 150)">
+      <div class="ac-list" id="ac-r${id}"></div>
+    </div>
+    <button class="btn-remove" onclick="removeRow(this)">✕</button>
+  `;
+  area.appendChild(div);
+  div.querySelector('.input-barcode').focus();
+  updateSearchBtn();
+}
+
+function removeRow(btn) {
+  const area = document.getElementById('rows-area');
+  if (area.children.length <= 1) return;
+  btn.parentElement.remove();
+  updateSearchBtn();
+}
+
+function resetAll() {
+  document.getElementById('rows-area').innerHTML = '';
+  document.getElementById('result-area').style.display = 'none';
+  document.getElementById('done-area').style.display = 'none';
+  document.getElementById('search-error').textContent = '';
+  document.getElementById('execute-error').textContent = '';
+  document.getElementById('db-files').innerHTML = '';
+  document.getElementById('db-summary').textContent = '';
+  document.getElementById('bulk-사유').value = '';
+  document.getElementById('xl-preview').innerHTML = '';
+  document.getElementById('btn-xl-search').disabled = true;
+  document.getElementById('email-box').style.display = 'none';
+  if (dbOpen) toggleDb();
+  searchGroups = [];
+  _xlItems = [];
+  _이메일준비 = null;
+  addRow();
+}
+
+// ── 버튼 활성화 ──────────────────────────────────
+function updateSearchBtn() {
+  const rows = document.querySelectorAll('#rows-area .row-input');
+  const valid = [...rows].some(r => {
+    const bc = r.querySelector('.input-barcode').value.trim();
+    const qty = parseInt(r.querySelector('.input-qty').value, 10);
+    return bc && qty > 0;
+  });
+  document.getElementById('btn-search').disabled = !valid;
+}
+
+// ── 자동완성 ─────────────────────────────────────
+const _acTimers = {};
+const _acActive = {};
+
+function onBarcodeInput(inp, id) {
+  updateSearchBtn();
+  const q = inp.value.trim();
+  clearTimeout(_acTimers[id]);
+  if (!q) { hideAc(id, 0); return; }
+  _acTimers[id] = setTimeout(() => fetchAc(q, id, inp), 250);
+}
+
+async function fetchAc(q, id, inp) {
+  try {
+    const res = await fetch(`/api/발주/상품검색?q=${encodeURIComponent(q)}`);
+    const data = await res.json();
+    renderAc(data.items || [], id, inp);
+  } catch { hideAc(id, 0); }
+}
+
+function renderAc(items, id, inp) {
+  const list = document.getElementById(`ac-${id}`);
+  if (!list) return;
+  _acActive[id] = -1;
+  if (!items.length) {
+    list.innerHTML = '<div class="ac-empty">검색 결과 없음</div>';
+    list.classList.add('show');
+    return;
+  }
+  list.innerHTML = items.map((it, i) => `
+    <div class="ac-item" data-bc="${escHtml(it.바코드)}" data-idx="${i}"
+         onmousedown="selectAc(event, ${id})">
+      <span class="ac-name">${escHtml(it.이름)}</span>
+      <span class="ac-bc">${escHtml(it.바코드)}</span>
+    </div>
+  `).join('');
+  list.classList.add('show');
+}
+
+function selectAc(e, id) {
+  e.preventDefault();
+  const item = e.currentTarget;
+  const bc = item.dataset.bc;
+  const row = document.querySelector(`[data-row-id="${id}"]`);
+  if (!row) return;
+  const inp = row.querySelector('.input-barcode');
+  inp.value = bc;
+  hideAc(id, 0);
+  row.querySelector('.input-qty').focus();
+  updateSearchBtn();
+}
+
+function hideAc(id, delay) {
+  setTimeout(() => {
+    const list = document.getElementById(`ac-${id}`);
+    if (list) list.classList.remove('show');
+  }, delay);
+}
+
+function onBarcodeKey(e, id) {
+  const list = document.getElementById(`ac-${id}`);
+  if (!list || !list.classList.contains('show')) return;
+  const items = list.querySelectorAll('.ac-item');
+  if (!items.length) return;
+  let idx = _acActive[id] ?? -1;
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    idx = Math.min(idx + 1, items.length - 1);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    idx = Math.max(idx - 1, 0);
+  } else if (e.key === 'Enter' && idx >= 0) {
+    e.preventDefault();
+    items[idx].dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+    return;
+  } else if (e.key === 'Escape') {
+    hideAc(id, 0); return;
+  } else { return; }
+  _acActive[id] = idx;
+  items.forEach((el, i) => el.classList.toggle('ac-active', i === idx));
+}
+
+// ── 사유 자동완성 ─────────────────────────────────
+const SAYU_PRESETS = ['정기발주', '신제품', '신기종', '수동발주', '직접입력'];
+
+function _sayuItems(q) {
+  const q2 = q.trim().toLowerCase();
+  return q2 ? SAYU_PRESETS.filter(s => s.includes(q2)) : SAYU_PRESETS;
+}
+
+function _renderSayuAc(acId, items) {
+  const list = document.getElementById(`ac-${acId}`);
+  if (!list) return;
+  _acActive[acId] = -1;
+  if (!items.length) { list.classList.remove('show'); return; }
+  list.innerHTML = items.map((s, i) => `
+    <div class="ac-item" data-val="${escHtml(s)}" data-idx="${i}"
+         onmousedown="selectSayuAc(event, '${acId}')">
+      <span class="ac-name">${escHtml(s)}</span>
+    </div>
+  `).join('');
+  list.classList.add('show');
+}
+
+function selectSayuAc(e, acId) {
+  e.preventDefault();
+  const val = e.currentTarget.dataset.val;
+  if (acId === 'bulk') {
+    document.getElementById('bulk-사유').value = val;
+  } else {
+    const rowId = acId.slice(1);
+    const row = document.querySelector(`[data-row-id="${rowId}"]`);
+    if (row) row.querySelector('.input-사유').value = val;
+  }
+  hideAc(acId, 0);
+}
+
+function onSayuInput(inp, acId) {
+  _renderSayuAc(acId, _sayuItems(inp.value));
+}
+
+// 포커스 시 전체 프리셋 표시
+function onSayuFocus(inp, acId) {
+  _renderSayuAc(acId, _sayuItems(inp.value));
+}
+
+function onSayuKey(e, acId) {
+  const list = document.getElementById(`ac-${acId}`);
+  if (!list || !list.classList.contains('show')) return;
+  const items = list.querySelectorAll('.ac-item');
+  if (!items.length) return;
+  let idx = _acActive[acId] ?? -1;
+  if (e.key === 'ArrowDown') { e.preventDefault(); idx = Math.min(idx+1, items.length-1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); idx = Math.max(idx-1, 0); }
+  else if (e.key === 'Enter' && idx >= 0) {
+    e.preventDefault();
+    items[idx].dispatchEvent(new MouseEvent('mousedown', { bubbles: true })); return;
+  } else if (e.key === 'Escape') { hideAc(acId, 0); return; }
+  else { return; }
+  _acActive[acId] = idx;
+  items.forEach((el, i) => el.classList.toggle('ac-active', i === idx));
+}
+
+function onBulkSayuInput(inp) { _renderSayuAc('bulk', _sayuItems(inp.value)); }
+function onBulkSayuKey(e) { onSayuKey(e, 'bulk'); }
+
+function applyBulkSayu() {
+  const val = document.getElementById('bulk-사유').value.trim();
+  document.querySelectorAll('#rows-area .input-사유').forEach(inp => { inp.value = val; });
+}
+
+// ── 조회 ──────────────────────────────────────────
+function collectItems() {
+  const rows = document.querySelectorAll('#rows-area .row-input');
+  const items = [];
+  _바코드사유맵 = {};
+  for (const row of rows) {
+    const bc = row.querySelector('.input-barcode').value.trim();
+    const qty = parseInt(row.querySelector('.input-qty').value, 10);
+    const 사유 = row.querySelector('.input-사유').value.trim();
+    if (bc && qty > 0) {
+      items.push({ barcode: bc, quantity: qty, 사유 });
+      _바코드사유맵[bc] = 사유;
+    }
+  }
+  return items;
+}
+
+async function doSearch() {
+  const items = collectItems();
+  if (!items.length) {
+    document.getElementById('search-error').textContent = '바코드와 수량을 입력해주세요.';
+    return;
+  }
+  document.getElementById('search-error').textContent = '';
+
+  const btn = document.getElementById('btn-search');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>조회 중...';
+
+  try {
+    const res = await fetch('/api/발주/조회', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      document.getElementById('search-error').textContent = data.error || '조회 실패';
+      return;
+    }
+    renderSearchResult(data);
+  } catch (e) {
+    document.getElementById('search-error').textContent = '서버 오류: ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '상품 조회';
+  }
+}
+
+function renderSearchResult(data) {
+  searchGroups = data.groups || [];
+  window._lastGroups = searchGroups;
+
+  // DB 카드: 조회된 상품 목록 표시 후 자동 오픈
+  const allItems = searchGroups.flatMap(g => g.items || []);
+  const filesEl = document.getElementById('db-files');
+  const summary = document.getElementById('db-summary');
+  if (allItems.length) {
+    filesEl.innerHTML = allItems.map(it => `
+      <div class="db-file-row">
+        <span class="db-file-name">${escHtml(it.이름)}</span>
+        <span class="db-file-count">${escHtml(it.barcode)}</span>
+      </div>
+    `).join('');
+    summary.textContent = `${allItems.length}개 상품`;
+    if (!dbOpen) toggleDb();
+  }
+
+  // 미확인 바코드
+  const uArea = document.getElementById('unconfirmed-area');
+  if (data.미확인 && data.미확인.length) {
+    uArea.innerHTML = `<div class="unconfirmed">
+      <strong>미확인 바코드 (카탈로그에 없음):</strong> ${data.미확인.join(', ')}
+    </div>`;
+  } else {
+    uArea.innerHTML = '';
+  }
+
+  // 그룹 카드 렌더
+  const gArea = document.getElementById('groups-area');
+  gArea.innerHTML = '';
+  searchGroups.forEach((group, idx) => {
+    const card = document.createElement('div');
+    card.className = 'group-card';
+
+    const defaultPo = `${group.po_prefix}(${group.po_번호_제안})`;
+
+    const rows = (group.items || []).map(it => `
+      <tr>
+        <td>${escHtml(it.barcode)}</td>
+        <td>${escHtml(it.이름)}</td>
+        <td>${it.원가.toLocaleString()}</td>
+        <td>${it.수량.toLocaleString()}</td>
+        <td>${(it.원가 * it.수량).toLocaleString()}</td>
+      </tr>
+    `).join('');
+
+    const acct = _계좌_매칭(group.제조사, group.계좌id);
+    const acctHtml = acct
+      ? `<div style="font-size:12px;color:#065f46;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:4px;padding:4px 10px;margin-top:6px;">
+           <strong>${escHtml(acct.회사명_중문||acct.회사명_영문)}</strong>`
+        + (acct.bank_name ? ` &nbsp;·&nbsp; ${escHtml(acct.bank_name)}` : '')
+        + (acct.swift ? ` &nbsp;·&nbsp; SWIFT: ${escHtml(acct.swift)}` : '')
+        + (acct.account_number ? ` &nbsp;·&nbsp; ${escHtml(acct.account_number)}` : '')
+        + `</div>`
+      : `<div style="font-size:12px;color:#9ca3af;background:#f9fafb;border:1px dashed #d1d5db;border-radius:4px;padding:4px 10px;margin-top:6px;">계좌 미매칭</div>`;
+
+    card.innerHTML = `
+      <div class="group-header">
+        <div>
+          <span class="group-title">${escHtml(group.제조사)} / ${escHtml(group.브랜드)}</span>
+          <span style="font-size:12px; color:#9ca3af; margin-left:8px;">${escHtml(group.원본파일)}</span>
+          ${acctHtml}
+        </div>
+        <div class="po-row">
+          <label>PO 코드</label>
+          <input class="po-input" type="text" value="${escHtml(defaultPo)}" data-idx="${idx}">
+        </div>
+      </div>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>바코드</th><th>상품명</th><th>원가 (¥)</th><th>수량</th><th>합계 (¥)</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+    gArea.appendChild(card);
+  });
+
+  document.getElementById('result-area').style.display = searchGroups.length ? 'block' : 'none';
+}
+
+// ── 발주 실행 ─────────────────────────────────────
+async function doExecute() {
+  if (!searchGroups.length) return;
+
+  const poInputs = document.querySelectorAll('.po-input');
+  const groups = searchGroups.map((g, i) => ({
+    원본파일: g.원본파일,
+    po코드: poInputs[i] ? poInputs[i].value.trim() : '',
+    max_lt: g.max_lt || 0,
+    사유: _바코드사유맵[g.items[0]?.barcode] || '정기발주',
+    items: g.items.map(it => ({ barcode: it.barcode, quantity: it.수량 })),
+  }));
+
+  const payload = { groups };
+
+  const btn = document.getElementById('btn-execute');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>발주 중...';
+  document.getElementById('execute-error').textContent = '';
+
+  try {
+    const res = await fetch('/api/발주/실행', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      document.getElementById('execute-error').textContent = data.error || '발주 실패';
+      return;
+    }
+    _lastOrderResult = data;
+    document.getElementById('pi-gen-btn').style.display = 'inline-block';
+    renderDone(data.results, data.이메일_준비);
+    loadPoDashboard();  // 발주 후 대시보드 갱신
+  } catch (e) {
+    document.getElementById('execute-error').textContent = '서버 오류: ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '발주 실행';
+  }
+}
+
+function renderDone(results, 이메일준비) {
+  _이메일준비 = 이메일준비 || null;
+  document.getElementById('result-area').style.display = 'none';
+  const area = document.getElementById('done-results');
+  area.innerHTML = results.map(r => {
+    const 발주요청Tag = r.중국발주요청_완료
+      ? '<span class="tag tag-ok">발주요청리스트 완료</span>'
+      : '<span class="tag tag-skip">Sheets 미설정</span>';
+    const parts = r.파일.replace(/\\/g, '/').split('/');
+    const 파일명 = parts.pop();
+    const 발주유형 = parts.pop() || '정기발주';
+    const 다운로드url = `/발주/다운로드/${encodeURIComponent(발주유형)}/${encodeURIComponent(파일명)}`;
+    const 도착일표시 = r.예상_도착일 ? `<span style="font-size:13px; color:#059669; margin-left:8px;">예상 도착 ${escHtml(r.예상_도착일)}</span>` : '';
+    return `<div class="done-card">
+      <div class="done-title" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <span>${escHtml(r.po코드)}${도착일표시} ${발주요청Tag}</span>
+        <a href="${다운로드url}" download="${escHtml(파일명)}"
+           style="padding:6px 14px; background:#3b82f6; color:#fff; border-radius:6px; font-size:13px; font-weight:600; text-decoration:none;">
+          다운로드
+        </a>
+      </div>
+      <div class="done-meta" style="margin-top:6px;">저장 경로: ${escHtml(r.파일)}</div>
+    </div>`;
+  }).join('');
+
+  const emailBox = document.getElementById('email-box');
+  const btnEmail = document.getElementById('btn-email');
+  const emailStatus = document.getElementById('email-status');
+  if (_이메일준비) {
+    emailStatus.textContent = `발주서 ${_이메일준비.po코드들?.length || 0}건 이메일 발송 대기 중`;
+    emailStatus.style.color = '';
+    btnEmail.style.display = '';
+    btnEmail.disabled = false;
+    btnEmail.textContent = '이메일 발송';
+    emailBox.style.display = 'flex';
+  }
+  document.getElementById('done-area').style.display = 'block';
+}
+
+// ── 이메일 발송 ───────────────────────────────────
+async function sendEmail() {
+  if (!_이메일준비) return;
+  const btn = document.getElementById('btn-email');
+  const status = document.getElementById('email-status');
+  btn.disabled = true;
+  btn.textContent = '발송 중...';
+  try {
+    const res = await fetch('/api/발주/이메일_발송', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 이메일_준비: _이메일준비 }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      status.textContent = '이메일 발송 완료';
+      status.style.color = '#059669';
+      btn.style.display = 'none';
+    } else {
+      status.textContent = '발송 실패: ' + (data.error || '');
+      status.style.color = '#dc2626';
+      btn.disabled = false;
+      btn.textContent = '재시도';
+    }
+  } catch(e) {
+    status.textContent = '오류: ' + e.message;
+    status.style.color = '#dc2626';
+    btn.disabled = false;
+    btn.textContent = '재시도';
+  }
+}
+
+// ── 이메일 수신자 설정 ──────────────────────────────
+async function loadEmailCfg() {
+  try {
+    const res = await fetch('/api/발주/이메일_설정');
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('cfg-to').value = data.수신자 || '';
+      document.getElementById('cfg-cc').value = data.참조 || '';
+    }
+  } catch(e) {}
+}
+
+async function saveEmailCfg() {
+  const 수신자 = document.getElementById('cfg-to').value.trim();
+  const 참조   = document.getElementById('cfg-cc').value.trim();
+  try {
+    const res = await fetch('/api/발주/이메일_설정', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 수신자, 참조 }),
+    });
+    const data = await res.json();
+    const msg = document.getElementById('cfg-msg');
+    if (data.success) {
+      msg.textContent = '저장되었습니다.';
+      msg.style.color = '#16a34a';
+    } else {
+      msg.textContent = data.error || '저장 실패';
+      msg.style.color = '#dc2626';
+    }
+    msg.style.display = 'inline';
+    setTimeout(() => { msg.style.display = 'none'; }, 3000);
+  } catch(e) {
+    alert('저장 오류: ' + e.message);
+  }
+}
+
+// ── 신규 발주서 알림 토스트 ───────────────────────
+function showToast(items) {
+  const area = document.getElementById('toast-area');
+  const div = document.createElement('div');
+  div.className = 'toast';
+  const lines = items.map(it => `${escHtml(it.바코드)} ${escHtml(it.이름)}`).join(', ');
+  div.innerHTML = `<strong>원본 발주서 DB 신규 등록</strong>${lines}`;
+  area.appendChild(div);
+  setTimeout(() => { div.style.opacity = '0'; div.style.transition = 'opacity 0.5s'; }, 5000);
+  setTimeout(() => div.remove(), 5600);
+}
+
+function startAlarmPolling() {
+  setInterval(async () => {
+    try {
+      const res = await fetch('/api/발주/신규알림');
+      const data = await res.json();
+      if (data.items && data.items.length) {
+        showToast(data.items);
+        loadPoDashboard();
+      }
+    } catch {}
+  }, 5000);
+}
+
+// ── 제조사-계좌 매칭 현황 ────────────────────────
+let _matchOpen = false;
+function toggleMatchReport() {
+  _matchOpen = !_matchOpen;
+  document.getElementById('match-body').classList.toggle('open', _matchOpen);
+  document.getElementById('match-chevron').classList.toggle('open', _matchOpen);
+}
+
+async function loadMatchReport() {
+  const btn = document.getElementById('btn-match-refresh');
+  const summary = document.getElementById('match-summary');
+  btn.disabled = true; btn.textContent = '분석 중...';
+  try {
+    const data = await fetch('/api/pi/제조사_매칭_현황').then(r => r.json());
+    if (!data.success) { summary.textContent = '오류'; return; }
+    const ok = data.매칭됨 || [], fail = data.미매칭 || [];
+    summary.textContent = `매칭 ${ok.length}개 · 미매칭 ${fail.length}개`;
+    const failRows = fail.map(r =>
+      `<div style="padding:4px 8px;font-size:13px;color:#b91c1c;background:#fef2f2;border-radius:4px;margin-bottom:3px;">
+        ✗ <strong>${escHtml(r.제조사명)}</strong> — 계좌 없음
+      </div>`
+    ).join('');
+    const okRows = ok.map(r =>
+      `<div style="padding:4px 8px;font-size:12px;color:#065f46;background:#ecfdf5;border-radius:4px;margin-bottom:3px;">
+        ✓ ${escHtml(r.제조사명)} → ${escHtml(r.계좌명_중문||r.계좌명_영문)}
+      </div>`
+    ).join('');
+    document.getElementById('match-result').innerHTML =
+      (fail.length ? `<div style="font-size:12px;font-weight:600;color:#b91c1c;margin-bottom:6px;">미매칭 (계좌 등록 필요)</div>${failRows}<div style="margin-bottom:8px;"></div>` : '')
+      + (ok.length ? `<div style="font-size:12px;font-weight:600;color:#065f46;margin-bottom:6px;">매칭됨</div>${okRows}` : '');
+    if (!_matchOpen) toggleMatchReport();
+    await _계좌_로드();
+  } catch(e) {
+    summary.textContent = '오류: ' + e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = '분석 실행';
+  }
+}
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ── 엔터 키 ───────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' || !e.target.matches('#rows-area input')) return;
+  const id = e.target.closest('.row-input')?.dataset.rowId;
+  if (id && document.getElementById(`ac-${id}`)?.classList.contains('show')) return;
+  e.preventDefault();
+  const rows = [...document.querySelectorAll('#rows-area .row-input')];
+  const cur = e.target.closest('.row-input');
+  const idx = rows.indexOf(cur);
+  if (idx === rows.length - 1 && e.target.matches('.input-qty')) {
+    addRow();
+  } else if (e.target.matches('.input-barcode')) {
+    cur.querySelector('.input-qty').focus();
+  } else if (idx < rows.length - 1) {
+    rows[idx + 1].querySelector('.input-barcode').focus();
+  }
+});
+
+init();
+</script>
+
+<!-- 선금계약서 생성 모달 -->
+<div id="modal-pi" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:10px;padding:22px;max-width:560px;width:95%;max-height:88vh;overflow-y:auto">
+    <div style="font-size:15px;font-weight:700;margin-bottom:14px">선금계약서 생성</div>
+
+    <div style="margin-bottom:10px">
+      <label style="font-weight:600;font-size:12px;display:block;margin-bottom:4px">제조사 계좌 선택*</label>
+      <select id="pi-acct-sel" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px">
+        <option value="">— 선택 —</option>
+      </select>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <div style="flex:1">
+        <label style="font-weight:600;font-size:12px;display:block;margin-bottom:4px">한국 담당자*</label>
+        <select id="pi-staff" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px">
+          <option value="">— 선택 —</option>
+          <option value="강태구|fieslvh683@nuart.co.kr|Tae Goo Kang">강태구</option>
+          <option value="김려|kimreyo86@nuart.co.kr|Ryeo Kim">김려</option>
+          <option value="손설옥|celina0923@nuart.co.kr|Celina Son">손설옥</option>
+          <option value="연유진|yujin2332@nuart.co.kr|Yujin Yeon">연유진</option>
+          <option value="윤희도|muzea123@nuart.co.kr|Heedo Yoon">윤희도</option>
+          <option value="전미경|junmk@nuart.co.kr|Mikyung Jeon">전미경</option>
+        </select>
+      </div>
+      <div style="flex:1">
+        <label style="font-weight:600;font-size:12px;display:block;margin-bottom:4px">
+          중국 담당자 이름 <span style="color:#dc2626">*</span>
+        </label>
+        <input id="pi-staff-cn" type="text" placeholder="예: James"
+          style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;margin-bottom:5px">
+        <label style="font-weight:600;font-size:12px;display:block;margin-bottom:4px">
+          이메일 <span style="color:#dc2626">*</span>
+        </label>
+        <input id="pi-staff-cn-email" type="email" placeholder="예: james@supplier.com"
+          style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;margin-bottom:5px">
+        <label style="font-weight:600;font-size:12px;display:block;margin-bottom:4px">
+          연락처 <span style="color:#9ca3af;font-weight:400">(선택)</span>
+        </label>
+        <input id="pi-staff-cn-phone" type="text" placeholder="예: 13812345678"
+          style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px">
+      </div>
+    </div>
+
+    <div style="margin-bottom:10px">
+      <div style="font-weight:600;font-size:12px;margin-bottom:6px">제품 영문 설명 <span style="color:#6b7280;font-weight:400;font-size:11px">(통관용 인보이스 — 담당자 직접 입력)</span> <span style="color:#b45309;font-weight:600;font-size:11px;background:#fef3c7;border-radius:3px;padding:1px 6px;">⚠ 관세사 확인 필요</span></div>
+      <div id="pi-product-rows" style="max-height:200px;overflow-y:auto;border:1px solid #e5e7eb;border-radius:6px;padding:6px 8px;font-size:12px"></div>
+    </div>
+
+    <div style="margin-bottom:10px">
+      <div style="font-weight:600;font-size:12px;margin-bottom:6px">자금 집행 일정 <span style="color:#6b7280;font-weight:400;font-size:11px">(예정일 필수)</span></div>
+      <div id="pi-dep-rows"></div>
+      <button onclick="piAddDep()"
+        style="margin-top:4px;border:1px solid #ccc;background:#fff;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer">
+        + 차수 추가
+      </button>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button onclick="submitPIGen()"
+        style="background:#1a1a2e;color:#fff;border:none;border-radius:5px;padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer">
+        선금계약서 생성
+      </button>
+      <button onclick="document.getElementById('modal-pi').style.display='none'"
+        style="border:1px solid #ccc;background:#fff;border-radius:5px;padding:7px 18px;font-size:13px;cursor:pointer">
+        취소
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+var _lastOrderResult = null;
+var _piDeps = [
+  {pct:30, amount:null, 예정일:''},
+  {pct:70, amount:null, 예정일:''},
+];
+var PI_LABELS = ['1st Deposit','2nd Deposit','3rd Deposit','4th Deposit'];
+var _piProductRows = [];
+
+// ── 중국 담당자: 계좌DB 우선, localStorage 폴백 ─────────────────
+function _cnCacheLoad() {
+  try { return JSON.parse(localStorage.getItem('pi_cn_cache') || '{}'); }
+  catch(e) { return {}; }
+}
+function _cnCacheSave(회사id, data) {
+  var cache = _cnCacheLoad();
+  cache[회사id] = data;
+  localStorage.setItem('pi_cn_cache', JSON.stringify(cache));
+}
+function _cnCacheApply(회사id) {
+  if (!회사id) return;
+  // 1순위: 계좌DB에 저장된 담당자 정보
+  var acct = _계좌목록.find(function(a){ return String(a.id) === String(회사id); });
+  if (acct) {
+    if (acct.seller_name)  document.getElementById('pi-staff-cn').value = acct.seller_name;
+    if (acct.seller_email) document.getElementById('pi-staff-cn-email').value = acct.seller_email;
+    if (acct.seller_phone) document.getElementById('pi-staff-cn-phone').value = acct.seller_phone;
+    if (acct.seller_name || acct.seller_email) return;
+  }
+  // 2순위: localStorage 캐시
+  var d = _cnCacheLoad()[회사id];
+  if (!d) return;
+  if (d.담당자)  document.getElementById('pi-staff-cn').value = d.담당자;
+  if (d.이메일)  document.getElementById('pi-staff-cn-email').value = d.이메일;
+  if (d.연락처)  document.getElementById('pi-staff-cn-phone').value = d.연락처;
+}
+
+async function openPIModal() {
+  var r = await fetch('/api/계좌/목록').then(r=>r.json());
+  var accts = r.data || [];
+  var sel = document.getElementById('pi-acct-sel');
+  sel.innerHTML = '<option value="">— 선택 —</option>' +
+    accts.map(function(a) {
+      var label = a.회사명_중문 || a.회사명_영문;
+      return '<option value="'+a.id+'">'+escHtml(label)+'</option>';
+    }).join('');
+  // 계좌 변경 시 자동완성 적용
+  sel.onchange = function() { _cnCacheApply(this.value); };
+
+  // 날짜 기본값: 1차=오늘, 2차=오늘+리드타임 이후 첫 업무일
+  var today = new Date();
+  var todayStr = today.toISOString().slice(0, 10);
+  var max_lt = 0;
+  (window._lastGroups || []).forEach(function(g) { max_lt = Math.max(max_lt, g.max_lt || 0); });
+  var dep2 = new Date(today);
+  dep2.setDate(today.getDate() + (max_lt || 0));
+  while (dep2.getDay() === 0 || dep2.getDay() === 6) { dep2.setDate(dep2.getDate() + 1); }
+  var dep2Str = dep2.toISOString().slice(0, 10);
+
+  _piDeps = [{pct:30, amount:null, 예정일: todayStr}, {pct:70, amount:null, 예정일: dep2Str}];
+
+  // 제품 목록 구성
+  var groups = window._lastGroups || [];
+  var results = (_lastOrderResult && _lastOrderResult.results) ? _lastOrderResult.results : [];
+  _piProductRows = [];
+  var allBarcodes = [];
+  var 제조사명 = (groups[0] && groups[0].제조사) ? groups[0].제조사 : '';
+  groups.forEach(function(g, gi) {
+    var groupPO = (results[gi] && results[gi].po코드) ? results[gi].po코드 : '';
+    if (g.items) g.items.forEach(function(item) {
+      var bc = String(item.barcode||item.바코드||'');
+      allBarcodes.push(bc);
+      _piProductRows.push({
+        po_no: groupPO, brand: g.브랜드||'', 이름: item.이름||'',
+        barcode: bc, qty: item.quantity||item.수량||0,
+        unit_price: item.원가||0, description_en: '',
+      });
+    });
+  });
+
+  // 계좌 자동매칭
+  if (allBarcodes.length) {
+    fetch('/api/pi/계좌_자동매칭', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({barcodes: allBarcodes, 제조사명: 제조사명}),
+    }).then(function(res) { return res.json(); }).then(function(m) {
+      if (m.success && m.계좌id) {
+        document.getElementById('pi-acct-sel').value = m.계좌id;
+        _cnCacheApply(m.계좌id);
+      }
+    }).catch(function(){});
+  }
+
+  renderPIProducts();
+  renderPIDeps();
+  document.getElementById('modal-pi').style.display = 'flex';
+}
+
+function renderPIProducts() {
+  var el = document.getElementById('pi-product-rows');
+  if (!_piProductRows.length) {
+    el.innerHTML = '<div style="color:#9ca3af;font-size:12px;padding:4px 0">제품 없음</div>';
+    return;
+  }
+  el.innerHTML = _piProductRows.map(function(p, i) {
+    return '<div style="display:flex;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid #f3f4f6">'
+      + '<span style="flex:2;color:#374151;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+escHtml(p.이름)+'">'+escHtml(p.이름)+'</span>'
+      + '<span style="flex-shrink:0;color:#9ca3af;font-size:11px">'+escHtml(p.barcode)+'</span>'
+      + '<input type="text" placeholder="영문 설명 입력" value="'+escHtml(p.description_en)+'"'
+      + ' oninput="_piProductRows['+i+'].description_en=this.value"'
+      + ' style="flex:2;border:1px solid #ddd;border-radius:3px;padding:3px 6px;font-size:12px;min-width:0">'
+      + '</div>';
+  }).join('');
+}
+
+function renderPIDeps() {
+  document.getElementById('pi-dep-rows').innerHTML = _piDeps.map(function(d,i){
+    return '<div style="display:flex;gap:6px;align-items:center;margin-bottom:5px;padding:5px;border:1px solid #eee;border-radius:4px;flex-wrap:wrap">'
+      +'<span style="width:80px;font-size:11px;font-weight:600;flex-shrink:0">'+PI_LABELS[i]+'</span>'
+      +'<input type="number" value="'+d.pct+'" min="0" max="100" placeholder="%" '
+      +'oninput="_piDeps['+i+'].pct=+this.value" '
+      +'style="width:55px;border:1px solid #ddd;border-radius:3px;padding:3px 5px;font-size:12px">'
+      +'<span style="font-size:11px">%</span>'
+      +'<input type="number" placeholder="또는 금액(위안)" value="'+(d.amount||'')+'" '
+      +'oninput="_piDeps['+i+'].amount=this.value?+this.value:null" '
+      +'style="width:90px;border:1px solid #ddd;border-radius:3px;padding:3px 5px;font-size:12px">'
+      +'<span style="font-size:11px">위안</span>'
+      +'<input type="date" value="'+(d.예정일||'')+'" '
+      +'onchange="_piDeps['+i+'].예정일=this.value" '
+      +'style="width:130px;border:1px solid #ddd;border-radius:3px;padding:3px 5px;font-size:12px">'
+      +(i>=2?'<button onclick="_piDeps.splice('+i+',1);renderPIDeps()" style="border:1px solid #c62828;background:#fff;color:#c62828;border-radius:3px;padding:2px 6px;font-size:11px;cursor:pointer">삭제</button>':'')
+      +'</div>';
+  }).join('');
+}
+
+function piAddDep() {
+  if (_piDeps.length >= 4) { alert('최대 4차'); return; }
+  _piDeps.push({pct:0, amount:null, 예정일:''});
+  renderPIDeps();
+}
+
+async function submitPIGen() {
+  var 회사id = document.getElementById('pi-acct-sel').value;
+  var staffVal = document.getElementById('pi-staff').value;
+  var 중국담당자 = document.getElementById('pi-staff-cn').value.trim();
+  var 중국이메일 = document.getElementById('pi-staff-cn-email').value.trim();
+  var 중국연락처 = document.getElementById('pi-staff-cn-phone').value.trim();
+  if (!회사id) { alert('제조사 계좌를 선택하세요.'); return; }
+  if (!staffVal) { alert('한국 담당자를 선택하세요.'); return; }
+  if (!중국담당자) { alert('중국 담당자 이름을 입력하세요.'); return; }
+  if (!중국이메일) { alert('중국 담당자 이메일을 입력하세요.'); return; }
+  var staffParts = staffVal.split('|');
+  var 담당자 = staffParts[0];          // 한글 (DB·대시보드용)
+  var 담당자이메일 = staffParts[1] || '';
+  var 담당자_영문 = staffParts[2] || staffParts[0]; // 영문 (PI 파일 Attn용)
+  if (!_piDeps.every(function(d){return d.예정일;})) {
+    alert('모든 차수의 예정일을 입력하세요.');
+    return;
+  }
+
+  // 발주 결과에서 PO코드 + 제품 목록 구성 (영문 설명은 담당자 직접 입력값 사용)
+  var results = (_lastOrderResult && _lastOrderResult.results) ? _lastOrderResult.results : [];
+  var po코드 = results.length > 0 ? results[0].po코드 : 'UNKNOWN';
+  if (!po코드) { alert('발주 결과에서 PO코드를 확인할 수 없습니다. 발주 실행 후 다시 시도하세요.'); return; }
+
+  var 제품목록 = _piProductRows.map(function(p) {
+    return {
+      po_no: p.po_no || po코드,
+      brand: p.brand,
+      description: p.description_en || p.이름,
+      product_name_kr: p.이름,
+      barcode: p.barcode,
+      qty: p.qty,
+      unit_price: p.unit_price,
+      already_paid: 0,
+    };
+  });
+
+  var r = await fetch('/api/pi/생성', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      po코드: po코드,
+      회사id: 회사id,
+      담당자: 담당자,
+      담당자_영문: 담당자_영문,
+      담당자이메일: 담당자이메일,
+      중국담당자: 중국담당자,
+      중국이메일: 중국이메일,
+      중국연락처: 중국연락처,
+      max_lt: (function(){ var m=0; (window._lastGroups||[]).forEach(function(g){m=Math.max(m,g.max_lt||0);}); return m; })(),
+      제품목록: 제품목록,
+      디포짓: _piDeps.map(function(d,i){
+        return {
+          label: PI_LABELS[i]||('차수'+(i+1)),
+          pct: d.pct/100,
+          amount: d.amount||null,
+          예정일: d.예정일,
+        };
+      }),
+    })
+  }).then(r=>r.json());
+
+  if (!r.success) { alert('선금계약서 생성 실패: ' + r.error); return; }
+  // 중국 담당자 정보 캐시 저장 (다음 번 자동완성 용)
+  _cnCacheSave(회사id, {담당자: 중국담당자, 이메일: 중국이메일, 연락처: 중국연락처});
+  document.getElementById('modal-pi').style.display = 'none';
+  alert('선금계약서 생성 완료! 선금계약서 관리 페이지(/pi)에서 확인하세요.');
+}
+</script>
+</body>
+</html>

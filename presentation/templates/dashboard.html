@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>재고 대시보드</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.2/styles/ag-grid.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.2/styles/ag-theme-alpine.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Malgun Gothic',sans-serif;background:#f0f2f5;color:#222;font-size:13px;display:flex;min-height:100vh}
+
+    /* ── 사이드바 ── */
+    .sidebar{width:200px;min-width:200px;background:#1a1a2e;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:10;overflow-y:auto}
+    .sidebar .logo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .sidebar .logo strong{color:#fff;font-size:14px;display:block;margin-bottom:2px}
+    .sidebar .logo span{color:#aaa;font-size:11px}
+    .sidebar-section{padding:10px 0 4px}
+    .section-title{padding:4px 16px 6px;font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.8px;font-weight:700}
+    .sidebar a{display:block;padding:8px 16px;color:#aaa;text-decoration:none;font-size:12px;transition:background .12s}
+    .sidebar a:hover{background:rgba(255,255,255,.07);color:#fff}
+    .sidebar a.active{background:rgba(74,158,255,.15);color:#4a9eff;border-left:3px solid #4a9eff;padding-left:13px}
+    .cat-nav-btn{display:block;width:100%;text-align:left;padding:8px 16px;color:#aaa;background:none;border:none;cursor:pointer;font-size:12px;font-family:'Malgun Gothic',sans-serif;transition:background .12s}
+    .cat-nav-btn:hover{background:rgba(255,255,255,.07);color:#fff}
+    .cat-nav-btn.active{background:rgba(74,158,255,.15);color:#4a9eff;border-left:3px solid #4a9eff;padding-left:13px}
+    .sidebar-footer{margin-top:auto;padding:14px 16px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;color:#444}
+
+    /* ── 상단 nav ── */
+    .top-nav{position:fixed;top:0;left:200px;right:0;height:44px;background:#1a1a2e;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:9;border-bottom:1px solid rgba(255,255,255,.08)}
+    .top-nav-active{color:#7ec8ff;font-weight:700;text-decoration:none;padding:5px 14px;border-radius:4px;font-size:13px;border:1px solid rgba(74,158,255,.4)}
+    .top-nav-tabs{display:flex;gap:4px}
+    .top-nav-tabs a{color:#aaa;text-decoration:none;padding:5px 13px;border-radius:4px;font-size:13px;background:rgba(255,255,255,.1)}
+    .top-nav-tabs a:hover{background:rgba(255,255,255,.18);color:#fff}
+
+    /* ── 메인 ── */
+    .main{margin-left:200px;flex:1;padding:16px;min-height:100vh;padding-top:60px}
+    .page-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+    .page-header h1{font-size:17px;font-weight:700;color:#1a1a2e}
+    .cat-badge{font-size:12px;color:#888;background:#e8eaf6;padding:3px 10px;border-radius:10px}
+
+    /* ── 버튼 ── */
+    .btn{border:1px solid #ccc;background:#fff;border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;white-space:nowrap;line-height:1.4}
+    .btn:hover{background:#f3f4f6}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .btn.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+
+    /* ── KPI ── */
+    .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+    .kpi-card{background:#fff;border-radius:8px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center}
+    .kpi-card .kpi-val{font-size:22px;font-weight:700;color:#1a1a2e;line-height:1.2}
+    .kpi-card .kpi-lbl{font-size:11px;color:#888;margin-top:3px}
+    .kpi-danger .kpi-val{color:#e53935}
+    .kpi-warn .kpi-val{color:#fb8c00}
+    .kpi-ok .kpi-val{color:#43a047}
+
+    /* ── 차트 박스 ── */
+    .chart-box{background:#fff;border-radius:8px;padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-bottom:14px}
+    .chart-box .chart-title{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+    .chart-box h3{font-size:13px;font-weight:700;color:#1a1a2e;margin:0}
+    .chart-sub{font-size:11px;color:#aaa}
+
+    /* ── 그리드 섹션 ── */
+    .grid-section{background:#fff;border-radius:8px;padding:12px 16px;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-bottom:14px}
+    .grid-toolbar{display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap}
+    .grid-toolbar h2{font-size:13px;font-weight:700}
+    .grid-toolbar input{border:1px solid #ddd;border-radius:4px;padding:4px 9px;font-size:12px;width:190px}
+    .hint-text{font-size:11px;color:#bbb}
+    .sel-lbl{font-size:12px;color:#4a9eff;margin-left:auto;font-weight:600}
+
+    /* ── 상세 ── */
+    #dash-detail{display:none;margin-bottom:14px}
+    .detail-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+    .detail-header h2{font-size:14px;font-weight:700}
+    .det-name{font-size:12px;color:#888}
+    .det-close{margin-left:auto;background:none;border:1px solid #ccc;border-radius:4px;padding:3px 10px;cursor:pointer;font-size:12px}
+    .det-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .det-stat{padding:6px 14px;border-radius:6px;background:#f5f5f5;font-size:12px}
+    .det-stat strong{font-size:16px;font-weight:700;display:block;line-height:1.3}
+    .stat-warn{background:#ffebee;color:#c62828}
+    .stat-ok{background:#e8f5e9;color:#2e7d32}
+    .stat-neutral{background:#e3f2fd;color:#1565c0}
+
+    /* ── 아카이브 패널 ── */
+    .arch-panel{background:#fff;border-radius:8px;padding:14px 18px;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-bottom:14px;display:none}
+    .arch-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+    .arch-row:last-child{margin-bottom:0}
+    .arch-row select{border:1px solid #ddd;border-radius:5px;padding:5px 10px;font-size:13px;min-width:200px}
+    .arch-msg{font-size:12px;color:#888}
+    .arch-prog{display:none;margin-top:10px}
+    .arch-bar-track{background:#e0e0e0;border-radius:4px;height:8px;width:100%;max-width:420px}
+    .arch-bar-fill{background:#4527a0;height:8px;border-radius:4px;width:0%;transition:width .3s}
+    .arch-result-list{margin-top:6px;font-size:12px;max-height:90px;overflow-y:auto}
+
+    /* ── AG Grid 테마 ── */
+    .ag-theme-alpine{
+      --ag-header-background-color:#1a1a2e;
+      --ag-header-foreground-color:#fff;
+      --ag-font-size:12px;
+      --ag-font-family:'Malgun Gothic',sans-serif;
+      --ag-odd-row-background-color:#f9f9f9;
+      --ag-row-hover-color:#edf5ff;
+      --ag-selected-row-background-color:#dbeafe;
+      --ag-border-color:#e5e7eb;
+      --ag-cell-horizontal-padding:10px;
+      --ag-row-height:34px;
+    }
+    .ag-theme-alpine .ag-header-cell{font-size:11px;font-weight:600}
+    .badge{display:inline-block;padding:2px 7px;border-radius:9px;font-size:10.5px;font-weight:700}
+    .b-d{background:#ffebee;color:#c62828}
+    .b-w{background:#fff3e0;color:#e65100}
+    .b-s{background:#e8f5e9;color:#2e7d32}
+    .b-i{background:#f3f3f3;color:#888}
+    .short-warn-cell{color:#e53935!important;font-weight:700}
+  </style>
+</head>
+<body>
+
+<!-- ── 사이드바 ── -->
+<nav class="sidebar">
+  <div class="logo">
+    <strong>구매 자동화</strong>
+    <span>재고 대시보드</span>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="section-title">카테고리</div>
+    <div id="cat-nav"></div>
+  </div>
+
+  <div class="sidebar-footer">구매팀 자동화 시스템</div>
+</nav>
+
+<!-- ── 상단 nav ── -->
+<div class="top-nav">
+  <a href="/dashboard" class="top-nav-active">재고 대시보드</a>
+  <div class="top-nav-tabs">
+    <a href="/">원본 발주서 생성</a>
+    <a href="/발주">발주 실행</a>
+    <a href="/재고현황">재고현황판</a>
+    <a href="/pi">선금계약서 관리</a>
+  </div>
+</div>
+
+<!-- ── 메인 콘텐츠 ── -->
+<main class="main">
+
+  <div class="page-header">
+    <h1>재고 대시보드</h1>
+    <span class="cat-badge" id="cat-badge">전체</span>
+    <span style="flex:1"></span>
+    <button class="btn" id="btn-arch-toggle" onclick="archToggle()"
+      style="background:#546e7a;color:#fff;border-color:#546e7a;font-size:11px">과거 데이터 재분석 ▾</button>
+  </div>
+
+  <!-- 과거 재분석 패널 -->
+  <div class="arch-panel" id="arch-panel">
+    <div class="arch-row">
+      <select id="arch-folder-sel"><option value="">— 날짜 선택 —</option></select>
+      <button class="btn active" onclick="과거분석실행()" id="btn-arch-run">단건 분석</button>
+      <span class="arch-msg" id="arch-msg"></span>
+    </div>
+    <div class="arch-row">
+      <button class="btn" onclick="일괄분석실행(false)"
+        style="background:#4527a0;color:#fff;border-color:#4527a0">일괄 분석 (미처리만)</button>
+      <button class="btn" onclick="일괄분석실행(true)"
+        style="background:#b71c1c;color:#fff;border-color:#b71c1c">일괄 분석 (덮어쓰기)</button>
+      <span class="arch-msg" id="bulk-msg"></span>
+    </div>
+    <div class="arch-prog" id="arch-prog">
+      <div class="arch-bar-track"><div class="arch-bar-fill" id="arch-bar"></div></div>
+      <div style="font-size:12px;color:#555;margin-top:4px" id="arch-prog-text">처리 중…</div>
+      <div class="arch-result-list" id="arch-result-list"></div>
+    </div>
+  </div>
+
+  <!-- KPI 카드 -->
+  <div class="kpi-row" id="dash-kpi"></div>
+
+  <!-- 통합 추이 차트 -->
+  <div class="chart-box">
+    <div class="chart-title">
+      <h3>재고 현황 통합 추이</h3>
+      <span class="chart-sub">막대(좌): 상태별 제품 수 &nbsp;|&nbsp; 선(우): 재고합계·판매량</span>
+    </div>
+    <canvas id="d-chart-combined" style="max-height:280px"></canvas>
+  </div>
+
+  <!-- SKU 그리드 -->
+  <div class="grid-section">
+    <div class="grid-toolbar">
+      <h2>SKU 목록</h2>
+      <input type="text" id="dash-search" placeholder="바코드 / 상품명 검색" oninput="dashSearch()">
+      <button class="btn active" data-dsf="전체" onclick="dashFilter(this)">전체</button>
+      <button class="btn" data-dsf="위험" onclick="dashFilter(this)">위험</button>
+      <button class="btn" data-dsf="주의" onclick="dashFilter(this)">주의</button>
+      <button class="btn" data-dsf="정상" onclick="dashFilter(this)">정상</button>
+      <span class="hint-text">클릭 / 드래그 다중 선택 → 상세 차트</span>
+      <span class="sel-lbl" id="dash-sel-lbl"></span>
+    </div>
+    <div id="dashGrid" class="ag-theme-alpine" style="height:44vh;width:100%"></div>
+    <div id="grid-empty" style="display:none;text-align:center;padding:40px;color:#bbb;font-size:13px">
+      데이터가 없습니다. <a href="/재고현황" style="color:#4a9eff">재고현황판</a>에서 먼저 분석을 실행해 주세요.
+    </div>
+  </div>
+
+  <!-- 선택 제품 통합 상세 -->
+  <div id="dash-detail">
+    <div class="chart-box">
+      <div class="detail-header">
+        <h2>선택 제품 통합 상세</h2>
+        <span class="det-name" id="det-name"></span>
+        <button class="det-close" onclick="detailClose()">닫기</button>
+      </div>
+      <div class="det-stats" id="det-stats"></div>
+      <canvas id="d-detail-proj" style="max-height:340px"></canvas>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.2/dist/ag-grid-community.min.js"></script>
+<script>
+// ── 카테고리 정의 ──────────────────────────────────────────────
+const _DASH_CATS=[
+  {key:'전체',  label:'전체',   keywords:null},
+  {key:'ACC',   label:'ACC',    keywords:['태블릿','핸드폰','노트북','릴','워치','음향기기']},
+  {key:'전장품',label:'전장품', keywords:['전장품','전장']},
+  {key:'패션',  label:'패션',   keywords:['패션']},
+  {key:'잡화',  label:'잡화',   keywords:['잡화']},
+  {key:'신기종',label:'신기종', keywords:['신기종']},
+  {key:'기타',  label:'기타',   keywords:['기타']},
+];
+
+// ── 상태 변수 ─────────────────────────────────────────────────
+let _dashCat='전체';
+let _dashData=[];
+let _dashSnaps=[];
+let _dashGrid=null;
+let _dashStatusFilter='전체';
+let _dCharts={};
+let _archOpen=false;
+
+// ── 사이드바 카테고리 ─────────────────────────────────────────
+function buildCatNav(){
+  document.getElementById('cat-nav').innerHTML=_DASH_CATS.map(c=>
+    `<button class="cat-nav-btn${c.key===_dashCat?' active':''}" onclick="catSwitch('${c.key}')">${c.label}</button>`
+  ).join('');
+}
+
+function catSwitch(key){
+  _dashCat=key;
+  document.getElementById('cat-badge').textContent=key;
+  document.querySelectorAll('.cat-nav-btn').forEach(b=>b.classList.toggle('active',b.textContent===key));
+  renderDashboard();
+}
+
+function _filterRows(rows){
+  const def=_DASH_CATS.find(c=>c.key===_dashCat);
+  if(!def||!def.keywords) return rows;
+  const kws=def.keywords.map(k=>k.toLowerCase());
+  return rows.filter(r=>kws.some(k=>String(r.대분류||'').toLowerCase().includes(k)));
+}
+
+// ── 데이터 로드 ───────────────────────────────────────────────
+async function loadDashboard(){
+  const [curR,archR,srcR]=await Promise.all([
+    fetch('/api/재고현황/데이터').then(r=>r.json()).catch(()=>({})),
+    fetch('/api/재고현황/아카이브_목록').then(r=>r.json()).catch(()=>({날짜들:[]})),
+    fetch('/api/재고현황/소스_아카이브_목록').then(r=>r.json()).catch(()=>({목록:[]})),
+  ]);
+
+  _dashData=curR.rows||[];
+
+  const 날짜들=(archR.날짜들||[]).slice(0,12);
+  if(날짜들.length){
+    const snaps=await Promise.all(날짜들.map(d=>
+      fetch(`/api/재고현황/아카이브/${d}`).then(r=>r.json()).catch(()=>null)
+    ));
+    _dashSnaps=날짜들.map((d,i)=>({날짜:d,...(snaps[i]||{})})).filter(s=>s.rows);
+  }
+
+  const sel=document.getElementById('arch-folder-sel');
+  sel.innerHTML='<option value="">— 날짜 선택 —</option>';
+  (srcR.목록||[]).forEach(item=>{
+    const opt=document.createElement('option');
+    opt.value=item.폴더명;
+    opt.textContent=`${item.날짜} (소스 ${item.소스_수}개)`;
+    sel.appendChild(opt);
+  });
+
+  buildCatNav();
+  renderDashboard();
+}
+
+function renderDashboard(){
+  const rows=_getFilteredRows();
+  renderKPI(rows);
+  renderTrendChart();
+  renderDashGrid(rows);
+}
+
+// ── KPI ──────────────────────────────────────────────────────
+function renderKPI(rows){
+  const 위험=rows.filter(r=>r.재고상태==='위험').length;
+  const 주의=rows.filter(r=>r.재고상태==='주의').length;
+  const 판매합=rows.reduce((a,r)=>a+(r.쿠팡주간판매||0)+(r.일반채널판매||0),0);
+  const 발주합=rows.reduce((a,r)=>a+(r.발주량산출||0),0);
+  document.getElementById('dash-kpi').innerHTML=[
+    {lbl:'총 SKU',val:rows.length.toLocaleString(),cls:''},
+    {lbl:'위험',val:위험.toLocaleString(),cls:'kpi-danger'},
+    {lbl:'주의',val:주의.toLocaleString(),cls:'kpi-warn'},
+    {lbl:'이번주 판매합',val:판매합.toLocaleString(undefined,{maximumFractionDigits:0}),cls:''},
+    {lbl:'발주산출 합계',val:발주합.toLocaleString(undefined,{maximumFractionDigits:0}),cls:'kpi-ok'},
+  ].map(c=>`<div class="kpi-card ${c.cls}"><div class="kpi-val">${c.val}</div><div class="kpi-lbl">${c.lbl}</div></div>`).join('');
+}
+
+// ── 통합 추이 차트 ────────────────────────────────────────────
+function renderTrendChart(){
+  if(!_dashSnaps.length) return;
+  const sorted=[..._dashSnaps].sort((a,b)=>a.날짜.localeCompare(b.날짜));
+  const labels=sorted.map(s=>s.날짜.slice(5));
+
+  function _sf(rows){
+    if(_dashCat==='전체') return rows||[];
+    const def=_DASH_CATS.find(c=>c.key===_dashCat);
+    if(!def||!def.keywords) return rows||[];
+    const kws=def.keywords.map(k=>k.toLowerCase());
+    return (rows||[]).filter(r=>kws.some(k=>String(r.대분류||'').toLowerCase().includes(k)));
+  }
+
+  _dBuildChart('d-chart-combined',{
+    data:{labels,datasets:[
+      {type:'bar',label:'위험',stack:'st',yAxisID:'y',order:2,
+       data:sorted.map(s=>_sf(s.rows).filter(r=>r.재고상태==='위험').length),
+       backgroundColor:'rgba(229,57,53,.75)'},
+      {type:'bar',label:'주의',stack:'st',yAxisID:'y',order:2,
+       data:sorted.map(s=>_sf(s.rows).filter(r=>r.재고상태==='주의').length),
+       backgroundColor:'rgba(251,140,0,.70)'},
+      {type:'bar',label:'정상',stack:'st',yAxisID:'y',order:2,
+       data:sorted.map(s=>_sf(s.rows).filter(r=>r.재고상태==='정상').length),
+       backgroundColor:'rgba(67,160,71,.25)'},
+      {type:'line',label:'재고합계',yAxisID:'y1',order:1,
+       data:sorted.map(s=>_sf(s.rows).reduce((a,r)=>a+(r.재고합계||0),0)),
+       borderColor:'#00897b',borderWidth:2.5,pointRadius:3,tension:.3},
+      {type:'line',label:'쿠팡주간판매',yAxisID:'y1',order:1,
+       data:sorted.map(s=>_sf(s.rows).reduce((a,r)=>a+(r.쿠팡주간판매||0),0)),
+       borderColor:'#1565c0',borderWidth:1.8,borderDash:[5,3],pointRadius:3,tension:.3},
+      {type:'line',label:'일반채널판매',yAxisID:'y1',order:1,
+       data:sorted.map(s=>_sf(s.rows).reduce((a,r)=>a+(r.일반채널판매||0),0)),
+       borderColor:'#6a1b9a',borderWidth:1.8,borderDash:[5,3],pointRadius:3,tension:.3},
+    ]},
+    options:{
+      interaction:{mode:'index',intersect:false},
+      scales:{
+        x:{stacked:true,ticks:{font:{size:11}}},
+        y:{stacked:true,position:'left',beginAtZero:true,
+          title:{display:true,text:'제품 수',font:{size:11}},
+          ticks:{font:{size:11}},grid:{color:'rgba(0,0,0,.06)'}},
+        y1:{position:'right',beginAtZero:true,
+          title:{display:true,text:'수량',font:{size:11}},
+          ticks:{font:{size:11}},grid:{drawOnChartArea:false}}
+      },
+      plugins:{
+        legend:{position:'bottom',labels:{boxWidth:12,font:{size:11},padding:14}},
+        tooltip:{callbacks:{label:ctx=>`  ${ctx.dataset.label}: ${Number(ctx.parsed.y).toLocaleString()}`}}
+      }
+    }
+  });
+}
+
+function _dBuildChart(id,cfg){
+  if(_dCharts[id]){_dCharts[id].destroy();delete _dCharts[id];}
+  const ctx=document.getElementById(id);if(!ctx)return;
+  _dCharts[id]=new Chart(ctx,cfg);
+}
+
+// ── AG Grid ──────────────────────────────────────────────────
+const _gridColDefs=[
+  {field:'재고상태',headerName:'상태',width:60,pinned:'left',
+   cellRenderer:p=>{const m={위험:'b-d',주의:'b-w',정상:'b-s',정보없음:'b-i'};
+     return`<span class="badge ${m[p.value]||'b-i'}">${p.value||'-'}</span>`;}},
+  {field:'바코드',headerName:'바코드',width:120,pinned:'left'},
+  {field:'상품명',headerName:'상품명',flex:1,minWidth:140},
+  {field:'브랜드',headerName:'브랜드',width:70},
+  {field:'대분류',headerName:'대분류',width:70},
+  {field:'재고합계',headerName:'재고',width:65,type:'numericColumn'},
+  {field:'쿠팡주간판매',headerName:'쿠팡/주',width:80,type:'numericColumn'},
+  {field:'일반채널판매',headerName:'일반/주',width:80,type:'numericColumn'},
+  {field:'발주량산출',headerName:'발주산출',width:72,type:'numericColumn',
+   cellClass:p=>p.value<0?'short-warn-cell':''},
+  {field:'재고소진일',headerName:'소진(일)',width:68,type:'numericColumn',
+   cellClass:p=>{const v=p.value;return(!v||v<14)?'short-warn-cell':'';}},
+];
+
+function _getFilteredRows(){
+  return _filterRows(_dashData).filter(r=>_dashStatusFilter==='전체'||r.재고상태===_dashStatusFilter);
+}
+
+function renderDashGrid(rows){
+  const emptyEl=document.getElementById('grid-empty');
+  const gridEl=document.getElementById('dashGrid');
+  if(!rows.length&&!_dashData.length){
+    // 데이터 자체가 없는 경우
+    gridEl.style.display='none';
+    emptyEl.style.display='block';
+    return;
+  }
+  gridEl.style.display='';
+  emptyEl.style.display='none';
+
+  if(_dashGrid){
+    _dashGrid.setGridOption('rowData',rows);
+    return;
+  }
+  _dashGrid=agGrid.createGrid(gridEl,{
+    columnDefs:_gridColDefs,
+    rowData:rows,
+    rowSelection:'multiple',
+    rowMultiSelectWithClick:true,
+    defaultColDef:{sortable:true,filter:true,resizable:true},
+    animateRows:true,
+    onSelectionChanged:onDashSelectionChanged,
+  });
+}
+
+function dashSearch(){
+  if(_dashGrid) _dashGrid.setGridOption('quickFilterText',document.getElementById('dash-search').value.trim());
+}
+
+function dashFilter(btn){
+  document.querySelectorAll('[data-dsf]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  _dashStatusFilter=btn.dataset.dsf;
+  renderDashGrid(_getFilteredRows());
+}
+
+// ── 선택 제품 상세 (통합 + 투영 차트) ────────────────────────
+async function onDashSelectionChanged(){
+  if(!_dashGrid) return;
+  const sel=_dashGrid.getSelectedRows();
+  document.getElementById('dash-sel-lbl').textContent=sel.length?`${sel.length}개 선택`:'';
+  if(!sel.length){detailClose();return;}
+  const barcodes=sel.map(r=>r.바코드).filter(Boolean);
+  if(!barcodes.length) return;
+  const r=await fetch(`/api/재고현황/바코드_이력?barcodes=${barcodes.join(',')}`).then(r=>r.json()).catch(()=>null);
+  if(!r||!r.success) return;
+  renderDetailChart(sel,r.이력);
+}
+
+function renderDetailChart(selRows,이력){
+  document.getElementById('dash-detail').style.display='block';
+  document.getElementById('det-name').textContent=selRows.length===1?selRows[0].상품명:`${selRows.length}개 제품 선택됨`;
+
+  // 현재 집계
+  const 현재재고=selRows.reduce((a,r)=>a+(r.재고합계||0),0);
+  const 주간판매=selRows.reduce((a,r)=>a+(r.쿠팡주간판매||0)+(r.일반채널판매||0),0);
+  const 일판매=주간판매/7;
+  const 소진일수=일판매>0?Math.ceil(현재재고/일판매):null;
+
+  // 소진 예상일
+  const today=new Date();today.setHours(0,0,0,0);
+  const stockoutDate=소진일수!=null?new Date(today.getTime()+소진일수*86400000):null;
+  const fmtDate=d=>d?(d.getMonth()+1)+'/'+d.getDate():'-';
+
+  // 통계 카드
+  const dClass=(소진일수!=null&&소진일수<30)?'stat-warn':'stat-ok';
+  document.getElementById('det-stats').innerHTML=[
+    `<div class="det-stat stat-neutral"><strong>${현재재고.toLocaleString()}</strong>현재 재고합계</div>`,
+    `<div class="det-stat"><strong>${주간판매.toLocaleString(undefined,{maximumFractionDigits:1})}</strong>주간 판매합</div>`,
+    `<div class="det-stat ${dClass}"><strong>${소진일수!=null?소진일수+'일':'-'}</strong>예상 소진 기간</div>`,
+    stockoutDate?`<div class="det-stat ${dClass}"><strong>${fmtDate(stockoutDate)}</strong>재고 소진 예상일</div>`:'',
+  ].join('');
+
+  // 이력 날짜 수집
+  const 날짜셋=new Set();
+  Object.values(이력).forEach(arr=>arr.forEach(p=>날짜셋.add(p.날짜)));
+  const hist날짜=[...날짜셋].sort();
+
+  // 이력 집계 함수
+  function histSum(key){
+    return hist날짜.map(d=>
+      Object.values(이력).reduce((tot,arr)=>{
+        const pt=arr.find(p=>p.날짜===d);
+        return tot+(pt?parseFloat(pt[key]||0):0);
+      },0)
+    );
+  }
+
+  // 최신 이력 재고값 (투영 시작점)
+  let latestInv=현재재고;
+  if(hist날짜.length){
+    const last=hist날짜[hist날짜.length-1];
+    latestInv=Object.values(이력).reduce((tot,arr)=>{
+      const pt=arr.find(p=>p.날짜===last);return tot+(pt?parseFloat(pt.재고합계||0):0);
+    },0);
+  }
+
+  // 투영 날짜 생성: today → stockout + 7일
+  const todayStr=today.toISOString().slice(0,10);
+  const stockoutStr=stockoutDate?stockoutDate.toISOString().slice(0,10):null;
+  const projDates=[];
+  if(stockoutDate){
+    const end=new Date(stockoutDate);end.setDate(end.getDate()+7);
+    const cur=new Date(today);
+    while(cur<=end){projDates.push(cur.toISOString().slice(0,10));cur.setDate(cur.getDate()+1);}
+  } else {
+    // 소진일 계산 불가 시 today만 표시
+    projDates.push(todayStr);
+  }
+
+  // X축 전체 날짜
+  const allDates=[...new Set([...hist날짜,...projDates])].sort();
+  const labels=allDates.map(d=>d.slice(5));
+
+  // 이력 데이터 (이력 있는 날만, 나머지 null)
+  function histData(key){
+    return allDates.map(d=>날짜셋.has(d)?
+      Object.values(이력).reduce((tot,arr)=>{const pt=arr.find(p=>p.날짜===d);return tot+(pt?parseFloat(pt[key]||0):0);},0)
+      :null);
+  }
+
+  // 투영 재고 (today~소진일, 이전은 null)
+  const projInv=allDates.map(d=>{
+    if(d<todayStr) return null;
+    const daysDiff=Math.round((new Date(d+'T00:00:00')-today)/86400000);
+    return Math.max(0,latestInv-일판매*daysDiff);
+  });
+
+  // annotation
+  const annotations={};
+  if(stockoutStr){
+    const sIdx=labels.indexOf(stockoutStr.slice(5));
+    if(sIdx>=0){
+      annotations.stockoutLine={
+        type:'line',xMin:sIdx,xMax:sIdx,
+        borderColor:'rgba(229,57,53,.9)',borderWidth:2.5,borderDash:[6,3],
+        label:{
+          display:true,
+          content:'⚠ 재고 소진 예상 ('+fmtDate(stockoutDate)+')',
+          position:'start',
+          backgroundColor:'rgba(229,57,53,.9)',
+          color:'#fff',
+          font:{size:11,weight:'bold'},
+          padding:{x:8,y:4},
+          yAdjust:14,
+        }
+      };
+    }
+  }
+  const tIdx=labels.indexOf(todayStr.slice(5));
+  if(tIdx>=0){
+    annotations.todayLine={
+      type:'line',xMin:tIdx,xMax:tIdx,
+      borderColor:'rgba(0,0,0,.3)',borderWidth:1.5,borderDash:[3,3],
+      label:{
+        display:true,content:'오늘',position:'end',
+        backgroundColor:'rgba(0,0,0,.55)',color:'#fff',
+        font:{size:10},padding:{x:6,y:3}
+      }
+    };
+  }
+
+  _dBuildChart('d-detail-proj',{
+    data:{labels,datasets:[
+      {label:'재고합계 (실적)',data:histData('재고합계'),
+       borderColor:'#00897b',backgroundColor:'rgba(0,137,123,.07)',
+       borderWidth:2.5,pointRadius:3,tension:.3,fill:true,spanGaps:false,yAxisID:'y'},
+      {label:'재고 투영',data:projInv,
+       borderColor:'rgba(229,57,53,.85)',
+       borderWidth:2,borderDash:[6,4],pointRadius:2,tension:.1,spanGaps:false,yAxisID:'y'},
+      {label:'발주량산출',data:histData('발주량산출'),
+       borderColor:'#ff8f00',borderWidth:1.8,borderDash:[4,3],
+       pointRadius:2,tension:.3,spanGaps:false,yAxisID:'y'},
+      {label:'쿠팡주간판매',data:histData('쿠팡주간판매'),
+       borderColor:'#1565c0',borderWidth:1.5,borderDash:[3,3],
+       pointRadius:2,tension:.3,spanGaps:false,yAxisID:'y1'},
+      {label:'일반채널판매',data:histData('일반채널판매'),
+       borderColor:'#6a1b9a',borderWidth:1.5,borderDash:[3,3],
+       pointRadius:2,tension:.3,spanGaps:false,yAxisID:'y1'},
+    ]},
+    options:{
+      interaction:{mode:'index',intersect:false},
+      scales:{
+        x:{ticks:{font:{size:11},maxRotation:45}},
+        y:{position:'left',beginAtZero:true,
+          title:{display:true,text:'재고 / 발주량',font:{size:11}},
+          ticks:{font:{size:11}}},
+        y1:{position:'right',beginAtZero:true,
+          title:{display:true,text:'주간 판매량',font:{size:11}},
+          ticks:{font:{size:11}},grid:{drawOnChartArea:false}}
+      },
+      plugins:{
+        legend:{position:'bottom',labels:{boxWidth:12,font:{size:11},padding:12}},
+        annotation:{annotations},
+        tooltip:{callbacks:{
+          label:ctx=>`  ${ctx.dataset.label}: ${Number(ctx.parsed.y).toLocaleString(undefined,{maximumFractionDigits:1})}`
+        }}
+      }
+    }
+  });
+}
+
+function detailClose(){
+  document.getElementById('dash-detail').style.display='none';
+  if(_dashGrid) _dashGrid.deselectAll();
+  document.getElementById('dash-sel-lbl').textContent='';
+}
+
+// ── 과거 재분석 ──────────────────────────────────────────────
+function archToggle(){
+  _archOpen=!_archOpen;
+  document.getElementById('arch-panel').style.display=_archOpen?'block':'none';
+  document.getElementById('btn-arch-toggle').textContent='과거 데이터 재분석 '+(_archOpen?'▴':'▾');
+}
+
+async function 과거분석실행(){
+  const 폴더명=document.getElementById('arch-folder-sel').value;
+  if(!폴더명){alert('날짜를 선택해주세요.');return;}
+  const msg=document.getElementById('arch-msg');
+  const btn=document.getElementById('btn-arch-run');
+  msg.textContent='분석 중…';btn.disabled=true;
+  try{
+    const r=await(await fetch('/api/재고현황/과거_분석',{method:'POST',
+      headers:{'Content-Type':'application/json'},body:JSON.stringify({폴더명})})).json();
+    msg.textContent=r.success?`완료: ${(r.rows||[]).length}개 분석됨`:'오류: '+(r.error||'실패');
+    if(r.success) await loadDashboard();
+  }catch(e){msg.textContent='오류: '+e.message;}
+  btn.disabled=false;
+}
+
+async function 일괄분석실행(덮어쓰기){
+  if(!덮어쓰기&&!confirm('미처리 날짜만 분석합니다. 진행할까요?'))return;
+  if(덮어쓰기&&!confirm('모든 날짜를 덮어쓰기 재분석합니다. 시간이 걸릴 수 있습니다. 진행할까요?'))return;
+  const prog=document.getElementById('arch-prog');
+  const bar=document.getElementById('arch-bar');
+  const txt=document.getElementById('arch-prog-text');
+  const lst=document.getElementById('arch-result-list');
+  document.getElementById('bulk-msg').textContent='';
+  prog.style.display='block';bar.style.width='0%';lst.innerHTML='';
+  try{
+    const r=await(await fetch('/api/재고현황/일괄_아카이브_분석',{method:'POST',
+      headers:{'Content-Type':'application/json'},body:JSON.stringify({덮어쓰기})})).json();
+    bar.style.width='100%';
+    if(r.success){
+      txt.textContent=`완료: ${r.완료||0}개 분석됨, ${r.건너뜀||0}개 건너뜀`;
+      lst.innerHTML=(r.결과||[]).map(item=>{
+        const color=item.skipped?'#aaa':item.error?'#e53935':'#2e7d32';
+        const label=item.skipped?'건너뜀':item.error?`오류: ${item.error}`:`${item.행수}개`;
+        return`<span style="color:${color};margin-right:10px">${item.날짜}: ${label}</span>`;
+      }).join('');
+      await loadDashboard();
+    }else txt.textContent='오류: '+(r.error||'실패');
+  }catch(e){txt.textContent='오류: '+e.message;}
+}
+
+// ── 초기화 ───────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',()=>{
+  buildCatNav();
+  loadDashboard();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  발주자동화:
+    build: .
+    image: 발주자동화:latest
+    container_name: 발주자동화
+    restart: always
+    ports:
+      - "5006:5006"
+    env_file:
+      - .env                          # SMTP, Google Sheets 인증 등 민감 정보
+    environment:
+      PYTHONUNBUFFERED: "1"
+      PORT: "5006"
+      # ── NAS 마운트 경로 ──────────────────────────────────────────
+      통합발주서원본_DIR: /app/통합발주서원본   # 원본 발주서 1.4GB 폴더
+      발주서_DIR: /app/발주서                   # 발주 실행 결과 저장
+    volumes:
+      # ── 영구 데이터 (NAS 실제 경로로 수정) ──────────────────────
+      - /volume1/docker/발주자동화/uploads:/app/uploads
+      - /volume1/docker/발주자동화/output:/app/output          # 재고현황 JSON
+      - /volume1/docker/발주자동화/구글시트대체용:/app/구글 시트 대체용
+      # ── 원본 발주서 / 발주 결과 (NAS 공유폴더) ──────────────────
+      - /volume1/통합발주서원본:/app/통합발주서원본             # 읽기+쓰기
+      - /volume1/발주서:/app/발주서                             # 발주 실행 결과

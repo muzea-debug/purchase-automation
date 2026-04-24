@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>선금계약서 관리</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Malgun Gothic',sans-serif;font-size:13px;background:#f0f2f5}
+    .nav{background:#1a1a2e;padding:10px 20px;display:flex;align-items:center;justify-content:space-between}
+    .nav strong{color:#fff;font-size:15px}
+    .nav-left{display:flex;align-items:center;gap:10px}
+    .nav-dash{color:#7ec8ff!important;font-weight:700;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:13px;border:1px solid rgba(74,158,255,.35)}
+    .nav-dash:hover{background:rgba(74,158,255,.15)!important}
+    .nav-tabs{display:flex;gap:4px}
+    .nav-tabs a{color:#ccc;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:600;background:rgba(255,255,255,0.15)}
+    .nav-tabs a:hover,.nav-tabs a.active{background:#4a4a8a;color:#fff}
+    .wrap{padding:16px}
+    .tabs{display:flex;gap:4px;margin-bottom:14px}
+    .tab-btn{padding:7px 20px;border:1.5px solid #ccc;border-radius:5px 5px 0 0;background:#f5f5f5;cursor:pointer;font-size:13px;font-weight:600}
+    .tab-btn.active{background:#fff;border-bottom-color:#fff;color:#1a1a2e}
+    .tab-panel{display:none;background:#fff;border:1px solid #ddd;border-radius:0 5px 5px 5px;padding:16px}
+    .tab-panel.active{display:block}
+    .sec-title{font-size:14px;font-weight:700;margin-bottom:10px;color:#1a1a2e;border-bottom:2px solid #1a1a2e;padding-bottom:4px}
+    table{width:100%;border-collapse:collapse;font-size:12px}
+    th{background:#1a1a2e;color:#fff;padding:6px 10px;text-align:left;white-space:nowrap}
+    td{padding:5px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+    tr:hover td{background:#f9f9ff}
+    .btn{border:1px solid #ccc;background:#fff;border-radius:4px;padding:4px 12px;font-size:12px;cursor:pointer;white-space:nowrap}
+    .btn-primary{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+    .btn-danger{background:#c62828;color:#fff;border-color:#c62828}
+    .btn-sm{padding:2px 8px;font-size:11px}
+    .form-row{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;flex-wrap:wrap}
+    .form-row label{width:130px;flex-shrink:0;font-weight:600;font-size:12px;padding-top:6px}
+    .form-row input,.form-row textarea,.form-row select{flex:1;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:12px;min-width:0}
+    .form-row textarea{height:55px;resize:vertical}
+    .parse-box{border:2px dashed #4a9eff;border-radius:6px;padding:12px;margin-bottom:10px;background:#f8fbff}
+    .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
+    .modal-bg.open{display:flex}
+    .modal{background:#fff;border-radius:10px;padding:22px;max-width:600px;width:95%;max-height:88vh;overflow-y:auto}
+    .modal-title{font-size:15px;font-weight:700;margin-bottom:14px}
+    .dep-row{display:flex;gap:6px;align-items:center;margin-bottom:5px;padding:6px 8px;border:1px solid #eee;border-radius:4px;flex-wrap:wrap}
+    .dep-row input{border:1px solid #ddd;border-radius:3px;padding:3px 6px;font-size:12px}
+    .badge-ok{background:#e8f5e9;color:#2e7d32;padding:2px 7px;border-radius:9px;font-size:11px;font-weight:600}
+    .badge-pend{background:#fff3e0;color:#e65100;padding:2px 7px;border-radius:9px;font-size:11px;font-weight:600}
+    .badge-none{background:#f3f3f3;color:#888;padding:2px 7px;border-radius:9px;font-size:11px}
+    .pi-card{border:1px solid #e0e0e0;border-radius:6px;padding:12px;margin-bottom:10px}
+    .pi-card-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+    .pi-code{font-size:14px;font-weight:700;color:#1a1a2e}
+    .drop-img{border:2px dashed #ccc;border-radius:6px;padding:10px 16px;text-align:center;cursor:pointer;background:#fafafa;font-size:12px;color:#888;display:inline-block}
+    .empty-msg{padding:30px;text-align:center;color:#bbb;font-size:13px}
+    .stamp-preview{height:44px;margin-left:10px;display:none;vertical-align:middle;border:1px solid #eee;border-radius:3px}
+
+    /* ── 담당자 필터 버튼 ── */
+    .staff-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+    .staff-btn{
+      padding:10px 20px;border-radius:8px;font-size:14px;font-weight:700;
+      cursor:pointer;border:2px solid #d1d5db;background:#fff;color:#374151;
+      transition:all .15s;user-select:none;
+    }
+    .staff-btn:hover{border-color:#4a4a8a;color:#1a1a2e}
+    .staff-btn.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+    .staff-btn.all-btn{background:#f0f2f5;border-color:#9ca3af;color:#6b7280}
+    .staff-btn.all-btn.active{background:#4a4a8a;color:#fff;border-color:#4a4a8a}
+    .pi-count-badge{
+      display:inline-block;background:#ef4444;color:#fff;border-radius:10px;
+      padding:1px 7px;font-size:11px;margin-left:4px;font-weight:600;
+    }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-left">
+    <strong>발주 자동화</strong>
+    <a href="/dashboard" class="nav-dash">재고 대시보드</a>
+  </div>
+  <div class="nav-tabs">
+    <a href="/">원본 발주서 생성</a>
+    <a href="/발주">발주 실행</a>
+    <a href="/재고현황">재고현황판</a>
+    <a href="/pi" class="active">선금계약서 관리</a>
+  </div>
+</nav>
+<div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:0">
+    <div class="tabs" style="margin-bottom:0">
+      <button class="tab-btn active" onclick="switchTab('대시보드')">선금계약서 현황</button>
+      <button class="tab-btn" onclick="switchTab('계좌')">계좌 DB</button>
+    </div>
+    <a href="/api/pi/템플릿_다운로드" style="font-size:12px;padding:5px 12px;background:#f0f4ff;border:1px solid #6366f1;color:#4338ca;border-radius:5px;text-decoration:none;margin-bottom:1px">선금계약서 기본양식 다운로드</a>
+  </div>
+
+  <!-- ── 계좌 DB 탭 ── -->
+  <div id="tab-계좌" class="tab-panel">
+    <div style="margin-bottom:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div class="sec-title" style="margin:0;border:none;padding:0">계좌 목록</div>
+      <button class="btn btn-primary" onclick="openAddModal()">+ 계좌 추가</button>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+        <div style="font-size:12px;color:#555;font-weight:600">누아트 도장:</div>
+        <label style="cursor:pointer;display:flex;align-items:center;gap:6px">
+          <input type="file" id="nuart-stamp-input" accept="image/*" style="display:none" onchange="uploadNuartStamp(this)">
+          <span class="btn btn-sm" onclick="document.getElementById('nuart-stamp-input').click()">업로드</span>
+          <img id="nuart-stamp-preview" style="height:36px;display:none;border:1px solid #eee;border-radius:3px;padding:2px">
+          <span id="nuart-stamp-status" style="font-size:11px;color:#888"></span>
+        </label>
+        <button class="btn btn-sm" onclick="testSlack()">슬랙 테스트</button>
+      </div>
+    </div>
+    <table>
+      <thead><tr>
+        <th>회사명(영문)</th><th>SWIFT</th><th>계좌번호</th><th>은행</th><th>도장</th><th>관리</th>
+      </tr></thead>
+      <tbody id="acct-tbody"><tr><td colspan="6" class="empty-msg">불러오는 중...</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- ── 선금계약서 현황 탭 ── -->
+  <div id="tab-대시보드" class="tab-panel active">
+    <!-- 담당자 필터 버튼 -->
+    <div class="staff-btns" id="staff-btns"></div>
+    <div id="pi-list"><div class="empty-msg">로드 중...</div></div>
+  </div>
+</div>
+
+<!-- ── 계좌 추가/수정 모달 ── -->
+<div class="modal-bg" id="modal-acct">
+  <div class="modal">
+    <div class="modal-title">계좌 등록 / 수정</div>
+    <div style="margin-bottom:12px">
+      <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#555">텍스트 자동 파싱</div>
+      <div class="parse-box">
+        <textarea id="paste-text" style="width:100%;height:90px;border:1px solid #ddd;border-radius:4px;padding:6px;font-size:11px;font-family:monospace;resize:vertical"
+          placeholder="Bank information 블록을 복사해서 붙여넣으세요..."></textarea>
+        <button class="btn btn-primary" style="margin-top:5px" onclick="parseText()">자동 입력</button>
+      </div>
+    </div>
+    <input type="hidden" id="edit-id">
+    <div class="form-row"><label>회사명(영문)*</label><input id="f-name-en" type="text"></div>
+    <div class="form-row"><label>회사명(중문)</label><input id="f-name-cn" type="text"></div>
+    <div class="form-row">
+      <label>국가 / 도시</label>
+      <input id="f-country" type="text" placeholder="China" style="flex:0.6;margin-right:6px">
+      <input id="f-city" type="text" placeholder="Cixi" style="flex:1">
+    </div>
+    <div class="form-row"><label>계좌번호*</label><input id="f-acct" type="text" style="font-family:monospace"></div>
+    <div class="form-row"><label>수취인명*</label><input id="f-bene-name" type="text"></div>
+    <div class="form-row"><label>수취인 주소</label><textarea id="f-bene-addr"></textarea></div>
+    <div class="form-row"><label>SWIFT*</label><input id="f-swift" type="text" style="font-family:monospace"></div>
+    <div class="form-row"><label>은행명</label><input id="f-bank-name" type="text"></div>
+    <div class="form-row"><label>은행 주소</label><input id="f-bank-addr" type="text"></div>
+    <div class="form-row"><label>Sort code</label><input id="f-sort" type="text" style="font-family:monospace"></div>
+    <div class="form-row"><label>Branch Code</label><input id="f-branch" type="text" style="font-family:monospace"></div>
+    <div class="form-row">
+      <label>업체 도장</label>
+      <div>
+        <div class="drop-img" onclick="document.getElementById('stamp-file-input').click()">
+          도장 이미지 클릭하여 업로드
+        </div>
+        <input type="file" id="stamp-file-input" accept="image/*" style="display:none">
+        <img id="stamp-preview-img" class="stamp-preview">
+        <div id="stamp-current" style="font-size:11px;color:#666;margin-top:3px"></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-primary" onclick="saveAcct()">저장</button>
+      <button class="btn" onclick="closeModal('modal-acct')">취소</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── 디포짓 수정 모달 ── -->
+<div class="modal-bg" id="modal-dep">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-title">디포짓 수정 — <span id="dep-po-title"></span></div>
+    <div id="dep-rows-wrap"></div>
+    <button class="btn" onclick="addDepRow()" style="margin:8px 0;font-size:11px">+ 차수 추가 (최대 4차)</button>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-primary" onclick="saveDep()">저장 및 PI 재생성</button>
+      <button class="btn" onclick="closeModal('modal-dep')">취소</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── 상태 ────────────────────────────────────────────────────────
+var _piDataMap = {};      // po코드 → pi 전체 데이터 (디포짓 포함)
+var _allPIList = [];      // 전체 PI 목록 캐시
+var _activeStaff = null;  // null = 전체
+
+const STAFF_LIST = ['강태구','김려','손설옥','연유진','윤희도','전미경'];
+const DEP_LABELS = ['1st Deposit','2st Deposit','3st Deposit','4st Deposit'];
+
+// ── 탭 ──────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', ['대시보드','계좌'][i] === name);
+  });
+  ['대시보드','계좌'].forEach(n => {
+    document.getElementById('tab-'+n).classList.toggle('active', n === name);
+  });
+  if (name === '계좌') loadAccounts();
+  if (name === '대시보드') loadAllPI();
+}
+
+// ── 담당자 필터 버튼 ────────────────────────────────────────────
+function renderStaffButtons() {
+  const wrap = document.getElementById('staff-btns');
+  const counts = {};
+  _allPIList.forEach(p => {
+    const name = p.담당자 || '미지정';
+    counts[name] = (counts[name] || 0) + 1;
+  });
+
+  const allActive = _activeStaff === null;
+  let html = `<button class="staff-btn all-btn${allActive ? ' active' : ''}" onclick="filterStaff(null)">
+    전체 <span class="pi-count-badge">${_allPIList.length}</span>
+  </button>`;
+
+  STAFF_LIST.forEach(name => {
+    const cnt = counts[name] || 0;
+    if (cnt === 0) return;
+    const active = _activeStaff === name;
+    html += `<button class="staff-btn${active ? ' active' : ''}" onclick="filterStaff('${name}')">
+      ${name} <span class="pi-count-badge">${cnt}</span>
+    </button>`;
+  });
+
+  // STAFF_LIST에 없는 담당자도 표시
+  Object.keys(counts).forEach(name => {
+    if (!STAFF_LIST.includes(name)) {
+      const active = _activeStaff === name;
+      html += `<button class="staff-btn${active ? ' active' : ''}" onclick="filterStaff('${escHtml(name)}')">
+        ${escHtml(name)} <span class="pi-count-badge">${counts[name]}</span>
+      </button>`;
+    }
+  });
+
+  wrap.innerHTML = html;
+}
+
+function filterStaff(name) {
+  _activeStaff = name;
+  renderStaffButtons();
+  const filtered = name ? _allPIList.filter(p => p.담당자 === name) : _allPIList;
+  renderPIList(filtered);
+}
+
+// ── 선금계약서 목록 ──────────────────────────────────────────────
+async function loadAllPI() {
+  const r = await fetch('/api/pi/목록').then(r => r.json());
+  _allPIList = (r.data || []).map(p => ({...p, 디포짓: p.디포짓_요약 || []}));
+  _piDataMap = {};
+  _allPIList.forEach(p => { _piDataMap[p.po코드] = p; });
+  renderStaffButtons();
+  const filtered = _activeStaff ? _allPIList.filter(p => p.담당자 === _activeStaff) : _allPIList;
+  renderPIList(filtered);
+}
+
+function renderPIList(list) {
+  const el = document.getElementById('pi-list');
+  if (!list.length) {
+    el.innerHTML = '<div class="empty-msg">선금계약서가 없습니다.</div>';
+    return;
+  }
+  el.innerHTML = list.map(pi => {
+    const deps = pi.디포짓 || [];
+    const depRows = deps.map((d, i) => `
+      <tr>
+        <td>${d.label || ''}</td>
+        <td>${Math.round((d.pct||0)*100)}%</td>
+        <td>¥${Number(d.amount||0).toLocaleString()}</td>
+        <td>${d.예정일||'-'}</td>
+        <td>${d.완료 ? '<span class="badge-ok">완료</span>' : '<span class="badge-pend">미완료</span>'}</td>
+        <td>${!d.완료
+          ? `<button class="btn btn-sm" onclick="markDone('${pi.po코드}',${i})">완료</button>`
+          : '—'}</td>
+      </tr>`).join('');
+
+    const productSection = pi.제품목록 && pi.제품목록.length ? `
+      <details style="margin-top:8px">
+        <summary style="cursor:pointer;font-size:11px;color:#666;padding:2px 0">
+          제품 목록 (${pi.제품목록.length}건) — 총액 ¥${Number(pi.총액_위안||0).toLocaleString()}
+        </summary>
+        <table style="margin-top:5px;font-size:11px">
+          <thead><tr><th>바코드</th><th>제품명</th><th>수량</th><th>단가(위안)</th><th>금액</th></tr></thead>
+          <tbody>${pi.제품목록.map(p => `<tr>
+            <td style="font-family:monospace">${p.barcode||''}</td>
+            <td>${p.product_name_kr||p.description||''}</td>
+            <td>${p.qty||0}</td>
+            <td>¥${p.unit_price||0}</td>
+            <td>¥${((p.qty||0)*(p.unit_price||0)).toLocaleString()}</td>
+          </tr>`).join('')}</tbody>
+        </table>
+      </details>` : '';
+
+    return `
+    <div class="pi-card">
+      <div class="pi-card-hd">
+        <div>
+          <span class="pi-code">[${pi.po코드}]</span>
+          <span style="margin-left:8px;color:#666">${pi.담당자||''}</span>
+          <span style="margin-left:8px;font-size:11px;color:#999">생성: ${pi.생성일||''}</span>
+          ${pi.입고상태 ? `<span style="margin-left:8px;font-size:11px;color:#2e7d32">${pi.입고상태}</span>` : ''}
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-sm" onclick="openDepModal('${pi.po코드}')">디포짓 수정</button>
+          <button class="btn btn-sm btn-primary" onclick="downloadPI('${pi.po코드}')">다운로드</button>
+          <button class="btn btn-sm btn-danger" onclick="deletePI('${pi.po코드}')">삭제</button>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>차수</th><th>%</th><th>금액(위안)</th><th>예정일</th><th>상태</th><th>완료처리</th></tr></thead>
+        <tbody>${depRows}</tbody>
+      </table>
+      ${productSection}
+    </div>`;
+  }).join('');
+}
+
+async function markDone(po, idx) {
+  const btn = event.target;
+  btn.disabled = true; btn.textContent = '처리 중...';
+  await fetch('/api/pi/완료_처리', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({po코드: po, 인덱스: idx})
+  });
+  await loadAllPI();
+}
+
+async function deletePI(po) {
+  if (!confirm(`[${po}] 선금계약서를 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`)) return;
+  const r = await fetch('/api/pi/삭제', {
+    method: 'DELETE',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({po코드: po})
+  }).then(r => r.json());
+  if (!r.success) { alert('삭제 실패: ' + (r.error||'')); return; }
+  await loadAllPI();
+}
+
+function downloadPI(po) {
+  window.location = '/api/pi/다운로드?po=' + encodeURIComponent(po);
+}
+
+// ── 디포짓 수정 모달 ─────────────────────────────────────────────
+var _curDepPO = null;
+var _depRows  = [];
+
+function openDepModal(po) {
+  const pi = _piDataMap[po];
+  if (!pi) { alert('데이터를 찾을 수 없습니다. 새로고침 후 다시 시도하세요.'); return; }
+  _curDepPO = po;
+  _depRows = (pi.디포짓 || []).map(d => ({...d}));
+  document.getElementById('dep-po-title').textContent = po;
+  renderDepRows();
+  document.getElementById('modal-dep').classList.add('open');
+}
+
+function renderDepRows() {
+  document.getElementById('dep-rows-wrap').innerHTML = _depRows.map((d, i) => `
+    <div class="dep-row">
+      <span style="width:80px;font-size:11px;font-weight:600;flex-shrink:0">${DEP_LABELS[i]||('차수'+(i+1))}</span>
+      <input type="number" value="${Math.round((d.pct||0)*100)}" min="0" max="100" placeholder="%"
+        oninput="_depRows[${i}].pct=this.value/100" style="width:55px">
+      <span style="font-size:11px">%</span>
+      <input type="number" value="${d.amount||''}" min="0" placeholder="또는 금액(위안)"
+        oninput="_depRows[${i}].amount=this.value?+this.value:null" style="width:100px">
+      <span style="font-size:11px">위안</span>
+      <input type="date" value="${d.예정일||''}" onchange="_depRows[${i}].예정일=this.value" style="width:130px">
+      ${i >= 2 ? `<button class="btn btn-sm btn-danger" onclick="_depRows.splice(${i},1);renderDepRows()">삭제</button>` : ''}
+      ${d.완료 ? '<span class="badge-ok" style="flex-shrink:0">완료</span>' : ''}
+    </div>`).join('');
+}
+
+function addDepRow() {
+  if (_depRows.length >= 4) { alert('최대 4차까지 가능합니다.'); return; }
+  _depRows.push({label: DEP_LABELS[_depRows.length]||('차수'+(_depRows.length+1)), pct:0, amount:null, 예정일:'', 완료:false});
+  renderDepRows();
+}
+
+async function saveDep() {
+  if (!_depRows.every(d => d.예정일)) { alert('모든 차수의 예정일을 입력하세요.'); return; }
+  const btn = event.target;
+  btn.disabled = true; btn.textContent = '저장 중...';
+  try {
+    const r = await fetch('/api/pi/디포짓_수정', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({po코드: _curDepPO, 디포짓: _depRows})
+    }).then(r => r.json());
+    if (!r.success) { alert('저장 실패: ' + r.error); return; }
+    closeModal('modal-dep');
+    await loadAllPI();
+  } finally {
+    btn.disabled = false; btn.textContent = '저장 및 PI 재생성';
+  }
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+// ── 계좌 목록 ────────────────────────────────────────────────────
+async function loadAccounts() {
+  const r = await fetch('/api/계좌/목록').then(r => r.json());
+  const tb = document.getElementById('acct-tbody');
+  if (!r.data || !r.data.length) {
+    tb.innerHTML = '<tr><td colspan="6" class="empty-msg">등록된 계좌가 없습니다.</td></tr>';
+    return;
+  }
+  tb.innerHTML = r.data.map(a => `
+    <tr>
+      <td><strong>${a.회사명_영문||''}</strong>${a.회사명_중문 ? '<br><span style="font-size:11px;color:#888">'+a.회사명_중문+'</span>' : ''}</td>
+      <td style="font-family:monospace;font-size:11px">${a.swift||''}</td>
+      <td style="font-family:monospace;font-size:11px">${a.account_number||''}</td>
+      <td style="font-size:11px">${a.bank_name||''}</td>
+      <td>${a.도장_파일 ? '<span class="badge-ok">등록됨</span>' : '<span class="badge-none">없음</span>'}</td>
+      <td style="white-space:nowrap">
+        <button class="btn btn-sm" onclick="editAcctById('${a.id}')">수정</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteAcct('${a.id}')">삭제</button>
+      </td>
+    </tr>`).join('');
+}
+
+var _acctCache = {};
+async function editAcctById(id) {
+  if (!_acctCache[id]) {
+    const r = await fetch('/api/계좌/목록').then(r => r.json());
+    (r.data||[]).forEach(a => { _acctCache[a.id] = a; });
+  }
+  editAcct(_acctCache[id] || {id});
+}
+
+function openAddModal() {
+  clearAcctForm();
+  document.getElementById('modal-acct').classList.add('open');
+}
+function editAcct(a) {
+  clearAcctForm();
+  document.getElementById('edit-id').value = a.id || '';
+  document.getElementById('f-name-en').value = a.회사명_영문 || '';
+  document.getElementById('f-name-cn').value = a.회사명_중문 || '';
+  document.getElementById('f-country').value = a.country || '';
+  document.getElementById('f-city').value = a.city || '';
+  document.getElementById('f-acct').value = a.account_number || '';
+  document.getElementById('f-bene-name').value = a.beneficiary_name || '';
+  document.getElementById('f-bene-addr').value = a.beneficiary_address || '';
+  document.getElementById('f-swift').value = a.swift || '';
+  document.getElementById('f-bank-name').value = a.bank_name || '';
+  document.getElementById('f-bank-addr').value = a.bank_address || '';
+  document.getElementById('f-sort').value = a.sort_code || '';
+  document.getElementById('f-branch').value = a.branch_code || '';
+  if (a.도장_파일) document.getElementById('stamp-current').textContent = '현재: ' + a.도장_파일;
+  document.getElementById('modal-acct').classList.add('open');
+}
+function clearAcctForm() {
+  ['edit-id','f-name-en','f-name-cn','f-country','f-city','f-acct',
+   'f-bene-name','f-bene-addr','f-swift','f-bank-name','f-bank-addr','f-sort','f-branch'
+  ].forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('stamp-preview-img').style.display = 'none';
+  document.getElementById('stamp-current').textContent = '';
+  document.getElementById('paste-text').value = '';
+  document.getElementById('parse-text-area').style.display = 'none';
+  document.getElementById('parse-img-area').style.display = 'none';
+  document.getElementById('stamp-file-input').value = '';
+}
+async function saveAcct() {
+  const id = document.getElementById('edit-id').value;
+  const payload = {
+    id: id || undefined,
+    회사명_영문:         document.getElementById('f-name-en').value.trim(),
+    회사명_중문:         document.getElementById('f-name-cn').value.trim(),
+    country:            document.getElementById('f-country').value.trim(),
+    city:               document.getElementById('f-city').value.trim(),
+    account_number:     document.getElementById('f-acct').value.trim(),
+    beneficiary_name:   document.getElementById('f-bene-name').value.trim(),
+    beneficiary_address:document.getElementById('f-bene-addr').value.trim(),
+    swift:              document.getElementById('f-swift').value.trim(),
+    bank_name:          document.getElementById('f-bank-name').value.trim(),
+    bank_address:       document.getElementById('f-bank-addr').value.trim(),
+    sort_code:          document.getElementById('f-sort').value.trim(),
+    branch_code:        document.getElementById('f-branch').value.trim(),
+  };
+  if (!payload.회사명_영문) { alert('회사명(영문)은 필수입니다.'); return; }
+  const r = await fetch('/api/계좌/저장', {
+    method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  }).then(r => r.json());
+  if (!r.success) { alert('저장 실패: ' + r.error); return; }
+  const stampFile = document.getElementById('stamp-file-input').files[0];
+  if (stampFile) {
+    const fd = new FormData(); fd.append('file', stampFile);
+    await fetch('/api/계좌/도장_업로드/' + r.id, {method: 'POST', body: fd});
+  }
+  _acctCache = {};
+  closeModal('modal-acct');
+  loadAccounts();
+}
+async function deleteAcct(id) {
+  if (!confirm('이 계좌를 삭제하시겠습니까?')) return;
+  await fetch('/api/계좌/삭제/' + id, {method: 'DELETE'});
+  _acctCache = {};
+  loadAccounts();
+}
+
+// ── 자동 파싱 ────────────────────────────────────────────────────
+async function parseText() {
+  const text = document.getElementById('paste-text').value.trim();
+  if (!text) { alert('텍스트를 붙여넣어주세요.'); return; }
+  const r = await fetch('/api/계좌/텍스트_파싱', {
+    method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({text})
+  }).then(r => r.json());
+  if (r.success) fillAcctForm(r.data); else alert('파싱 실패: ' + r.error);
+}
+function fillAcctForm(d) {
+  if (d.회사명_영문||d.beneficiary_name) document.getElementById('f-name-en').value = d.회사명_영문||d.beneficiary_name||'';
+  if (d.country)             document.getElementById('f-country').value = d.country;
+  if (d.city)                document.getElementById('f-city').value = d.city;
+  if (d.account_number)      document.getElementById('f-acct').value = d.account_number;
+  if (d.beneficiary_name)    document.getElementById('f-bene-name').value = d.beneficiary_name;
+  if (d.beneficiary_address) document.getElementById('f-bene-addr').value = d.beneficiary_address;
+  if (d.swift)               document.getElementById('f-swift').value = d.swift;
+  if (d.bank_name)           document.getElementById('f-bank-name').value = d.bank_name;
+  if (d.bank_address)        document.getElementById('f-bank-addr').value = d.bank_address;
+  if (d.sort_code)           document.getElementById('f-sort').value = d.sort_code;
+  if (d.branch_code)         document.getElementById('f-branch').value = d.branch_code;
+}
+
+// 도장 미리보기
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('stamp-file-input').addEventListener('change', function() {
+    const file = this.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.getElementById('stamp-preview-img');
+      img.src = e.target.result; img.style.display = 'inline';
+    };
+    reader.readAsDataURL(file);
+  });
+  loadAllPI();
+});
+
+// ── 누아트 도장 업로드 ─────────────────────────────────────────────
+async function uploadNuartStamp(input) {
+  const file = input.files[0]; if (!file) return;
+  const status = document.getElementById('nuart-stamp-status');
+  status.textContent = '업로드 중...';
+  const fd = new FormData(); fd.append('file', file);
+  const r = await fetch('/api/계좌/누아트_도장_업로드', {method: 'POST', body: fd}).then(r => r.json());
+  if (r.success) {
+    status.textContent = '등록 완료';
+    const preview = document.getElementById('nuart-stamp-preview');
+    const reader = new FileReader();
+    reader.onload = e => { preview.src = e.target.result; preview.style.display = 'inline'; };
+    reader.readAsDataURL(file);
+  } else {
+    status.textContent = '실패: ' + (r.error || '');
+  }
+}
+
+// ── 슬랙 테스트 ───────────────────────────────────────────────────
+async function testSlack() {
+  const r = await fetch('/api/pi/슬랙_테스트', {method: 'POST'}).then(r => r.json());
+  alert(r.success ? '슬랙 발송 성공!' : '슬랙 발송 실패 (Webhook URL 확인)');
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>

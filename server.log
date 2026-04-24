@@ -1,0 +1,1671 @@
+서버 시작: http://localhost:5006
+저장 경로: C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\output
+[SMTP] FROM='muzea123@naver.com' TO='muzea123@nuart.co.kr' CC='muzea123@naver.com' PW=설정됨
+[발주서원본_파서] 파싱: (국내)DMK_LED 도킹형 미니 보조배터리_금형건 (누아트&일리온 전용).xlsx
+[재고현황] 캐시 로드 완료: 5205행
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5006
+ * Running on http://192.168.219.105:5006
+Press CTRL+C to quit
+[발주서원본_파서] 파싱: (국내)DMK_고속충전 대용량 보조배터리.xlsx
+[발주서원본_파서] 파싱: APL_누아트 왕그립 맥세이프 스마트톡 발주서(누아트전용).xlsx
+[발주서원본_파서] 파싱: APL_크리스탈 하드케이스,릴 하이브리드2.0(누아트전용).xlsx
+[발주서원본_파서] 파싱: APL_클래식 버킨 가죽 다이어리 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: APL_프리미엄 사피아노 가죽 다이어리 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: GKK_에어프레임 젤하드 힌지커버 보호형 링 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: GKK_펜수납 슬림 하드 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: ZONYSUN_프리미엄 방수팩 (누아트전용).xlsx
+[발주서원본_파서] 파싱: 万泓电子科技_보풀제거기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 万泓电子科技_보풀제거기(일리온전용).xlsx
+[발주서원본_파서] 파싱: 东嘉科技_맥세이프 호환 헤이즐 실리콘케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 东嘉科技_헤이즐 파스텔 실리콘케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 丽峰鞋业有限公司_말로 크로스 레더 샌들(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 义乌陆戈饰品有限公司_마리 믹스 헤어 스크런치(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 义乌陆戈饰品有限公司_피오니 벨벳 헤어밴드(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 亮科时代科技_8핀 2in1 멀티 카드리더기 케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 亮科时代科技_8핀 2in1 멀티 카드리더기 케이블(일리온전용).xlsx
+[발주서원본_파서] 파싱: 亮科时代科技_C타입 3in1 멀티 카드리더기 케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 亮科时代科技_C타입 3in1 멀티 카드리더기 케이블(일리온전용).xlsx
+[발주서원본_파서] 파싱: 亮科时代科技_C타입 이어폰 고속 충전 듀얼 젠더 3.5mm 연결 잭(누아트전용).xlsx
+[발주서원본_파서] 파싱: 亮科时代科技_C타입 이어폰 고속 충전 듀얼 젠더 C타입 연결 잭(누아트전용).xlsx
+[발주서원본_파서] 파싱: 伊望鞋业_에토 클래식 스웨이드 퍼 미드 부츠 (누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 伊望鞋业_에토 클래식 스웨이드 퍼 숏 미니 부츠(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 优安纳伞业科技有限公司_OYW 3단 자동 거꾸로 우산(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 优安纳伞业科技有限公司_OYW 글로우 5단 수동 미니 우양산(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 优必纳科技_스마트폰 태블릿 침대 자바라 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_레터링 로고 니트 비니（누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_루미에 니트 베이직 머플러(누아트 스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_마리 코튼 헤어 스크런치(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_마리에뜨 투톤 체크 머플러(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_버튼 니트 바라클라바(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_버튼 케이블 니트 바라클라바(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_베이직 핑거리스 니트 장갑(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_볼드 니트 숏 비니(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_스노우 브러쉬드 머플러(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_스마트터치 장갑(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_스카프 니트 바라클라바(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_슬림핏 타이, 스탠다드핏 타이(누아트 스튜디오).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_오토메틱타이(누아트 스튜디오).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_클래식 라인 니트 머플러(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_클래식 미니멀 스트라이프 머플러(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_클래식 소프트 리브드 핑거홀 터치 숏 장갑(누아트 스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_클래식 소프트 터치장갑(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_클래식 소프트 핑거홀 터치 숏 장갑(누아트 스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_허그 앙고라 핑거홀 장갑(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兰溪峰之燕_후디 스트링 니트 바라클라바(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 兴怡轩_NUART 갤럭시탭 360도 회전 터치펜슬 수납 투명 하드케이스.xlsx
+[발주서원본_파서] 파싱: 兴怡轩_NUART 갤럭시탭 마그네틱 탈부착 종이질감 액정보호필름 1매입.xlsx
+[발주서원본_파서] 파싱: 兴怡轩_NUART 갤럭시탭 종이질감 액정보호필름 1매입.xlsx
+[발주서원본_파서] 파싱: 兴怡轩_NUART 갤럭시탭 풀커버 강화유리 액정보호필름 2매입.xlsx
+[발주서원본_파서] 파싱: 兴怡轩_스마트커버 애플펜슬 수납 아이패드 투명케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴怡轩_아이패드 360도 회전 스마트커버 애플펜슬 수납 투명 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴怡轩_아이패드 스마트커버 애플펜슬 수납 투명 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴怡轩_아이패드 종이질감 액정보호필름 1매입(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴怡轩_아이패드 태블릿 풀커버 강화유리 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴怡轩_태블릿PC 아이패드 마그네틱 탈부착 종이질감 액정보호필름(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_NUART 갤럭시워치 호환 마그네틱 루프 실리콘 스트랩.xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 실리콘 충전독 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 액티브2 풀커버케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 울트라 커버케이스+고광택 보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 울트라 풀커버 하드케이스(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 커버케이스+고광택 보호필름(3개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 큐빅 범퍼 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 풀커버 케이스(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 풀커버 케이스(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 풀커버 하드케이스(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시워치 풀커버 하드케이스(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시핏3 TPU 풀커버 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_갤럭시핏3 풀커버 강화유리 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_맥세이프 핑거링 그립 스마트톡(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_맥세이프링 플레이트 호환 자석 스티커(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_변색없는 샤오미 미밴드8 풀커버 강화유리 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_변색없는 애플워치 풀커버 하드케이스(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_샤오미 미밴드8 풀커버 강화유리 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 실리콘 충전독 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 알루미늄 메탈 커버 베젤링 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 큐빅 커버케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 풀커버 강화유리 하드케이스(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 프레임 풀커버 하드 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 프리미엄 자가복원 EPU 풀커버 액정보호필름(3개입)+변색없는 하드 커버케이스(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 호환 마그네틱 투톤 실리콘 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 호환 스무디 실리콘 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 호환 실리콘 TPU 케이스 스트랩 세트(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_애플워치 호환 풀커버 투명 TPU 젤리케이스(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴淼科技_초극세사 광택용 천(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴粤_모던 가죽 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴粤_무지 입체형 에어팟케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴越科技_누아트 딱붙패드 실리콘 양면 흡착식 멀티 부착 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 兴越科技_맥세이프 호환 마그네틱 스탠드 링 헤이즐 실리콘케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 凯鑫成电子_ILYON 아이패드 호환 스타일러스 스마트 펜슬 터치펜.xlsx
+[발주서원본_파서] 파싱: 凯鑫成电子_NUART 아이패드 호환 스타일러스 스마트 터치펜.xlsx
+[발주서원본_파서] 파싱: 利兴塑胶_블루웨이브 암튜브(누아트전용).xlsx
+[발주서원본_파서] 파싱: 利海通科技_ILYON_3in1 맥세이프 호환 마그네틱 무선 충전기 (갤럭시워치 호환)(일리온전용).xlsx
+[발주서원본_파서] 파싱: 利海通科技_NUART_3in1 맥세이프 호환 마그네틱 무선 충전기 (갤럭시워치 호환)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 力高诚_ILYON 빌트인 대용량 도킹형 미니 보조배터리(일리온전용).xlsx
+[발주서원본_파서] 파싱: 力高诚_NUART 빌트인 대용량 도킹형 미니 보조배터리(누아트전용).xlsx
+[발주서원본_파서] 파싱: 华旺盛电子_에어팟맥스 투명 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 华洁电子_15와트 PD충전 3in1 멀티 고속충전 케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 华洁电子_15와트 PD충전 3in1 멀티 고속충전 케이블(일리온전용).xlsx
+[발주서원본_파서] 파싱: 吉凌科技_CAT7 랜선 랜케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 吉凌科技_CAT7 랜선 랜케이블(일리온전용).xlsx
+[발주서원본_파서] 파싱: 吉凌科技_C타입,라이트닝 아이폰 고속 충전 케이블(3개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 吉凌科技_HDMI ver.2.1 UHD 8K MHL 케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 吉凌科技_HDMI ver.2.1 UHD 8K MHL 케이블(일리온전용).xlsx
+[발주서원본_파서] 파싱: 吉凌科技_ILYON 갤럭시,애플워치 마그네틱 무선 충전기(일리온전용).xlsx
+[발주서원본_파서] 파싱: 吉凌科技_NUART 갤럭시,애플워치 마그네틱 무선 충전기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 吉凌科技_고속충전 패브릭 케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 吉凌科技_고속충전 패브릭 케이블(일리온 전용).xlsx
+[발주서원본_파서] 파싱: 君诗乐科技_ILYON 갤럭시 S펜 호환 교체형 메탈 펜촉.xlsx
+[발주서원본_파서] 파싱: 君诗乐科技_ILYON 갤럭시 S펜 호환 교체형 펜촉.xlsx
+[발주서원본_파서] 파싱: 君诗乐科技_NUART 갤럭시 S펜 호환 교체형 메탈 펜촉.xlsx
+[발주서원본_파서] 파싱: 君诗乐科技_NUART 갤럭시 S펜 호환 교체형 펜촉.xlsx
+[발주서원본_파서] 파싱: 启辰硅胶_버즈2프로 이어팁(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 启辰硅胶_버즈3프로,버즈4,버즈4프로 이어팁(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 启辰硅胶_에어팟프로2,프로 이어팁(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 启辰硅胶_에어팟프로2,프로 이어팁(6개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 启辰硅胶_에어팟프로3 이어팁(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 品成科技_애플워치 울트라 슬림 실리콘 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 品成科技_애플워치 울트라 실리콘 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 壹百德_NUART 프리터치 스마트 터치펜 볼펜겸용(3개입).xlsx
+[발주서원본_파서] 파싱: 壹百德_갤럭시노트9 호환용 S펜(누아트전용).xlsx
+[발주서원본_파서] 파싱: 壹百德_릴에이블 프리미엄 투명 하드 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 壹百德_에어프레임 카드수납 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 壹百德_에어프레임 투명 젤리케이스(1&3개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 壹百德_에어프레임 투명 젤리케이스(구기종)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 壹百德_에어프레임 투명 젤하드 케이스 Z플립전용 (누아트전용).xlsx
+[발주서원본_파서] 파싱: 壹百德_울트라씬 투명 젤리케이스(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 壹百德_울트라씬 투명 젤리케이스(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 壹百德_펜수납 힌지보호 어센틱 클리어 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 大朗燕岭五金制品厂_스마트폰 태블릿 침대 자바라 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 大朗燕岭五金制品厂_스마트폰 태블릿 침대 자바라 거치대(일리온전용).xlsx
+[발주서원본_파서] 파싱: 天梦星_애플펜슬 12세대 펜촉 보호 캡 케이스 10P(누아트전용).xlsx
+[발주서원본_파서] 파싱: 天梦星_애플펜슬1,2세대 펜촉 보호캡 케이스 혼합 3P(누아트전용).xlsx
+[발주서원본_파서] 파싱: 天梦星_에어팟 프로2,프로 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱 실패 天梦星_에어팟1,2세대 메탈 철가루 방지 스티커(2개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 天梦星_에어팟1,2세대 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱: 天梦星_에어팟3세대 메탈 철가루 방지 스티커(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱 실패 天梦星_에어팟3세대 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱: 天梦星_에어팟4세대 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 天梦星_에어팟프로3 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 天迅源电子科技_PD충전 20W(C타입 to USB-A)2포트 멀티 고속충전기 어댑터(누아트전용).xlsx
+[발주서원본_파서] 파싱: 威能斯针纺织_3pack코시모 크루 삭스_(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 威能斯针纺织_5pack 코시모 페이크 삭스(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 威能斯针纺织_시어리브 골지 삭스(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 威能斯针纺织_코시모 미들 삭스_세트(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 威能斯针纺织_코시모 컬러 삭스(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 威能斯针纺织_코시모 크루 삭스_세트(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 威能斯针纺织_퍼포먼스 스포츠 런닝 삭스(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 孝武电子_空调罩실외기커버(누아트전용).xlsx
+[발주서원본_파서] 파싱: 宁波今晨_탁상용가습기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 宁波今晨_탁상용가습기(일리온전용).xlsx
+[발주서원본_파서] 파싱: 宇晖实业_USB 메모리 카드 매트블랙(누아트전용).xlsx
+[발주서원본_파서] 파싱: 宇晖实业_일리온 USB 메모리 카드 매트블랙(일리온전용).xlsx
+[발주서원본_파서] 파싱: 宇粤磁铁_맥세이프호환플레이트자석스티커(누아트전용).xlsx
+[발주서원본_파서] 파싱: 宝恒源塑胶_ILYON C타입 유선 이어폰(일리온전용).xlsx
+[발주서원본_파서] 파싱: 宝恒源塑胶_ILYON 캐릭터 휴대용 선풍기(일리온전용).xlsx
+[발주서원본_파서] 파싱: 宝恒源塑胶_NUART C타입 유선 이어폰(누아트전용).xlsx
+[발주서원본_파서] 파싱: 宝恒源塑胶_USB 3.0 SD카드Micro SD(TF) 카드리더기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 宝恒源塑胶_USB 3.0 SD카드Micro SD(TF) 카드리더기(일리온전용).xlsx
+[발주서원본_파서] 파싱: 宝恒源塑胶_선풍기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 宝恒源塑胶_스마트톡(누아트전용).xlsx
+[발주서원본_파서] 파싱: 富坤电器_ILYON 여행용 멀티 어댑터.xlsx
+[발주서원본_파서] 파싱: 富坤电器_NUART 어행용 멀티 어댑터.xlsx
+[발주서원본_파서] 파싱: 富皇贸易_알루미늄 접이식 노트북 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 富皇贸易_초경량 휴대용 접이식 노트북 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 富阳龙腾鞋业_클래식 레인부츠(누아트스튜디오).xlsx
+[발주서원본_파서] 파싱: 巾派服饰_베이직 머플러(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 市睿电子科技_ILYON 갤럭시탭 호환 S펜 EMR 스타일러스 터치펜.xlsx
+[발주서원본_파서] 파싱: 市睿电子科技_ILYON 스마트폰 태블릿PC 정전식 초미세 터치펜.xlsx
+[발주서원본_파서] 파싱: 市睿电子科技_NUART 갤럭시탭 호환 S펜 EMR 스타일러스 터치펜.xlsx
+[발주서원본_파서] 파싱: 市睿电子科技_NUART 스마트폰 태블릿PC 정전식 초미세 터치펜.xlsx
+[발주서원본_파서] 파싱: 弘诚橡胶制品_NUART 가죽 마우스패드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 弘诚橡胶制品_NUART 논슬립 메모리폼 손목보호형 마우스패드.xlsx
+[발주서원본_파서] 파싱: 必盛源科技_ILYON C타입 랜젠더 어댑터 케이블.xlsx
+[발주서원본_파서] 파싱: 必盛源科技_NUART C타입 랜젠더 어댑터 케이블.xlsx
+[발주서원본_파서] 파싱: 必盛源科技_USB A타입 랜젠더 어댑터 케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 必盛源科技_USB A타입 랜젠더 어댑터 케이블(일리온전용).xlsx
+[발주서원본_파서] 파싱: 思特微电子_에어팟맥스 스마트케이스 파우치(누아트전용).xlsx
+[발주서원본_파서] 파싱: 惟祺电子商务_스티커(누아트전용).xlsx
+[발주서원본_파서] 파싱: 惠州亿睿科技_ILYON 날개없는 넥밴드 휴대용 선풍기.xlsx
+[발주서원본_파서] 파싱: 惠州亿睿科技_ILYON 에어릿 프로 쿨 휴대용 선풍기.xlsx
+[발주서원본_파서] 파싱: 惠州亿睿科技_NUART 날개없는 넥밴드 휴대용 선풍기.xlsx
+[발주서원본_파서] 파싱: 惠州亿睿科技_NUART 에어릿 프로 쿨 휴대용 선풍기.xlsx
+[발주서원본_파서] 파싱: 意唯电器_LED보풀제거기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 意唯电器_LED보풀제거기(일리온전용).xlsx
+[발주서원본_파서] 파싱: 拉普达电子厂_155cm 자바라 스탠드 침대 태블릿 스마트폰 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 拓新塑业_휴대용 방수팩 (누아트전용).xlsx
+[발주서원본_파서] 파싱: 振为鑫科技_支架탁상용거치대(일리온전용).xlsx
+[발주서원본_파서] 파싱: 振华网络科技_누아트 애플펜슬 1&2세대 호환 교체용 데일리팩 펜촉 세트(6개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 振华网络科技_애플펜슬 1&2세대 호환 반영구펜촉(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 振华网络科技_애플펜슬 1&2세대 호환 반영구펜촉(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 振华网络科技_일리온 애플펜슬 1&2세대 호환 교체용 데일리팩 펜촉 세트(6개입)(일리온전용).xlsx
+[발주서원본_파서] 파싱: 捷兔_ C타입 USB-A 3.0 SD카드 멀티 카드리더기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 捷兔_ C타입 USB-A 3.0 SD카드 멀티 카드리더기(일리온전용).xlsx
+[발주서원본_파서] 파싱: 新品柔_갤럭시워치 클래식 슬림 레더 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 新昕电子_곰돌이 디자인 아크릴 스마트톡(누아트전용).xlsx
+[발주서원본_파서] 파싱: 新昕电子_하트 맥세이프 그립 스마트톡(누아트전용).xlsx
+[발주서원본_파서] 파싱: 旗航创世科技_ILYON 멀티 초고속 충전기 어댑터 + 케이블(일리온전용).xlsx
+[발주서원본_파서] 파싱: 旗航创世科技_ILYON 멀티 초고속 충전기 어댑터(일리온 전용).xlsx
+[발주서원본_파서] 파싱: 旗航创世科技_NUART 멀티 초고속 충전기 어댑터 + 케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 旗航创世科技_NUART 멀티 초고속 충전기 어댑터(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_360도 회전 탁상용 접이식 휴대용 각도 조절 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_갤럭시 버즈3  버즈3프로 투명 젤리 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_갤럭시 버즈류 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_버즈4 크리스탈 TPU 변색방지 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_에어팟12세대 크리스탈 TPU 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_에어팟3세대 크리스탈 TPU 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_에어팟4세대 크리스탈 TPU 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_에어팟프로2 변색방지 랜야드루프 크리스탈 TPU 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_에어팟프로2 크리스탈 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_에어팟프로3 크리스탈 TPU 변색방지 투명 젤리케이스 + 카라비너 키링(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_에어팟프로3 크리스탈 TPU 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_크리스탈 TPU 변색방지 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 日升昌_휴대용 각도조절 스마트폰 태블릿 스탠드 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 旺欧皮具_에어팟 가죽케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 易偲美_(가로형)프레임 더블카드 휴대폰 투명 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 易偲美_(디하가로형)프레임 더블카드 휴대폰 투명 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 易偲美_맥세이프 에어룸 젤하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 易偲美_맥세이프 카드지갑 2장 수납 스탠드 거치대(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 易偲美_카메라 렌즈 보호 슬라이드 범퍼 휴대폰 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 晗瑾科技_맥세이프 마그네틱 에어룸 투명 젤하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 晗瑾科技_맥세이프 마그네틱 에어프레임 투명 젤하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 晗瑾科技_맥세이프 호환 3배 자력 에어룸 투명 휴대폰케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 晗瑾科技_변색없이 투명한 어센틱클리어 투명 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 晗瑾科技_에어룸 투명케이스(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 晗瑾科技_에어프레임 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 晗瑾科技_에어프레임 투명 젤하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 晗瑾科技_울트라씬 투명 젤리케이스(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 晗瑾科技_울트라씬 투명 젤리케이스(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 普行电子_PC케이블 3종(누아트전용).xlsx
+[발주서원본_파서] 파싱: 普行电子_PC케이블 3종(일리온전용).xlsx
+[발주서원본_파서] 파싱: 朗驰电子_HDMI ver. 2.1 UHD 4K 60Hz MHL 넷플릭스 OTT C타입 to 미러링 충전케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 朗驰电子_HDMI ver. 2.1 UHD 4K 60Hz MHL 넷플릭스 OTT C타입 to 미러링 충전케이블(일리온전용).xlsx
+[발주서원본_파서] 파싱: 标信塑料制品_컬러엣지 힌지보호 풀커버 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_(B)9H 0.2mm 지문인식 강화유리 액정보호필름(2개입)(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_(B)누아트 풀커버 강화유리 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_(B)사생활보호 풀커버 강화유리 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_(P)9H 0.2mm 지문인식 강화유리 액정보호필름(2개입)(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_(P)사생활보호 풀커버 강화유리 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_(P)풀커버 강화유리 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_9H 0.2mm 지문인식 강화유리 액정보호필름(2개입)(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_9H 강화유리 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_9H 강화유리 액정보호필름(4개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_9H 고강도 풀커버 강화유리 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_ILYON 유선이어폰(일리온전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_NUART 유선이어폰(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시 워치 9H 고강도 풀커버 강화유리 액정보호필름(3개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시 후면 카메라 렌즈 메탈 링 강화유리 보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시워치 액정보호필름(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시워치 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시워치 액정보호필름(3개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시워치 지문방지 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시워치 지문방지 액정보호필름(3개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시핏2 액정 보호필름(3개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시핏3 호환 지문방지 액정보호필름 (2개입)(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_갤럭시핏3 호환 프리미엄 자가복원 EPU 풀커버 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_누아트 갤럭시핏2 호환 프리미엄 자가복원 EPU 풀커버 액정보호필름(2개입)(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_누아트 스마트폰 휴대폰 키링 부착 연결고리 홀더(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_누아트 웹캠노트북 카메라 가리개 스티커(3개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_메탈 플레이트 풀커버 강화유리 보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_빛번짐 방지 후면 카메라 렌즈 강화유리 보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_사생활보호 자가복원 TPU EPU 코팅 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_사생활보호 풀커버 강화유리 액정보호필름(1&2개입),(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_사생활보호 풀커버 세라믹 액정보호필름(1&2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_샤오미 미밴드 액정보호 필름(3개입) (누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_아이패드 후면 카메라 렌즈 강화유리 태블릿 보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_아이폰 후면 카메라 렌즈 메탈 링 강화유리 보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_애플워치 지문방지 액정보호필름(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_애플워치 프리미엄 자가복원 EPU 액정보호필름(3매입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_애플워치 프리미엄 자가복원 EPU 풀커버 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_원터치 에어리스 사생활보호 풀커버 강화유리 액정보호필름(2개입)(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_원터치 에어리스 풀커버 강화유리 액정보호필름(2개입)(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_풀커버 강화유리 전면 액정보호필름(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_풀커버강화유리액정보호필름(1&2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_프라이버시풀커버강화유리액정보호필름(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_프리미엄 자가복원 TPU EPU 코팅 액정보호필름(2개입)(6DNF)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_프리미엄 자가복원 TPU EPU 코팅 액정보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_프리미엄 자가복원 TPU EPU 코팅 액정보호필름(3개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_프리미엄 프라이버시 자가복원 TPU EPU 코팅 액정보호필름(2개입)(AG필름)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_후면 카메라 렌즈 강화유리 보호필름(2개입) + 전면 풀커버 강화유리 액정보호필름(2개입)갤럭시Z플립6(누아트전용).xlsx
+[발주서원본_파서] 파싱: 森普乐科技_후면 카메라 렌즈 강화유리 보호필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 橙泰贸易_ILYON_유선이어폰 3종 2가지 색상.xlsx
+[발주서원본_파서] 파싱: 橙泰贸易_NUART_유선이어폰 3종 2가지 색상.xlsx
+[발주서원본_파서] 파싱: 欣菲冠贸易有限公司_헤이븐 후드 바라클라바(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 正行电子_맥세이프 호환 카드 2장 수납 카드지갑.xlsx
+[발주서원본_파서] 파싱: 比创特塑胶模具_에어팟맥스 헤드셋 스탠드 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 汉都科技_NUART 갤럭시워치 호환 마그네틱 실리콘 스트랩.xlsx
+[발주서원본_파서] 파싱: 汉都科技_애플워치 호환 마그네틱 실리콘 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 泉州旭升业_OYW UV차단 3단 자동 우산(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 泽程电器_보풀제거기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 泽程电器_보풀제거기(일리온전용).xlsx
+[발주서원본_파서] 파싱: 洪日_스무디 실리콘케이스, 에어팟1세대2세대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 洪日_스무디 실리콘케이스, 에어팟3세대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 洪日_스무디 실리콘케이스, 에어팟4세대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 洪日_스무디 실리콘케이스, 에어팟프로(누아트전용).xlsx
+[발주서원본_파서] 파싱: 洪日_스무디 실리콘케이스, 에어팟프로2(누아트전용).xlsx
+[발주서원본_파서] 파싱: 洪日_스무디 실리콘케이스, 에어팟프로3(누아트전용).xlsx
+[발주서원본_파서] 파싱: 洪日_스무디 실리콘케이스_버즈3 (누아트전용).xlsx
+[발주서원본_파서] 파싱: 洪日_스무디 실리콘케이스_버즈4 (누아트전용).xlsx
+[발주서원본_파서] 파싱: 洪日_에어팟 청소키트(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_NUART 갤럭시워치 밀레니즈 루프 메탈 스트랩.xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_NUART 갤럭시워치 호환 링크 브레이슬릿 메탈 스트랩.xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_NUART 갤럭시워치 호환 미니멀 슬림 천연 가죽스트랩.xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_NUART 갤럭시워치 호환 슬림 메탈 스트랩.xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_NUART 갤럭시워치 호환 슬림 밀레니즈밴드 메탈스트랩.xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_NUART 갤럭시워치 호환 슬림레더 가죽스트랩.xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_NUART 갤럭시워치 호환 프리미엄 악어 패턴 가죽스트랩.xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 날개형 밀레니즈루프 메탈 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 날개형 베이직 실리콘 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 스테인리스 밀레니즈 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 슬림 베이직 실리콘 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 실리콘 스포츠밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 울트라 나일론 스포츠루프 스트랩 밴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 나일론 솔로루프 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 나일론 스포츠 루프 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 날개형 TPU 클리어 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 날개형 나일론 솔로루프스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 날개형 링크 브레이 슬릿메탈스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 날개형 스포츠루프 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 날개형 알파인루프 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 마그네틱 디버클 실리콘 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 메탈 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 브리즈홀 에어핏 실리콘 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 실리콘 스트랩 밴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 아웃핏 액티브 실리콘 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 쥬빌레 메탈 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 크리스탈 클리어 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치 호환 트레일 이지핏 루프 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시워치울트라 밀레니즈루프 스트랩 밴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시핏2 실리콘 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시핏3 나일론 스포츠루프 스트랩.xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시핏3 밀레니즈루프 메탈 스트랩.xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_갤럭시핏3실리콘 밴드스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_샤오미 미밴드5,6,7 스포츠 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_샤오미 미밴드5,6,7 스포츠루프 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_샤오미 미밴드8 트레일 스포츠루프 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_샤오미미밴드5,6,7 실리콘 밴드 스트랩(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_샤오미미밴드8 나일론 솔로루프 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_샤오미미밴드8 스포츠루프 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_샤오미미밴드8 실리콘 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 밀레니즈 루프 클립형 메탈 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 TPU 투명 젤리 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 나일론 솔로루프 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 더블버클 슬림 실리콘 스트래 밴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 더블버클 실리콘 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 디버클 슬림 가죽 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 메탈밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 밀레니즈 스트랩 밴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 스포츠 실리콘 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 슬림 메탈밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 슬림 밀레니즈 스트랩 밴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 슬림 실리콘 스트랩 밴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 슬림 체인 메탈 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 싱글투어 가죽스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 울트라 미니 싱글투어 가죽스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 울트라 슬림레더 가죽스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 캔버스 가죽 스트랩 밴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_애플워치 호환 크리스탈 클리어 투명 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_에어팟맥스 내부 이어 쿠션 실리콘 커버케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_에어팟맥스 프리미엄 실리콘케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 流沙德仁钟表_에어팟맥스 헤드 실리콘 커버(누아트전용).xlsx
+[발주서원본_파서] 파싱: 海淘科技_ILYON_3in1 맥세이프 호환 마그네틱 무선 충전기(일리온전용).xlsx
+[발주서원본_파서] 파싱: 海淘科技_NUART_3in1 맥세이프 호환 마그네틱 무선 충전기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 海铁尼电子_다용도 맥세이프 부착 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 温州晟晖_맥스_오토_슬라이드_벨트(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 温州晟晖_소피_리버시블_라운드_레더_벨트(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 温州晟晖_오웬_위빙_레더_벨트(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 温州晟晖_트로이_웨스턴_레더_벨트(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 温州欣悦贸易有限公司_라센트 투톤 토트백(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 温州虹博科技发展有限公司_보스턴 슬라이드 클로그(누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 潮摩服装有限公司_솔리드 에센셜 반팔 티셔츠(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 潮摩服装有限公司_액티브 프레임 머슬핏 반팔 티셔츠(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 潮摩服装有限公司_우먼 솔리드 에센셜 반팔 티셔츠(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 潮摩服装有限公司_플로우 크롭 반팔 티셔츠(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 牛氏皮具_모던 사피아노 스퀘어 벨트 （누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 牛氏皮具_베이직 라운드 레더 벨트(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 牛氏皮具_베이직 슬림 라운드 레더 벨트_여성(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 牛氏皮具_베이직 슬림 스퀘어 레더 벨트_여성(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 牛氏皮具_클래식 스퀘어 레더 벨트(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 牧森表带_애플워치 호환 나일론 나토 밴드 스트랩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 环亚_갤럭시워치 TPU 일체형 투명 스트랩 밴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 环亚_갤럭시워치5propc커버케이스,강화유리3개입(누아트전용).xlsx
+[발주서원본_파서] 파싱: 瑞尚科技_맥세이프 호환 마그네틱 스탠드 링 에어룸 투명케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 瑞尚科技_맥세이프 호환 마그네틱 컬러엣지 풀커버케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 睿和电子科技_듀얼손난로(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 睿和电子科技_듀얼손난로(일리온 전용).xlsx
+[발주서원본_파서] 파싱: 睿和电子科技_손난로 보조배터리(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 睿和电子科技_손난로 보조배터리(일리온 전용).xlsx
+[발주서원본_파서] 파싱: 科雅诺_防水盒방수거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 聚叁利贸易_2단 알루미늄 노트북 거치대(누아트전용).xlsx
+[발주서원본_파서] 파싱: 聚新利电子_누아트 맥세이프 셀카봉(누아트전용).xlsx
+[발주서원본_파서] 파싱: 聚新利电子_일리온 맥세이프 셀카봉(일리온전용).xlsx
+[발주서원본_파서] 파싱: 艾富瑞晟美_소이소이 향수 공병(누아트전용).xlsx
+[발주서원본_파서] 파싱: 范秀国际贸易_볼캡(누아트 스튜디오 전용).xlsx
+[발주서원본_파서] 파싱: 茴锐科技_누아트 맥세이프 카라비너 삼각대(삼각대)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 茹萌文化传媒_스티커(누아트전용).xlsx
+[발주서원본_파서] 파싱: 蓝力锋科技_누아트 분실방지 잠금기능 샌드 락 범퍼케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 蓝力锋科技_맥세이프 마그네틱 스탠드 락 범퍼 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 蓝力锋科技_버즈시리즈 랜야드 루프 샌드 범퍼케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 蓝力锋科技_변색방지 락 범퍼 TPU 투명케이스(누아트 전용).xlsx
+[발주서원본_파서] 파싱: 蓝力锋科技_에어팟맥스 내부 이어 쿠션 실리콘 커버케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 蓝力锋科技_에어팟맥스 실리콘케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 蓝力锋科技_컬러엣지 분실방지 잠금기능 마그네틱 락 범퍼케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 蓝力锋科技_크리스탈 마그네틱 스탠드 락 범퍼 케이스(누아트전용).xlsx127.0.0.1 - - [18/Apr/2026 00:23:56] "GET / HTTP/1.1" 200 -
+[2026-04-18 00:23:57,064] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:23:57] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:24:00] "GET /재고현황 HTTP/1.1" 200 -
+[2026-04-18 00:24:00,938] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:24:00] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:24:01] "GET /api/카테고리목록 HTTP/1.1" 200 -
+
+[발주서원본_파서] 파싱: 豪栢电子_ILYON 에어릿 88g 미니 휴대용 선풍기.xlsx
+[발주서원본_파서] 파싱: 豪栢电子_NUART 에어릿 88g 미니 휴대용 선풍기.xlsx
+[발주서원본_파서] 파싱: 贝利科技_누아트 스마트폰 휴대폰 키링 연결고리 미니 홀더(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_맥세이프 에어프레임 젤하드 힌지보호 핑거링 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_맥세이프 호환 마그네틱 스탠드 링 컬러엣지 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_맥세이프 호환 변색없이 투명한 어센틱클리어 힌지 보호형 투명 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_변색없이 투명한 어센틱클리어 투명 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_변색없이 투명한 어센틱클리어 힌지 보호형 투명 하드케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_에어프레임 젤하드 힌지커버 보호형 링 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_에어프레임 투명 젤리케이스(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_에어프레임 투명 젤리케이스, 갤럭시Z폴드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_에어프레임 투명 젤리케이스, 갤럭시Z플립(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_울트라씬 투명 젤리케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 贝利科技_프로스트 풀 범퍼 투명케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 赛伯乐_마그네틱 힌지보호 거치대 카드수납 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 赛伯乐_마그네틱 힌지보호 카드수납 핑거링 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 赛伯乐_맥세이프 호환 팔레트 링 투명케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 赛伯乐_오픈 카드수납 거치대 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 赛伯乐_카메라 렌즈 보호 슬라이드 범퍼케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 赛伯乐_투명 팔레트 링 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 远丰_에어 힙색 방수팩(누아트전용).xlsx
+[발주서원본_파서] 파싱: 远征电子_디자인 미러톡(누아트전용).xlsx
+[발주서원본_파서] 파싱: 远征电子_맥세이프 하트 거울 그립 스마트톡(누아트전용).xlsx
+[발주서원본_파서] 파싱: 远征电子_붕어빵 맥세이프 그립 스마트톡(누아트전용).xlsx
+[발주서원본_파서] 파싱: 远征电子_테두리 거울 맥세이프 그립 스마트톡(누아트전용).xlsx
+[발주서원본_파서] 파싱: 迪加数码科技_릴 하이브리드 3.0 TPU 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 迪加数码科技_릴 하이브리드 3.0 실리콘 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 迪加数码科技_릴에이블 풀커버 필름(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 迪加数码科技_릴전자담배류 가죽 케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 迪加数码科技_전자담배 청소 알콜 면봉(누아트전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_C타입 to 3.5mm AUX 오디오 변환 케이블 젠더(누아트전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_C타입 to 3.5mm AUX 오디오 변환 케이블 젠더(일리온전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_C타입 to HDMI 미러링 케이블 컨버터 젠더(누아트전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_C타입 to HDMI 미러링 케이블 컨버터 젠더(일리온전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_HDMI ver.2.1 UHD 4K 60Hz MHL 미러링 케이블(누아트전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_고해상도 C타입 3.5mm 이어폰 변환 젠더(1개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_고해상도 C타입 3.5mm 이어폰 변환 젠더(1개입)(일리온전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_고해상도 C타입 3.5mm 이어폰 변환 젠더(2개입)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_변환 OTG 젠더(누아트전용).xlsx
+[발주서원본_파서] 파싱: 通达鑫海科技_변환 OTG 젠더(일리온전용).xlsx
+[발주서원본_파서] 파싱: 速昌铭科技_PD3.0 48W 2포트 고속 시거잭 차량용 충전기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 金沃德实业_누아트 무선 블루투스 경량 스마트폰 삼각대 셀카봉(누아트전용).xlsx
+[발주서원본_파서] 파싱: 金沃德实业_일리온 무선 블루투스 경량 스마트폰 삼각대 셀카봉(일리온전용).xlsx
+[발주서원본_파서] 파싱: 金美莱_우유거품기(누아트전용).xlsx
+[발주서원본_파서] 파싱: 鑫东泰印刷包装_전장품 데코스티커(누아트전용).xlsx
+[발주서원본_파서] 파싱: 铭玄捷电子科技_노트북 저반사 액정보호필름,트랙패드(세트)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 阳东樱花美容工具_족집게(누아트전용).xlsx
+[발주서원본_파서] 파싱: 阳光箱包有限公司_노마드 스포츠 백팩(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 阳光箱包有限公司_쉘리 나일론 백팩(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 阳光箱包有限公司_클래식 셔링 나일론 백팩 (누아트스튜디오 전용).xlsx
+[발주서원본_파서] 파싱 실패 阿里巴巴_创造数码科技플라워그립스마트톡(누아트전용).xlsx: could not convert string to float: '#REF!'
+[발주서원본_파서] 파싱: 阿里巴巴_계절상품 부자재 (누아트전용).xlsx
+[발주서원본_파서] 파싱: 阿里巴巴_일반채널용 사은품 악세사리(누아트전용).xlsx
+[발주서원본_파서] 파싱: 青岛艺盛帽业有限公司_윈드 벤트 지퍼 러닝 볼캡(누아트스튜디오전용).xlsx
+[발주서원본_파서] 파싱: 韩森橡胶制品_게이밍 마우스 장패드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 韩森橡胶制品_생활방수 마우스패드(누아트전용).xlsx
+[발주서원본_파서] 파싱: 顾德五金_누아트 알루미늄 그래픽카드 지지대(显卡支架지지대)(누아트전용).xlsx
+[발주서원본_파서] 파싱: 骐思创新电子科技_누아트 맥세이프 셀카봉(누아트전용).xlsx
+[발주서원본_파서] 파싱: 骐思创新电子科技_일리온 맥세이프 셀카봉(누아트전용).xlsx
+[발주서원본_파서] 파싱: 高纹化_프레임 락 범퍼케이스(누아트전용).xlsx
+[발주서원본_파서] 파싱: 鸿蕙科技_ILYON 충전케이블 5종.xlsx
+[발주서원본_파서] 파싱: 鸿蕙科技_NUART 충전케이블 5종.xlsx
+[발주서원본_파서] 파싱: 鸿蕙科技_스테레오 AUX 연장케이블 2종(누아트전용).xlsx
+[발주서원본_파서] 파싱: 테스트_NUART 테스트(NUART전용).xlsx
+[cache] 카테고리DB 로드: 바코드 5207개, 카테고리 12개
+[앱 오류] /api/재고현황/셀_저장: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+127.0.0.1 - - [18/Apr/2026 00:24:17] "POST /api/재고현황/셀_저장 HTTP/1.1" 500 -
+[2026-04-18 00:25:39,557] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:25:39] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:25:41] "GET /재고현황 HTTP/1.1" 200 -
+[2026-04-18 00:25:42,807] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:25:42] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+[2026-04-18 00:25:56,995] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:25:56] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+[앱 오류] /api/재고현황/셀_저장: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+127.0.0.1 - - [18/Apr/2026 00:26:52] "POST /api/재고현황/셀_저장 HTTP/1.1" 500 -
+[앱 오류] /api/재고현황/셀_저장: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+127.0.0.1 - - [18/Apr/2026 00:28:17] "POST /api/재고현황/셀_저장 HTTP/1.1" 500 -
+[앱 오류] /api/재고현황/셀_저장: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+127.0.0.1 - - [18/Apr/2026 00:28:18] "POST /api/재고현황/셀_저장 HTTP/1.1" 500 -
+127.0.0.1 - - [18/Apr/2026 00:28:36] "GET /발주 HTTP/1.1" 200 -
+[2026-04-18 00:28:38,116] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:28:38] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:28:42] "GET /api/발주/po_대시보드 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:28:42] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:28:47] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:28:52] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:28:57] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:28:59] "GET /api/발주/상품검색?q=88 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:02] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:07] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:12] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:13] "POST /api/발주/조회 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:17] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+[GoogleSheets] 조회 실패: <HttpError 400 when requesting https://sheets.googleapis.com/v4/spreadsheets/1MbOLiALLuifKIz5BuFIgmB5SDBR5lO1Kb0pZrGxnMfk/values/%EC%97%94%EB%8C%80%EC%8B%9C%21C%3AC?alt=json returned "Unable to parse range: 엔대시!C:C". Details: "Unable to parse range: 엔대시!C:C">
+[GoogleSheets] 조회 실패: <HttpError 400 when requesting https://sheets.googleapis.com/v4/spreadsheets/1MbOLiALLuifKIz5BuFIgmB5SDBR5lO1Kb0pZrGxnMfk/values/%EC%97%94%EB%8C%80%EC%8B%9C%21C%3AC?alt=json returned "Unable to parse range: 엔대시!C:C". Details: "Unable to parse range: 엔대시!C:C">
+[GoogleSheets] 조회 실패: <HttpError 400 when requesting https://sheets.googleapis.com/v4/spreadsheets/1MbOLiALLuifKIz5BuFIgmB5SDBR5lO1Kb0pZrGxnMfk/values/%EC%97%94%EB%8C%80%EC%8B%9C%21C%3AC?alt=json returned "Unable to parse range: 엔대시!C:C". Details: "Unable to parse range: 엔대시!C:C">
+[GoogleSheets] 조회 실패: <HttpError 400 when requesting https://sheets.googleapis.com/v4/spreadsheets/1MbOLiALLuifKIz5BuFIgmB5SDBR5lO1Kb0pZrGxnMfk/values/%EC%97%94%EB%8C%80%EC%8B%9C%21C%3AC?alt=json returned "Unable to parse range: 엔대시!C:C". Details: "Unable to parse range: 엔대시!C:C">
+[GoogleSheets] 조회 실패: <HttpError 400 when requesting https://sheets.googleapis.com/v4/spreadsheets/1MbOLiALLuifKIz5BuFIgmB5SDBR5lO1Kb0pZrGxnMfk/values/%EC%97%94%EB%8C%80%EC%8B%9C%21C%3AC?alt=json returned "Unable to parse range: 엔대시!C:C". Details: "Unable to parse range: 엔대시!C:C">
+[발주서원본_파서] 파싱 실패 天梦星_에어팟1,2세대 메탈 철가루 방지 스티커(2개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 天梦星_에어팟1,2세대 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 天梦星_에어팟3세대 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 阿里巴巴_创造数码科技플라워그립스마트톡(누아트전용).xlsx: could not convert string to float: '#REF!'
+[발주서원본_파서] 파싱 실패 天梦星_에어팟1,2세대 메탈 철가루 방지 스티커(2개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 天梦星_에어팟1,2세대 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 天梦星_에어팟3세대 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 阿里巴巴_创造数码科技플라워그립스마트톡(누아트전용).xlsx: could not convert string to float: '#REF!'
+[GoogleSheets] 제품DB 5207개 로드
+[GoogleSheets] 제품DB 5207개 로드
+[GoogleSheets] 조회 실패: <HttpError 400 when requesting https://sheets.googleapis.com/v4/spreadsheets/1MbOLiALLuifKIz5BuFIgmB5SDBR5lO1Kb0pZrGxnMfk/values/%EC%97%94%EB%8C%80%EC%8B%9C%21C%3AC?alt=json returned "Unable to parse range: 엔대시!C:C". Details: "Unable to parse range: 엔대시!C:C">
+[발주서원본_파서] 파싱 실패 天梦星_에어팟1,2세대 메탈 철가루 방지 스티커(2개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 天梦星_에어팟1,2세대 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 天梦星_에어팟3세대 메탈 철가루 방지 스티커(4개입)(누아트전용).xlsx: could not convert string to float: '가격\n(价格)'
+[발주서원본_파서] 파싱 실패 阿里巴巴_创造数码科技플라워그립스마트톡(누아트전용).xlsx: could not convert string to float: '#REF!'
+[GoogleSheets] 제품DB 5207개 로드
+[발주_실행] Sheets 기록 실패: <HttpError 400 when requesting https://sheets.googleapis.com/v4/spreadsheets/1MbOLiALLuifKIz5BuFIgmB5SDBR5lO1Kb0pZrGxnMfk/values/%EC%97%94%EB%8C%80%EC%8B%9C%21A%3AK:append?valueInputOption=USER_ENTERED&alt=json returned "Unable to parse range: 엔대시!A:K". Details: "Unable to parse range: 엔대시!A:K">
+[GoogleSheets] 중국발주요청리스트 1행 추가 완료
+[GoogleSheets] 4월 발주현황 헤더 매핑: {'발주일': 1, '바코드': 2, '주문번호': 3, '발주수량': 4, '제품명': 5, '브랜드명': 6, '업체명': 7, '시즌구분': 8, '카테고리_1': 9, '카테고리_2': 10, '단가': 11}
+127.0.0.1 - - [18/Apr/2026 00:29:22] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+[GoogleSheets] 4월 발주현황 1행 추가 완료
+127.0.0.1 - - [18/Apr/2026 00:29:22] "POST /api/발주/실행 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:25] "GET /api/발주/po_대시보드 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:27] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:32] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:34] "GET /재고현황 HTTP/1.1" 200 -
+[2026-04-18 00:29:34,570] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:29:34] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:29:54] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:29:54] "GET /api/카테고리목록 HTTP/1.1" 200 -
+[2026-04-18 00:29:55,013] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:29:55] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:30:15] "GET /api/발주서/바코드중복확인?바코드=9999999999 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:30:30] "POST /api/발주서/생성 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:30:35] "GET /발주 HTTP/1.1" 200 -
+[2026-04-18 00:30:36,211] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:30:36] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:30:38] "GET /api/발주/po_대시보드 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:30:41] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:30:43] "GET /api/발주/po_대시보드 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:30:46] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:30:49] "GET /재고현황 HTTP/1.1" 200 -
+[2026-04-18 00:30:49,523] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:30:49] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:31:03] "POST /api/재고현황/시트업데이트 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:31:15] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+[2026-04-18 00:31:15,989] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:31:15] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:31:16] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:32:13] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:32:16] "GET /api/발주/신규알림 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:56:05] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 00:56:07] "GET /api/카테고리목록 HTTP/1.1" 200 -
+[2026-04-18 00:56:10,077] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:56:10] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+127.0.0.1 - - [18/Apr/2026 00:56:12] "GET /재고현황 HTTP/1.1" 200 -
+[2026-04-18 00:56:13,248] ERROR in app: Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+127.0.0.1 - - [18/Apr/2026 00:56:13] "GET /favicon.ico HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\serving.py", line 332, in execute
+    application_iter = app(environ, start_response)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 860, in handle_exception
+    server_error = self.ensure_sync(handler)(server_error)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muzea\OneDrive\Desktop\코딩전용\원본 발주서 제작시\app.py", line 36, in _json_error
+    raise e
+werkzeug.exceptions.InternalServerError: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.

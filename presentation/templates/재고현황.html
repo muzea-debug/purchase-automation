@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>재고현황판</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.2/styles/ag-grid.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.2/styles/ag-theme-alpine.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Malgun Gothic',sans-serif;background:#f0f2f5;color:#222;font-size:13px}
+
+    .nav{background:#1a1a2e;padding:10px 20px;display:flex;align-items:center;justify-content:space-between}
+    .nav strong{color:#fff;font-size:15px}
+    .nav-tabs{display:flex;gap:4px}
+    .nav-tabs a{color:#aaa;text-decoration:none;padding:6px 14px;border-radius:4px;font-size:13px}
+    .nav-tabs a:hover{background:rgba(255,255,255,.1);color:#fff}
+    .nav-tabs a.active{background:#4a9eff;color:#fff}
+    .nav-left{display:flex;align-items:center;gap:10px}
+    .nav-dash{color:#7ec8ff!important;font-weight:700;text-decoration:none;padding:6px 14px;border-radius:4px;font-size:13px;border:1px solid rgba(74,158,255,.35)}
+    .nav-dash:hover{background:rgba(74,158,255,.15)!important}
+
+    .wrap{padding:12px 14px}
+    .top-bar{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+    .top-bar h1{font-size:17px;font-weight:700;margin-right:auto}
+    .upd-info{font-size:11px;color:#888}
+
+    .team-bar{display:flex;gap:5px;align-items:center;padding:0 0 8px;flex-wrap:wrap}
+    .team-bar .tbtn{border:1.5px solid #ccc;background:#fff;border-radius:14px;padding:4px 13px;font-size:12px;cursor:pointer;font-weight:600;line-height:1.4}
+    .team-bar .tbtn:hover{background:#f0f0f0}
+    .team-bar .tbtn.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+
+    .cat-bar{display:flex;gap:4px;align-items:center;padding:0 0 8px;flex-wrap:wrap}
+    .cat-bar .cbtn{border:1.5px solid #ccc;background:#fff;border-radius:14px;padding:3px 11px;font-size:11px;cursor:pointer;line-height:1.4}
+    .cat-bar .cbtn:hover{background:#f0f0f0}
+    .cat-bar .cbtn.active{background:#4a9eff;color:#fff;border-color:#4a9eff}
+
+    .panel{background:#fff;border-radius:8px;padding:16px 20px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.08);display:none}
+    .panel.open{display:block}
+    .panel h2{font-size:14px;font-weight:600;margin-bottom:10px}
+    .sheets-status{padding:7px 12px;border-radius:5px;font-size:12px;margin-bottom:12px}
+    .ss-ok{background:#e8f5e9;color:#2e7d32}.ss-local{background:#e3f2fd;color:#1565c0}.ss-warn{background:#fff8e1;color:#f57f17}
+    .drop-zone{border:2px dashed #4a9eff;border-radius:8px;padding:22px;text-align:center;cursor:pointer;background:#f8fbff;margin-bottom:12px;transition:background .15s}
+    .drop-zone.over,.drop-zone:hover{background:#e3f2fd;border-color:#1565c0}
+    .match-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:5px;margin-bottom:12px}
+    .match-row{padding:6px 9px;border-radius:5px;font-size:11px}
+    .m-ok{background:#e8f5e9;border-left:3px solid #43a047}.m-opt{background:#f5f5f5;border-left:3px solid #bbb}
+    .m-warn{background:#ffebee;color:#c62828;padding:5px 9px;border-radius:4px;font-size:11px;margin-top:4px}
+    .m-lbl{font-weight:700;color:#333}.m-file{color:#666;word-break:break-all;font-size:10px;margin-top:2px}
+
+    .summary{display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap}
+    .sc{background:#fff;border-radius:7px;padding:9px 15px;flex:1;min-width:85px;box-shadow:0 1px 3px rgba(0,0,0,.08);text-align:center}
+    .sc .n{font-size:22px;font-weight:700}.sc .l{font-size:11px;color:#888;margin-top:1px}
+    .sc.d .n{color:#e53935}.sc.w .n{color:#fb8c00}.sc.s .n{color:#43a047}
+
+    .btn{border:1px solid #ccc;background:#fff;border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;white-space:nowrap;line-height:1.4}
+    .btn:hover{background:#f3f4f6}.btn:disabled{opacity:.45;cursor:not-allowed}
+    .btn.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+    .btn.green{background:#2e7d32;color:#fff;border-color:#2e7d32}
+    .btn.red{background:#e53935;color:#fff;border-color:#e53935}
+    .btn.logi-on{background:#2e7d32;color:#fff;border-color:#2e7d32}
+
+    .rh-group{display:flex;gap:0;border:1px solid #ccc;border-radius:5px;overflow:hidden}
+    .rh-group button{border:none;background:#fff;padding:4px 9px;font-size:11px;cursor:pointer;border-right:1px solid #ddd;white-space:nowrap}
+    .rh-group button:last-child{border-right:none}
+    .rh-group button:hover{background:#f3f4f6}
+    .rh-group button.active{background:#1a1a2e;color:#fff}
+
+    .tbl-card{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;display:flex;flex-direction:column}
+    .tbl-toolbar{padding:7px 10px;display:flex;gap:5px;align-items:center;border-bottom:1px solid #eee;flex-wrap:wrap;flex-shrink:0}
+    .tbl-toolbar input[type=text]{border:1px solid #ddd;border-radius:4px;padding:4px 9px;font-size:12px;width:155px}
+    .row-count{font-size:12px;color:#888;margin-left:auto}
+    .sel-count{font-size:12px;color:#4a9eff;font-weight:600}
+
+    .status-bar{background:#0e1a30;color:#aaa;font-size:11px;padding:4px 12px;display:flex;gap:16px;align-items:center;flex-shrink:0;border-top:1px solid #1a2a45;min-height:26px;flex-wrap:wrap}
+    .status-bar .sb-lbl{color:#666}
+    .status-bar .sb-val{color:#7ec8ff;font-weight:600;font-family:monospace}
+    .status-bar .sb-sep{color:#333;margin:0 4px}
+
+    .loading{display:none;text-align:center;padding:40px;color:#888}
+    .spinner{width:30px;height:30px;border:3px solid #eee;border-top-color:#4a9eff;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 8px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .empty{text-align:center;padding:60px;color:#bbb;display:none}
+
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
+    .overlay.show{display:flex}
+    .modal{background:#fff;border-radius:10px;padding:22px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
+    .modal h3{font-size:15px;font-weight:700;margin-bottom:5px}
+    .modal p{font-size:12px;color:#666;margin-bottom:14px}
+    .grp-item{border:1px solid #eee;border-radius:5px;padding:9px;margin-bottom:7px}
+    .grp-lbl{font-weight:700;color:#1a1a2e;margin-bottom:4px;font-size:12px}
+    .grp-items{font-size:11px;color:#666;max-height:70px;overflow-y:auto;margin-bottom:6px}
+    .grp-btns{display:flex;gap:6px}
+    .grp-btns button{flex:1;padding:4px;border:1.5px solid #ddd;border-radius:4px;cursor:pointer;font-size:11px;font-weight:600;background:#fff}
+    .grp-btns .yes{border-color:#43a047;background:#e8f5e9;color:#2e7d32}
+    .grp-btns .no{border-color:#1a1a2e;background:#e8eaf6;color:#1a1a2e}
+    .modal-btns{display:flex;gap:8px;margin-top:14px}
+    .modal-btns button{flex:1;padding:8px;border:none;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer}
+    .btn-confirm{background:#1a1a2e;color:#fff}.btn-cancel{background:#eee;color:#333}
+
+    .order-panel{background:#fff;border-radius:8px;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-top:10px;display:none}
+    .order-panel.show{display:block}
+    .order-panel h2{font-size:14px;font-weight:700;margin-bottom:10px}
+    .order-opts{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:12px}
+    .order-opts label{font-size:12px;color:#555;display:block;margin-bottom:3px}
+    .order-opts select,.order-opts input[type=text]{border:1px solid #ddd;border-radius:4px;padding:5px 9px;font-size:13px}
+    .o-group{border:1px solid #e0e0e0;border-radius:6px;padding:10px;margin-bottom:8px}
+    .o-group .gt{font-weight:700;color:#1a1a2e;margin-bottom:6px;font-size:13px}
+    .o-group table{font-size:12px;width:100%;table-layout:auto}
+    .o-group thead th{background:#f5f5f5;color:#333;padding:4px 8px}
+    .o-group tbody td{padding:3px 8px;border-bottom:1px solid #f0f0f0}
+    .dl-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+    .dl-links a{background:#1a1a2e;color:#fff;padding:6px 13px;border-radius:5px;font-size:12px;text-decoration:none}
+    .unmatched{color:#e53935;font-size:12px;margin-top:5px}
+
+    .fab{display:none;position:fixed;bottom:20px;right:20px;background:#e53935;color:#fff;border:none;
+      padding:10px 18px;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;
+      box-shadow:0 4px 12px rgba(229,57,53,.4);z-index:50}
+    .fab:hover{background:#c62828}
+
+    /* ── AG Grid 테마 오버라이드 ── */
+    .ag-theme-alpine{
+      --ag-header-background-color:#1a1a2e;
+      --ag-header-foreground-color:#fff;
+      --ag-header-column-separator-color:rgba(255,255,255,.15);
+      --ag-header-column-resize-handle-color:rgba(255,255,255,.3);
+      --ag-font-size:12px;
+      --ag-font-family:'Malgun Gothic',sans-serif;
+      --ag-odd-row-background-color:#f9f9f9;
+      --ag-row-hover-color:#edf5ff;
+      --ag-selected-row-background-color:#dbeafe;
+      --ag-border-color:#e5e7eb;
+      --ag-cell-horizontal-padding:10px;
+      --ag-row-height:34px;
+    }
+    .ag-theme-alpine .ag-header-group-cell{background:#252545!important;color:#ccc!important;font-size:11px}
+    .ag-theme-alpine .ag-header-cell{font-size:11px;font-weight:600}
+    .ag-theme-alpine .ag-cell{line-height:var(--ag-row-height,34px)}
+    /* 편집 가능 셀 */
+    .ag-theme-alpine .ag-cell.edt-cell{background:#fffde7;cursor:pointer}
+    .ag-theme-alpine .ag-cell.edt-cell:hover{background:#fff9c4!important}
+    .ag-theme-alpine .ag-cell.edt-dis{color:#ccc;cursor:default}
+    .ag-theme-alpine .ag-cell.short-warn-cell{color:#e53935!important;font-weight:700}
+    /* 로지 행 */
+    .ag-theme-alpine .row-logi{background:#e8f5e9!important}
+    /* 뱃지 */
+    .badge{display:inline-block;padding:2px 7px;border-radius:9px;font-size:10.5px;font-weight:700}
+    .b-d{background:#ffebee;color:#c62828}.b-w{background:#fff3e0;color:#e65100}
+    .b-s{background:#e8f5e9;color:#2e7d32}.b-i{background:#f3f3f3;color:#888}
+    /* 물류확인 체크박스 셀 */
+    .ag-theme-alpine .logi-cell-bg{background:#f1f8e9!important;text-align:center}
+    .ag-theme-alpine .row-logi .logi-cell-bg{background:#a5d6a7!important}
+    @keyframes paste-flash{0%{background:#fff176}100%{background:inherit}}
+
+    /* ── 대시보드 ── */
+    #dashboard{padding:0 4px}
+    .dash-section{background:#fff;border-radius:8px;padding:16px 20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .dash-section h2{font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:12px}
+    .dash-archive-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .dash-archive-row select{border:1px solid #ddd;border-radius:5px;padding:6px 10px;font-size:13px;min-width:200px}
+    .dash-archive-row .arch-msg{font-size:12px;color:#888}
+    .chart-box{background:#fff;border-radius:8px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .chart-box h3{font-size:12px;font-weight:700;color:#444;margin-bottom:8px}
+    .chart-box canvas{max-height:220px}
+    .kpi-card{background:#fff;border-radius:8px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center}
+    .kpi-card .kpi-val{font-size:22px;font-weight:700;color:#1a1a2e;line-height:1.2}
+    .kpi-card .kpi-lbl{font-size:11px;color:#888;margin-top:3px}
+    .kpi-card.kpi-danger .kpi-val{color:#e53935}
+    .kpi-card.kpi-warn .kpi-val{color:#fb8c00}
+    .kpi-card.kpi-ok .kpi-val{color:#43a047}
+    .dash-cat-tab{padding:5px 13px;border-radius:5px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:12px;font-weight:600;color:#555}
+    .dash-cat-tab.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+    .dash-cat-tab:hover:not(.active){background:#f0f4ff;border-color:#4a9eff}
+    /* 발주 제안 패널 */
+    #suggestGrid .ag-cell.sg-edit{background:#fff8e1;cursor:pointer}
+    #suggestGrid .ag-cell.sg-edit:hover{background:#fff176!important}
+    #suggestGrid .ag-cell.sg-danger{color:#e53935;font-weight:700}
+    #suggestGrid .ag-cell.sg-warn{color:#fb8c00;font-weight:600}
+  </style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-left">
+    <strong>구매 자동화</strong>
+    <a href="/dashboard" class="nav-dash">재고 대시보드</a>
+  </div>
+  <div class="nav-tabs">
+    <a href="/">원본 발주서 생성</a>
+    <a href="/발주">발주 실행</a>
+    <a href="/재고현황" class="active">재고현황판</a>
+    <a href="/pi">선금계약서 관리</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="top-bar">
+    <h1>재고현황판</h1>
+    <span class="upd-info" id="upd-info"></span>
+    <span id="sync-ind" style="display:none;font-size:11px;color:#43a047;background:#e8f5e9;padding:3px 8px;border-radius:4px;border:1px solid #a5d6a7">↻ 동기화됨</span>
+    <div class="rh-group" title="행 높이">
+      <button onclick="setRowHeight(28)" id="rh-28">컴팩트</button>
+      <button onclick="setRowHeight(34)" id="rh-34" class="active">기본</button>
+      <button onclick="setRowHeight(44)" id="rh-44">넓게</button>
+    </div>
+    <button class="btn green" id="btn-sheets" onclick="시트업데이트()">구글시트 업데이트</button>
+    <button class="btn" onclick="패널토글()">소스파일 업데이트</button>
+    <button class="btn" onclick="엑셀다운로드()" style="background:#217346;color:#fff;border-color:#217346;">엑셀 다운로드</button>
+    <span id="run-msg" style="font-size:12px;color:#888"></span>
+  </div>
+
+  <div class="team-bar" id="team-bar">
+    <span style="font-size:11px;color:#888;font-weight:600">뷰:</span>
+    <button class="tbtn active" data-team="전체" onclick="teamSwitch(this)">구매팀 (전체)</button>
+    <button class="tbtn" data-team="MD_ACC" onclick="teamSwitch(this)">MD ACC</button>
+    <button class="tbtn" data-team="MD_전장품" onclick="teamSwitch(this)">MD 전장품</button>
+    <button class="tbtn" data-team="MD_패션" onclick="teamSwitch(this)">MD 패션</button>
+    <button class="tbtn" data-team="물류팀" onclick="teamSwitch(this)">물류팀</button>
+  </div>
+  <div class="cat-bar" id="cat-bar" style="display:none">
+    <span style="font-size:11px;color:#888;font-weight:600">대분류:</span>
+  </div>
+
+  <div class="panel" id="upload-panel">
+    <h2>소스 파일 업로드</h2>
+    {% if sheets_유형 == 'google' %}
+    <div class="sheets-status ss-ok">Google Sheets 연결됨</div>
+    {% elif sheets_유형 == 'local' %}
+    <div class="sheets-status ss-local">로컬 Excel 시트 연결됨</div>
+    {% else %}
+    <div class="sheets-status ss-warn">엔대시 시트 미연결
+      <button onclick="로컬시트초기화()" style="margin-left:8px;background:#f57f17;color:#fff;border:none;padding:3px 9px;border-radius:4px;cursor:pointer;font-size:12px;">로컬시트 초기화</button>
+    </div>
+    {% endif %}
+    <div class="drop-zone" id="drop-zone"
+         onclick="document.getElementById('f-all').click()"
+         ondragover="dzOver(event)" ondragleave="dzLeave()" ondrop="dzDrop(event)">
+      <div style="font-size:28px;margin-bottom:6px">📂</div>
+      <div style="font-size:13px;color:#555;margin-bottom:3px">파일을 드래그하거나 클릭 (일부만 올려도 됩니다)</div>
+      <div style="font-size:11px;color:#999">사방넷 · basic · forecast · nuartSKU · PO_SKU_LIST · 주문서 · 재고현황표</div>
+      <input type="file" id="f-all" multiple accept=".xlsx,.xls,.csv,.xlsm" style="display:none" onchange="파일매칭(this.files)">
+    </div>
+    <div class="match-grid" id="match-grid"></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="btn active" id="btn-run" onclick="분석실행()" disabled>조회 및 저장</button>
+    </div>
+  </div>
+
+  <div class="loading" id="loading"><div class="spinner"></div>처리 중…</div>
+  <div class="empty" id="empty">
+    <div style="font-size:40px;margin-bottom:10px">📦</div>
+    <div>저장된 데이터가 없습니다.</div>
+    <div style="margin-top:6px;font-size:12px;color:#bbb">소스파일 업데이트 버튼을 클릭해 주세요.</div>
+  </div>
+
+  <div id="result" style="display:none">
+    <div class="summary" id="summary"></div>
+
+    <div class="tbl-card">
+      <div class="tbl-toolbar">
+        <input type="text" id="search" placeholder="바코드 / 상품명 / 브랜드 검색" oninput="_debouncedSearch()">
+        <button class="btn active" data-f="전체"     onclick="상태필터(this)">전체</button>
+        <button class="btn"        data-f="위험"     onclick="상태필터(this)">위험</button>
+        <button class="btn"        data-f="주의"     onclick="상태필터(this)">주의</button>
+        <button class="btn"        data-f="정상"     onclick="상태필터(this)">정상</button>
+        <button class="btn"        data-f="정보없음" onclick="상태필터(this)">정보없음</button>
+        <button class="btn" onclick="필터초기화()">필터 초기화</button>
+        <button class="btn" id="btn-logi" onclick="물류뷰()">물류팀 보기</button>
+        <button class="btn" id="btn-edit-mode" style="display:none;background:#2e7d32;color:#fff;border-color:#2e7d32" onclick="editModeToggle()">정보수정</button>
+        <button class="btn" id="btn-bulk-edit" style="display:none;background:#1565c0;color:#fff;border-color:#1565c0" onclick="bulkEditOpen()">일괄 수정</button>
+        <button class="btn" id="btn-suggest" onclick="suggestPanelToggle()"
+          style="background:#e65100;color:#fff;border-color:#e65100">발주 제안</button>
+        <span class="row-count" id="row-count"></span>
+        <span class="sel-count" id="sel-count"></span>
+      </div>
+
+      <!-- AG Grid -->
+      <div id="myGrid" class="ag-theme-alpine" style="height:62vh;width:100%"></div>
+
+      <div class="status-bar" id="status-bar">
+        <span><span class="sb-lbl">행: </span><span class="sb-val" id="sb-rows">0</span></span>
+        <span class="sb-sep">|</span>
+        <span><span class="sb-lbl">선택: </span><span class="sb-val" id="sb-sel">0</span></span>
+        <span class="sb-sep">|</span>
+        <span><span class="sb-lbl">구매팀발주 합계: </span><span class="sb-val" id="sb-buy-sum">-</span></span>
+        <span class="sb-sep">|</span>
+        <span><span class="sb-lbl">발주량산출 합계: </span><span class="sb-val" id="sb-calc-sum">-</span></span>
+      </div>
+    </div>
+
+    <!-- 발주 제안 패널 -->
+    <div id="suggest-panel" style="display:none;margin-top:12px">
+      <div class="tbl-card" style="padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+          <h2 style="margin:0;font-size:14px;color:#e65100">발주 제안 목록</h2>
+          <span id="suggest-summary" style="font-size:12px;color:#888"></span>
+          <span style="flex:1"></span>
+          <label style="font-size:12px;color:#555;display:flex;align-items:center;gap:4px">
+            <input type="checkbox" id="suggest-주의포함" onchange="buildSuggestGrid()" checked> 주의 포함
+          </label>
+          <button class="btn" onclick="applySuggestToGrid()"
+            style="background:#1565c0;color:#fff;border-color:#1565c0">선택 항목 → 구매팀발주 반영</button>
+          <button class="btn" onclick="suggestPanelToggle()" style="font-size:12px">닫기</button>
+        </div>
+        <div style="font-size:11px;color:#aaa;margin-bottom:8px">
+          제안발주량 = 부족량 + 버퍼(위험 2주·주의 1주) → MOQ 단위 올림. 수량 직접 수정 가능.
+        </div>
+        <div id="suggestGrid" class="ag-theme-alpine" style="height:42vh;width:100%"></div>
+        <div id="suggest-status-bar" style="display:flex;gap:16px;padding:6px 4px;font-size:12px;color:#555;border-top:1px solid #eee;margin-top:4px">
+          <span>위험: <strong id="sg-danger">0</strong></span>
+          <span>주의: <strong id="sg-warn">0</strong></span>
+          <span>제안발주 합계: <strong id="sg-total">0</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-panel" id="order-panel">
+      <h2>정기발주 실행</h2>
+      <div class="order-opts">
+        <div><label>발주 유형</label>
+          <select id="발주유형"><option value="정기발주">정기발주</option><option value="신기종">신기종</option></select>
+        </div>
+        <div><label>한국 요청 도착일 (선택)</label>
+          <input type="text" id="도착일" placeholder="예: 2026-05-01">
+        </div>
+        <button class="btn red" id="btn-order" onclick="발주실행()">발주 실행</button>
+        <span id="order-msg" style="font-size:12px;color:#888"></span>
+      </div>
+      <div id="order-groups"></div>
+      <div id="dl-area"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 재고 대시보드 ── -->
+<div id="dashboard" style="display:none" class="wrap">
+
+  <!-- 카테고리 탭 -->
+  <div style="display:flex;align-items:center;gap:0;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+    <div id="dash-cat-tabs" style="display:flex;gap:4px;flex-wrap:wrap"></div>
+    <span style="flex:1"></span>
+    <button class="btn" id="btn-arch-panel-toggle" onclick="archPanelToggle()"
+      style="font-size:11px;background:#546e7a;color:#fff;border-color:#546e7a">과거 데이터 재분석 ▾</button>
+  </div>
+
+  <!-- 과거 재분석 패널 (접힘) -->
+  <div id="arch-panel" style="display:none" class="dash-section" style="margin-bottom:14px">
+    <div class="dash-archive-row" style="margin-bottom:8px">
+      <select id="arch-folder-sel"><option value="">— 날짜 선택 —</option></select>
+      <button class="btn active" onclick="과거분석실행()" id="btn-arch-run">단건 분석</button>
+      <span class="arch-msg" id="arch-msg"></span>
+    </div>
+    <div class="dash-archive-row">
+      <button class="btn" id="btn-bulk-arch" onclick="일괄분석실행(false)"
+        style="background:#4527a0;color:#fff;border-color:#4527a0">일괄 분석 (미처리만)</button>
+      <button class="btn" id="btn-bulk-arch-force" onclick="일괄분석실행(true)"
+        style="background:#b71c1c;color:#fff;border-color:#b71c1c">일괄 분석 (덮어쓰기)</button>
+      <span class="arch-msg" id="bulk-msg"></span>
+    </div>
+    <div id="bulk-progress" style="margin-top:8px;display:none">
+      <div style="font-size:12px;color:#555;margin-bottom:4px" id="bulk-progress-text">처리 중…</div>
+      <div style="background:#e0e0e0;border-radius:4px;height:8px;width:100%;max-width:400px">
+        <div id="bulk-bar" style="background:#4527a0;height:8px;border-radius:4px;width:0%;transition:width .3s"></div>
+      </div>
+      <div id="bulk-result-list" style="margin-top:8px;font-size:12px;max-height:100px;overflow-y:auto"></div>
+    </div>
+  </div>
+
+  <!-- KPI 카드 -->
+  <div id="dash-kpi" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px"></div>
+
+  <!-- 추이 차트 (아카이브 기반) - 통합 -->
+  <div class="chart-box" style="margin-bottom:14px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <h3 style="margin:0">재고 현황 통합 추이</h3>
+      <span style="font-size:11px;color:#aaa">막대(좌): 재고상태 제품 수 &nbsp;|&nbsp; 선(우): 재고합계·판매량</span>
+    </div>
+    <canvas id="d-chart-combined" style="max-height:280px"></canvas>
+  </div>
+
+  <!-- 선택 제품 상세 차트 (선택 시 표시) -->
+  <div id="dash-detail" style="display:none;margin-bottom:14px">
+    <div class="dash-section" style="padding-bottom:10px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <h2 style="margin:0">선택 제품 상세</h2>
+        <span id="dash-detail-label" style="font-size:12px;color:#888"></span>
+        <button onclick="dashDetailClose()" style="margin-left:auto;background:none;border:1px solid #ccc;border-radius:4px;padding:2px 8px;cursor:pointer;font-size:12px">닫기</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="chart-box" style="box-shadow:none;padding:0"><h3>재고량 / 판매량</h3><canvas id="d-detail-stock"></canvas></div>
+        <div class="chart-box" style="box-shadow:none;padding:0"><h3>발주량산출 / 예상 소진일</h3><canvas id="d-detail-order"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKU 그리드 -->
+  <div class="dash-section" style="padding:12px 16px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+      <h2 style="margin:0;font-size:13px">SKU 목록</h2>
+      <input type="text" id="dash-search" placeholder="바코드 / 상품명 검색" oninput="dashGridSearch()"
+        style="border:1px solid #ddd;border-radius:4px;padding:4px 9px;font-size:12px;width:200px">
+      <button class="btn active" data-dsf="전체"     onclick="dashStatusFilter(this)">전체</button>
+      <button class="btn"        data-dsf="위험"     onclick="dashStatusFilter(this)">위험</button>
+      <button class="btn"        data-dsf="주의"     onclick="dashStatusFilter(this)">주의</button>
+      <button class="btn"        data-dsf="정상"     onclick="dashStatusFilter(this)">정상</button>
+      <span style="font-size:11px;color:#999;margin-left:4px">클릭 또는 드래그로 다중 선택 → 상세 차트</span>
+      <span id="dash-sel-label" style="font-size:12px;color:#4a9eff;margin-left:auto"></span>
+    </div>
+    <div id="dashGrid" class="ag-theme-alpine" style="height:44vh;width:100%"></div>
+  </div>
+
+</div>
+
+<button class="fab" id="fab" onclick="발주패널열기()">선택 발주 실행 (<span id="fab-cnt">0</span>)</button>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3>입고 완료 확인</h3>
+    <p>입고 예정일이 지난 항목이 있습니다. 각 그룹의 입고 완료 여부를 선택해 주세요.</p>
+    <div id="modal-grps"></div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="모달닫기()">취소</button>
+      <button class="btn-confirm" onclick="입고확인완료()">확인 후 조회</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="db-edit-overlay">
+  <div class="modal" style="max-width:440px">
+    <h3 id="dbedit-title">제품 정보 수정</h3>
+    <p id="dbedit-sub" style="font-size:11px;color:#888;margin-bottom:14px"></p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><label style="font-size:11px;color:#555;font-weight:600">MOQ</label>
+        <input id="dbedit-moq" type="text" placeholder="예: 15~20" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:13px;margin-top:3px"></div>
+      <div><label style="font-size:11px;color:#555;font-weight:600">LT (일)</label>
+        <input id="dbedit-lt" type="text" placeholder="예: 30~45" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:13px;margin-top:3px"></div>
+      <div><label style="font-size:11px;color:#555;font-weight:600">원가 (위안)</label>
+        <input id="dbedit-cost" type="number" step="0.01" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:13px;margin-top:3px"></div>
+      <div><label style="font-size:11px;color:#555;font-weight:600">최종원가 (원)</label>
+        <input id="dbedit-final" type="number" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:13px;margin-top:3px"></div>
+      <div><label style="font-size:11px;color:#555;font-weight:600">안전일수</label>
+        <input id="dbedit-safe" type="number" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:13px;margin-top:3px"></div>
+      <div><label style="font-size:11px;color:#555;font-weight:600">브랜드</label>
+        <input id="dbedit-brand" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:13px;margin-top:3px"></div>
+      <div style="grid-column:1/-1"><label style="font-size:11px;color:#555;font-weight:600">발주서명</label>
+        <input id="dbedit-poname" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:13px;margin-top:3px"></div>
+      <div style="grid-column:1/-1"><label style="font-size:11px;color:#555;font-weight:600">주의사항</label>
+        <textarea id="dbedit-note" rows="2" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:5px 8px;font-size:13px;margin-top:3px;resize:vertical"></textarea></div>
+    </div>
+    <p id="dbedit-msg" style="font-size:12px;margin-top:8px;min-height:18px"></p>
+    <div class="modal-btns" style="margin-top:10px">
+      <button class="btn-cancel" onclick="dbEditClose()">취소</button>
+      <button class="btn-confirm" id="dbedit-save" onclick="dbEditSave()">저장 (DB 반영)</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="bulk-edit-overlay">
+  <div class="modal" style="max-width:380px">
+    <h3>일괄 수정</h3>
+    <p id="bulk-edit-sub" style="font-size:12px;color:#888;margin-bottom:14px"></p>
+    <div style="margin-bottom:10px">
+      <label style="font-size:11px;color:#555;font-weight:600">수정 항목</label>
+      <select id="bulk-field" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:6px 8px;font-size:13px;margin-top:4px" onchange="bulkFieldChange()">
+        <option value="">-- 선택 --</option>
+        <option value="기본_lt">LT (일)</option>
+        <option value="moq">MOQ</option>
+        <option value="원가_위안">원가 (위안)</option>
+        <option value="최종원가">최종원가 (원)</option>
+        <option value="안전일수">안전일수</option>
+        <option value="브랜드">브랜드</option>
+        <option value="발주서명">발주서명</option>
+        <option value="주의사항">주의사항</option>
+      </select>
+    </div>
+    <div style="margin-bottom:10px">
+      <label style="font-size:11px;color:#555;font-weight:600">변경 값</label>
+      <input id="bulk-value" type="text" placeholder="새 값 입력" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:6px 8px;font-size:13px;margin-top:4px">
+    </div>
+    <p id="bulk-msg" style="font-size:12px;margin-top:6px;min-height:18px"></p>
+    <div class="modal-btns" style="margin-top:10px">
+      <button class="btn-cancel" onclick="bulkEditClose()">취소</button>
+      <button class="btn-confirm" id="bulk-save" onclick="bulkEditSave()">선택 행 일괄 적용</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.2/dist/ag-grid-community.min.js"></script>
+<script>
+// ── 상태 뱃지 ──────────────────────────────────────────────────
+const B = {
+  '위험':'<span class="badge b-d">위험</span>',
+  '주의':'<span class="badge b-w">주의</span>',
+  '정상':'<span class="badge b-s">정상</span>',
+  '정보없음':'<span class="badge b-i">-</span>',
+};
+
+// ── 공휴일 / 날짜 헬퍼 ────────────────────────────────────────
+const KR_HOLIDAYS = new Set([
+  '2025-01-01','2025-01-28','2025-01-29','2025-01-30','2025-03-01','2025-05-05','2025-05-06','2025-06-06',
+  '2025-08-15','2025-10-03','2025-10-06','2025-10-07','2025-10-08','2025-10-09','2025-12-25',
+  '2026-01-01','2026-02-16','2026-02-17','2026-02-18','2026-02-19','2026-03-01','2026-03-02',
+  '2026-05-05','2026-06-06','2026-08-15','2026-08-17','2026-09-24','2026-09-25','2026-09-26',
+  '2026-10-01','2026-10-02','2026-10-09','2026-12-25',
+  '2027-01-01','2027-02-08','2027-02-09','2027-02-10','2027-03-01','2027-05-05','2027-06-06',
+  '2027-08-16','2027-10-04','2027-10-05','2027-10-06','2027-10-09','2027-12-25',
+]);
+function isBizDay(d){const day=d.getDay();if(day===0||day===6)return false;return!KR_HOLIDAYS.has(d.toISOString().slice(0,10));}
+const _arrivalCache=new Map();
+function calcExpectedArrival(lt){
+  if(!lt||lt<=0)return'-';
+  if(_arrivalCache.has(lt))return _arrivalCache.get(lt);
+  const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+Math.ceil(lt)+5);
+  for(let i=0;i<14;i++){if(isBizDay(d)&&(d.getDay()===2||d.getDay()===5)){const r=(d.getMonth()+1)+'/'+d.getDate();_arrivalCache.set(lt,r);return r;}d.setDate(d.getDate()+1);}
+  const r=(d.getMonth()+1)+'/'+d.getDate();_arrivalCache.set(lt,r);return r;
+}
+const _shortDateCache=new Map();
+function calcShortDate(n){
+  if(n==null||n<=0)return'-';
+  const k=Math.round(n);
+  if(_shortDateCache.has(k))return _shortDateCache.get(k);
+  const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+k);
+  const r=(d.getMonth()+1)+'/'+d.getDate();_shortDateCache.set(k,r);return r;
+}
+
+// ── 유틸 ─────────────────────────────────────────────────────
+function fmt(v){if(v==null||v==='')return'-';const n=parseFloat(v);if(isNaN(n))return String(v);return n.toLocaleString('ko-KR',{maximumFractionDigits:1});}
+function show(id){const el=document.getElementById(id);if(el)el.style.display='block';}
+function hide(id){const el=document.getElementById(id);if(el)el.style.display='none';}
+function setUpd(t){if(t)document.getElementById('upd-info').textContent='마지막 업데이트: '+t;}
+const fv = p => fmt(p.value);
+
+// ── 파생값 헬퍼 ───────────────────────────────────────────────
+function _합계(data){
+  const lr=data.물류실재고;
+  if(lr!=null&&lr!=='')return(data.중국재고_쿠팡||0)+(data.중국재고_일반||0)+Number(lr)+(data.중국쿠팡_미입고||0)+(data.중국일반_미입고||0);
+  return data.재고합계||0;
+}
+function _소진일수(data){
+  const lr=data.물류실재고;
+  if(lr!=null&&lr!==''){
+    const 합계=_합계(data);
+    const 일판매=((data.쿠팡주간판매||0)+(data.일반채널판매||0))/7;
+    return 일판매>0?Math.round(합계/일판매):null;
+  }
+  return data.재고소진일;
+}
+
+// ── AG Grid 상태 변수 ─────────────────────────────────────────
+let gridApi = null;
+let _all=[], _lastModified='';
+const _logi = new Set();
+let _stateFilter='전체', _searchQ='', _logiView=false, _teamCatFilter=null, _currentTeam='전체', _catFilter=null;
+let _editMode=false, _dbEditBc=null;
+let _ROW_H=34;
+
+// ── 팀 뷰 정의 ────────────────────────────────────────────────
+const ALL_NON_PINNED=['cat','brand','moq','lt','est-arr','cn-coup','cn-gen','sabanget','coup-fc','cn-coup-mi','cn-gen-mi','total','days','short-date','safe','in-code','in-date','coup-ord','coup-sale','gen-sale','avg-sale','forecast','calc','buy-qty','note','logi-chk','logi-stock','coup-adj','coup-reason','gen-adj','gen-reason'];
+const TEAM_DEFS={
+  '전체':{cols:null,catFilter:null},
+  'MD_ACC':{cols:new Set(['lt','moq','est-arr','total','avg-sale','days','short-date','safe','buy-qty','note','coup-adj','coup-reason','logi-chk']),catFilter:['잡화','태블릿','핸드폰','노트북','릴','워치','음향기기']},
+  'MD_전장품':{cols:new Set(['lt','moq','est-arr','total','avg-sale','days','short-date','safe','buy-qty','note','coup-adj','coup-reason','logi-chk']),catFilter:['전장품','전장']},
+  'MD_패션':{cols:new Set(['lt','moq','est-arr','total','avg-sale','days','short-date','safe','buy-qty','note','coup-adj','coup-reason','logi-chk']),catFilter:['패션']},
+  '물류팀':{cols:new Set(['logi-chk','logi-stock']),catFilter:null},
+};
+
+// ── 컬럼 정의 ─────────────────────────────────────────────────
+const colDefs = [
+  // ─ 고정 좌측 ─
+  {colId:'sel',checkboxSelection:true,headerCheckboxSelection:true,pinned:'left',width:34,sortable:false,filter:false,resizable:false,suppressMovable:true,suppressAutoSize:true},
+  {colId:'status',field:'재고상태',headerName:'상태',pinned:'left',width:60,
+    cellRenderer:p=>B[p.value]||'',
+    filter:'agSetColumnFilter',filterParams:{values:['위험','주의','정상','정보없음']}},
+  {colId:'barcode',field:'바코드',headerName:'바코드',pinned:'left',width:110,
+    cellStyle:{fontFamily:'monospace',fontSize:'11px'},
+    cellRenderer:p=>{
+      const s=document.createElement('span');
+      s.textContent=p.value||'';
+      s.title='클릭하여 복사';
+      s.style.cssText='cursor:pointer;display:block;width:100%';
+      s.onclick=e=>{
+        e.stopPropagation();
+        navigator.clipboard.writeText(p.value||'').then(()=>{
+          s.style.background='#c8e6c9';
+          setTimeout(()=>s.style.background='',700);
+        }).catch(()=>{});
+      };
+      return s;
+    }},
+  {colId:'name',field:'상품명',headerName:'상품명',pinned:'left',width:170,maxWidth:240,tooltipField:'상품명'},
+
+  // ─ 기본 정보 ─
+  {colId:'cat',headerName:'카테고리',width:90,
+    valueGetter:p=>[p.data.시즌구분,p.data.대분류,p.data.소분류].filter(Boolean).join('/')},
+  {colId:'brand',field:'브랜드',headerName:'브랜드',width:65},
+  {colId:'moq',field:'moq',headerName:'MOQ',width:52,type:'numericColumn'},
+  {colId:'lt',field:'기본_lt',headerName:'LT',width:44,type:'numericColumn',valueFormatter:p=>p.value>0?p.value+'일':'-'},
+  {colId:'est-arr',headerName:'예상입고일',width:55,valueGetter:p=>calcExpectedArrival(p.data.기본_lt),sortable:false,filter:false},
+
+  {colId:'cn-coup',field:'중국재고_쿠팡',headerName:'쿠팡중국재고',width:52,type:'numericColumn',valueFormatter:fv},
+  {colId:'cn-gen',field:'중국재고_일반',headerName:'일반중국재고',width:52,type:'numericColumn',valueFormatter:fv},
+
+  {colId:'sabanget',headerName:'사방넷',width:56,type:'numericColumn',
+    valueGetter:p=>p.data.물류실재고!=null&&p.data.물류실재고!==''?Number(p.data.물류실재고):(p.data.사방넷재고||0),
+    cellRenderer:p=>p.data.물류실재고!=null&&p.data.물류실재고!==''
+      ?`<span style="color:#2e7d32;font-weight:700">${fmt(p.data.물류실재고)}</span>`
+      :fmt(p.data.사방넷재고)},
+  {colId:'coup-fc',field:'쿠팡fc재고',headerName:'쿠팡FC',width:56,type:'numericColumn',valueFormatter:fv},
+
+  {colId:'cn-coup-mi',field:'중국쿠팡_미입고',headerName:'쿠팡중국미입고',width:52,type:'numericColumn',valueFormatter:fv},
+  {colId:'cn-gen-mi',field:'중국일반_미입고',headerName:'일반중국미입고',width:52,type:'numericColumn',valueFormatter:fv},
+
+  {colId:'total',headerName:'재고합계',width:62,type:'numericColumn',
+    valueGetter:p=>_합계(p.data),
+    cellRenderer:p=>`<strong>${fmt(p.value)}</strong>`},
+  {colId:'days',headerName:'소진일수',width:50,type:'numericColumn',
+    valueGetter:p=>_소진일수(p.data),
+    valueFormatter:p=>p.value!=null?p.value+'일':'-'},
+  {colId:'short-date',headerName:'쇼트예정일',width:55,
+    valueGetter:p=>calcShortDate(_소진일수(p.data)),
+    cellClassRules:{'short-warn-cell':p=>{const n=_소진일수(p.data);return n!=null&&p.data.안전재고일수>0&&n<p.data.안전재고일수;}},
+    filter:false,sortable:false},
+  {colId:'safe',field:'안전재고일수',headerName:'안전재고',width:50,type:'numericColumn',valueFormatter:p=>p.value!=null?p.value+'일':'-'},
+  {colId:'in-code',field:'입고예정_코드',headerName:'입고코드',width:78},
+  {colId:'in-date',field:'입고일자',headerName:'입고일자',width:68},
+  {colId:'coup-ord',field:'쿠팡발주수량',headerName:'쿠팡발주',width:56,type:'numericColumn',valueFormatter:fv},
+
+  {colId:'coup-sale',field:'쿠팡주간판매',headerName:'쿠팡주간판매',width:50,type:'numericColumn',valueFormatter:fv},
+  {colId:'gen-sale',field:'일반채널판매',headerName:'일반주간판매',width:50,type:'numericColumn',valueFormatter:fv},
+
+  {colId:'avg-sale',headerName:'일평균판매',width:55,type:'numericColumn',
+    valueGetter:p=>{const v=((p.data.쿠팡주간판매||0)+(p.data.일반채널판매||0))/7;return v>0?Math.round(v*10)/10:0;}},
+  {colId:'forecast',field:'예상판매_lt',headerName:'예상판매(LT)',width:64,type:'numericColumn',valueFormatter:fv},
+  {colId:'calc',field:'발주량산출',headerName:'발주량산출',width:62,type:'numericColumn',
+    cellRenderer:p=>`<strong style="${(p.value||0)<0?'color:#e53935':''}">${fmt(p.value)}</strong>`},
+
+  // ─ 편집 가능 ─
+  {colId:'buy-qty',field:'구매팀발주',headerName:'구매팀발주',width:68,type:'numericColumn',editable:true,cellClass:'edt-cell'},
+  {colId:'note',field:'비고',headerName:'구매팀비고',width:90,editable:true,cellClass:'edt-cell'},
+  {colId:'logi-chk',headerName:'물류확인',width:44,sortable:false,filter:false,
+    cellClass:'logi-cell-bg',
+    cellRenderer:p=>`<input type="checkbox" ${_logi.has(p.data.바코드)?'checked':''} onchange="logiChkAG(this,'${p.data.바코드}')" style="cursor:pointer;width:16px;height:16px;accent-color:#2e7d32">`},
+  {colId:'logi-stock',field:'물류실재고',headerName:'물류실재고',width:62,type:'numericColumn',
+    editable:p=>_logi.has(p.data.바코드),
+    cellClass:p=>_logi.has(p.data.바코드)?'edt-cell':'edt-dis'},
+
+  {colId:'coup-adj',field:'쿠팡조정',headerName:'쿠팡조정수량',width:62,type:'numericColumn',editable:true,cellClass:'edt-cell'},
+  {colId:'coup-reason',field:'쿠팡의견',headerName:'쿠팡의견',width:90,editable:true,cellClass:'edt-cell'},
+  {colId:'gen-adj',field:'일반조정',headerName:'일반조정수량',width:62,type:'numericColumn',editable:true,cellClass:'edt-cell'},
+  {colId:'gen-reason',field:'일반의견',headerName:'일반의견',width:90,editable:true,cellClass:'edt-cell'},
+];
+
+// ── 그리드 초기화 ─────────────────────────────────────────────
+function initGrid(){
+  const EDITABLE_FIELDS = new Set(['구매팀발주','비고','물류실재고','쿠팡조정','쿠팡의견','일반조정','일반의견']);
+
+  gridApi = agGrid.createGrid(document.getElementById('myGrid'), {
+    columnDefs: colDefs,
+    rowData: [],
+    rowHeight: _ROW_H,
+    getRowId: p => p.data.바코드,
+    rowSelection: 'multiple',
+    suppressRowClickSelection: true,
+    animateRows: false,
+    tooltipShowDelay: 500,
+    onFirstDataRendered: e => e.api.autoSizeAllColumns(),
+
+    defaultColDef: {
+      sortable: true,
+      resizable: true,
+      filter: 'agTextColumnFilter',
+      suppressMovable: false,
+      wrapHeaderText: true,
+      autoHeaderHeight: true,
+    },
+
+    // 외부 필터 (상태/검색/로지/팀카테고리/대분류)
+    isExternalFilterPresent: ()=>_stateFilter!=='전체'||!!_searchQ||_logiView||!!_teamCatFilter||!!_catFilter,
+    doesExternalFilterPass: node=>{
+      const r=node.data;
+      if(_stateFilter!=='전체'&&r.재고상태!==_stateFilter)return false;
+      if(_logiView&&!_logi.has(r.바코드))return false;
+      if(_searchQ){const q=_searchQ;if(!String(r.바코드||'').includes(q)&&!String(r.상품명||'').toLowerCase().includes(q)&&!String(r.브랜드||'').toLowerCase().includes(q))return false;}
+      if(_teamCatFilter){const cat=[r.시즌구분,r.대분류,r.소분류].filter(Boolean).join('/').toLowerCase();if(!_teamCatFilter.some(kw=>cat.includes(kw.toLowerCase())))return false;}
+      if(_catFilter){
+        const d=String(r.대분류||'');
+        const _NON_ACC=new Set(['전장품','잡화','신기종','기타','패션잡화']);
+        if(_catFilter==='ACC'){if(_NON_ACC.has(d))return false;}
+        else{if(d!==_catFilter)return false;}
+      }
+      return true;
+    },
+
+    // 행 색상 규칙
+    rowClassRules:{
+      'row-logi': p=>_logi.has(p.data.바코드),
+    },
+
+    // 셀 편집 완료 시 서버 저장
+    onCellValueChanged: params=>{
+      const field=params.colDef.field;
+      if(!EDITABLE_FIELDS.has(field))return;
+      const bc=params.data.바코드;
+      const val=params.newValue==null||params.newValue===''?null:params.newValue;
+      fetch('/api/재고현황/셀_저장',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({바코드:bc,필드:field,값:val})})
+        .then(r=>r.json()).then(d=>{if(d.success&&d.last_modified)_lastModified=d.last_modified;}).catch(()=>{});
+      // 물류실재고 변경 시 연관 셀 새로고침
+      if(field==='물류실재고'){
+        params.api.refreshCells({rowNodes:[params.node],columns:['sabanget','total','days','short-date'],force:true});
+      }
+      if(field==='구매팀발주')updateStatusBar();
+    },
+
+    // 선택 변경 시 FAB 업데이트
+    onSelectionChanged: ()=>{
+      const n=gridApi.getSelectedRows().length;
+      document.getElementById('fab').style.display=n?'block':'none';
+      document.getElementById('fab-cnt').textContent=n;
+      document.getElementById('sel-count').textContent=n?n+'개 선택':'';
+      document.getElementById('sb-sel').textContent=n.toLocaleString();
+    },
+
+    // 필터 변경 시 카운트 업데이트
+    onFilterChanged: ()=>updateStatusBar(),
+    onSortChanged: ()=>updateStatusBar(),
+
+    // 정보수정 모드: 비편집 셀 클릭 시 DB 수정 모달
+    onCellClicked: params=>{
+      if(!_editMode)return;
+      const colId=params.colDef.colId;
+      if(colId==='sel'||colId==='logi-chk'||colId==='barcode')return;
+      if(!params.colDef.editable)openProductEdit(params.data.바코드);
+    },
+  });
+}
+
+// ── 물류 체크 ─────────────────────────────────────────────────
+function logiChkAG(chk, bc){
+  const checked=chk.checked;
+  if(checked)_logi.add(bc);else _logi.delete(bc);
+  const node=gridApi?.getRowNode(bc);
+  if(node){
+    node.data.물류확인=checked;
+    if(!checked&&node.data.물류실재고!=null){
+      node.data.물류실재고=null;
+      fetch('/api/재고현황/셀_저장',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({바코드:bc,필드:'물류실재고',값:null})}).catch(()=>{});
+      gridApi.refreshCells({rowNodes:[node],columns:['sabanget','total','days','short-date'],force:true});
+    }
+    gridApi.refreshCells({rowNodes:[node],columns:['logi-stock','logi-chk'],force:true});
+    gridApi.redrawRows({rowNodes:[node]});
+  }
+  fetch('/api/재고현황/셀_저장',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({바코드:bc,필드:'물류확인',값:checked})})
+    .then(r=>r.json()).then(d=>{if(d.success&&d.last_modified)_lastModified=d.last_modified;}).catch(()=>{});
+  if(_logiView)gridApi.onFilterChanged();
+}
+
+// ── 팀 뷰 전환 ────────────────────────────────────────────────
+function teamSwitch(btn){
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  _currentTeam=btn.dataset.team;
+  const def=TEAM_DEFS[_currentTeam]||TEAM_DEFS['전체'];
+  _logiView=(_currentTeam==='물류팀');
+  _teamCatFilter=def.catFilter;
+  const eb=document.getElementById('btn-edit-mode');
+  if(eb)eb.style.display=_currentTeam==='전체'?'inline-block':'none';
+  const logiBtn=document.getElementById('btn-logi');
+  if(logiBtn){logiBtn.classList.toggle('logi-on',_logiView);logiBtn.textContent=_logiView?'전체 보기':'물류팀 보기';}
+  if(!gridApi)return;
+  if(def.cols===null){
+    gridApi.setColumnsVisible(ALL_NON_PINNED,true);
+  }else{
+    const show=[...def.cols],hide=ALL_NON_PINNED.filter(c=>!def.cols.has(c));
+    if(show.length)gridApi.setColumnsVisible(show,true);
+    if(hide.length)gridApi.setColumnsVisible(hide,false);
+  }
+  gridApi.onFilterChanged();
+  updateStatusBar();
+}
+
+// ── 필터 ─────────────────────────────────────────────────────
+let _searchTimer=null;
+function _debouncedSearch(){
+  clearTimeout(_searchTimer);
+  _searchTimer=setTimeout(()=>{
+    _searchQ=(document.getElementById('search').value||'').toLowerCase();
+    if(gridApi)gridApi.onFilterChanged();
+  },120);
+}
+function 상태필터(btn){
+  document.querySelectorAll('[data-f]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');_stateFilter=btn.dataset.f;
+  if(gridApi)gridApi.onFilterChanged();
+}
+function 필터초기화(){
+  _stateFilter='전체';_searchQ='';
+  document.getElementById('search').value='';
+  document.querySelectorAll('[data-f]').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[data-f="전체"]').classList.add('active');
+  if(gridApi){gridApi.setFilterModel(null);gridApi.onFilterChanged();}
+}
+function 물류뷰(){
+  _logiView=!_logiView;
+  const btn=document.getElementById('btn-logi');
+  btn.classList.toggle('logi-on',_logiView);btn.textContent=_logiView?'전체 보기':'물류팀 보기';
+  if(gridApi)gridApi.onFilterChanged();
+}
+
+// ── 행 높이 ───────────────────────────────────────────────────
+function setRowHeight(h){
+  _ROW_H=h;
+  document.querySelectorAll('.rh-group button').forEach(b=>b.classList.remove('active'));
+  const btn=document.getElementById('rh-'+h);if(btn)btn.classList.add('active');
+  if(gridApi){gridApi.setGridOption('rowHeight',h);gridApi.resetRowHeights();}
+  localStorage.setItem('재고현황_rowH',h);
+}
+
+// ── 상태바 ────────────────────────────────────────────────────
+function updateStatusBar(){
+  if(!gridApi)return;
+  let rowCount=0,buySum=0,calcSum=0,hasEdit=false;
+  gridApi.forEachNodeAfterFilter(node=>{
+    rowCount++;
+    const v=node.data.구매팀발주;
+    if(v!=null&&v!==''){buySum+=Number(v)||0;hasEdit=true;}
+    calcSum+=(node.data.발주량산출||0);
+  });
+  document.getElementById('sb-rows').textContent=rowCount.toLocaleString();
+  document.getElementById('sb-calc-sum').textContent=calcSum?Math.round(calcSum).toLocaleString():'-';
+  document.getElementById('sb-buy-sum').textContent=hasEdit?buySum.toLocaleString():'-';
+  document.getElementById('row-count').textContent=rowCount+'개';
+}
+
+// ── 데이터 렌더 ───────────────────────────────────────────────
+function render(data){
+  _all=data.rows||[];
+  _logi.clear();
+  _all.forEach(r=>{if(r.물류확인===true||r.물류확인==='true')_logi.add(r.바코드);});
+  renderSummary(data.요약||{});
+  renderCatButtons();
+  show('result');hide('empty');
+  if(gridApi){
+    gridApi.setGridOption('rowData',_all);
+  }
+  updateStatusBar();
+}
+function renderCatButtons(){
+  const bar=document.getElementById('cat-bar');
+  if(!bar)return;
+  const rawCats=new Set(_all.map(r=>r.대분류).filter(Boolean));
+  if(!rawCats.size){bar.style.display='none';return;}
+
+  // ACC 포함 여부로 통합, 나머지는 그대로
+  const hasACC=[...rawCats].some(c=>c.includes('ACC'));
+  const others=[...rawCats].filter(c=>!c.includes('ACC')).sort();
+  const buckets=[];
+  if(hasACC)buckets.push({label:'ACC',val:'ACC'});
+  others.forEach(c=>buckets.push({label:c,val:c}));
+
+  bar.style.display='flex';
+  bar.innerHTML='<span style="font-size:11px;color:#888;font-weight:600">대분류:</span>';
+  const mkBtn=(label,val)=>{
+    const b=document.createElement('button');
+    b.className='cbtn'+(val===_catFilter?' active':'');
+    b.textContent=label;
+    b.onclick=()=>{_catFilter=(val===_catFilter?null:val);renderCatButtons();if(gridApi)gridApi.onFilterChanged();};
+    bar.appendChild(b);
+  };
+  mkBtn('전체',null);
+  buckets.forEach(({label,val})=>mkBtn(label,val));
+}
+function renderSummary(s){
+  document.getElementById('summary').innerHTML=
+    `<div class="sc"><div class="n">${s.총제품수||0}</div><div class="l">전체</div></div>`+
+    `<div class="sc d"><div class="n">${s.위험||0}</div><div class="l">위험</div></div>`+
+    `<div class="sc w"><div class="n">${s.주의||0}</div><div class="l">주의</div></div>`+
+    `<div class="sc s"><div class="n">${s.정상||0}</div><div class="l">정상</div></div>`+
+    `<div class="sc"><div class="n">${s.정보없음||0}</div><div class="l">정보없음</div></div>`;
+}
+
+// ── 폴링 ─────────────────────────────────────────────────────
+function startPolling(){
+  setInterval(async()=>{
+    if(!_all.length||!_lastModified)return;
+    try{
+      const d=await(await fetch('/api/재고현황/변경확인?ts='+encodeURIComponent(_lastModified))).json();
+      if(!d.changed)return;
+      _lastModified=d.last_modified;_all=d.rows||[];
+      _logi.clear();_all.forEach(r=>{if(r.물류확인===true||r.물류확인==='true')_logi.add(r.바코드);});
+      if(gridApi)gridApi.setGridOption('rowData',_all);
+      updateStatusBar();
+      const ind=document.getElementById('sync-ind');
+      if(ind){ind.style.display='inline';setTimeout(()=>ind.style.display='none',2500);}
+    }catch{}
+  },5000);
+}
+
+// ── 정보수정 모드 ─────────────────────────────────────────────
+function editModeToggle(){
+  _editMode=!_editMode;const btn=document.getElementById('btn-edit-mode');
+  btn.textContent=_editMode?'수정모드 ON (행 클릭)':'정보수정';
+  btn.style.background=_editMode?'#e65100':'#2e7d32';btn.style.borderColor=_editMode?'#e65100':'#2e7d32';
+  const bbulk=document.getElementById('btn-bulk-edit');
+  if(bbulk)bbulk.style.display=_editMode?'inline-block':'none';
+}
+function openProductEdit(bc){
+  const row=_all.find(r=>r.바코드===bc);if(!row)return;
+  _dbEditBc=bc;
+  document.getElementById('dbedit-sub').textContent=`${bc}  ${row.상품명||''}`;
+  document.getElementById('dbedit-moq').value=row.moq||'';
+  document.getElementById('dbedit-lt').value=row.기본_lt>0?row.기본_lt:'';
+  document.getElementById('dbedit-cost').value=row.원가_위안||'';
+  document.getElementById('dbedit-final').value=row.최종원가||'';
+  document.getElementById('dbedit-safe').value=row.안전일수>0?row.안전일수:(row.안전재고일수>0?row.안전재고일수:'');
+  document.getElementById('dbedit-brand').value=row.브랜드||'';
+  document.getElementById('dbedit-poname').value=row.발주서명||'';
+  document.getElementById('dbedit-note').value=row.주의사항||'';
+  document.getElementById('dbedit-msg').textContent='';
+  document.getElementById('dbedit-save').disabled=false;
+  document.getElementById('db-edit-overlay').classList.add('show');
+}
+async function dbEditSave(){
+  if(!_dbEditBc)return;const btn=document.getElementById('dbedit-save'),msg=document.getElementById('dbedit-msg');
+  btn.disabled=true;msg.textContent='저장 중…';msg.style.color='#888';
+  const 필드들={};
+  const get=id=>document.getElementById(id).value.trim();
+  const moq=get('dbedit-moq'),lt=get('dbedit-lt'),cost=get('dbedit-cost'),fin=get('dbedit-final'),safe=get('dbedit-safe'),brand=get('dbedit-brand'),ponm=get('dbedit-poname'),note=document.getElementById('dbedit-note').value.trim();
+  if(moq)필드들.moq=moq;if(lt)필드들.기본_lt=lt;if(cost)필드들.원가_위안=parseFloat(cost);if(fin)필드들.최종원가=parseFloat(fin);if(safe)필드들.안전일수=parseFloat(safe);if(brand)필드들.브랜드=brand;if(ponm)필드들.발주서명=ponm;if(note!=='')필드들.주의사항=note;
+  if(!Object.keys(필드들).length){msg.textContent='변경 사항 없음';btn.disabled=false;return;}
+  try{
+    const d=await(await fetch('/api/재고현황/제품DB_수정',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({바코드:_dbEditBc,필드들})})).json();
+    if(d.success){
+      const row=_all.find(r=>r.바코드===_dbEditBc);
+      if(row){
+        if(필드들.moq){row.moq=필드들.moq;const nums=필드들.moq.match(/\d+/g);row.발주확정용_moq=nums?Math.max(...nums.map(Number)):0;}
+        if(필드들.기본_lt){const nums=String(필드들.기본_lt).match(/\d+/g);row.기본_lt=nums?Math.max(...nums.map(Number)):0;}
+        if(필드들.원가_위안!==undefined)row.원가_위안=필드들.원가_위안;
+        if(필드들.최종원가!==undefined)row.최종원가=필드들.최종원가;
+        if(필드들.안전일수!==undefined){row.안전일수=필드들.안전일수;row.안전재고일수=필드들.안전일수;}
+        if(필드들.브랜드)row.브랜드=필드들.브랜드;
+        if(필드들.발주서명)row.발주서명=필드들.발주서명;
+        if(필드들.주의사항!==undefined)row.주의사항=필드들.주의사항;
+        if(gridApi){const node=gridApi.getRowNode(_dbEditBc);if(node)gridApi.redrawRows({rowNodes:[node]});}
+      }
+      msg.style.color='#2e7d32';msg.textContent='DB에 저장 완료!';setTimeout(dbEditClose,1200);
+    }else{msg.style.color='#e53935';msg.textContent='오류: '+(d.error||'저장 실패');btn.disabled=false;}
+  }catch(e){msg.style.color='#e53935';msg.textContent='요청 실패: '+e.message;btn.disabled=false;}
+}
+function dbEditClose(){document.getElementById('db-edit-overlay').classList.remove('show');_dbEditBc=null;}
+
+// ── 일괄 수정 ──────────────────────────────────────────────────
+function bulkEditOpen(){
+  if(!gridApi)return;
+  const nodes=[];gridApi.forEachNodeAfterFilter(n=>{if(n.isSelected())nodes.push(n);});
+  if(!nodes.length){alert('선택된 행이 없습니다.');return;}
+  document.getElementById('bulk-edit-sub').textContent=`${nodes.length}개 행 선택됨`;
+  document.getElementById('bulk-field').value='';
+  document.getElementById('bulk-value').value='';
+  document.getElementById('bulk-msg').textContent='';
+  document.getElementById('bulk-save').disabled=false;
+  document.getElementById('bulk-edit-overlay').classList.add('show');
+}
+function bulkFieldChange(){
+  const f=document.getElementById('bulk-field').value;
+  const input=document.getElementById('bulk-value');
+  input.type=(f==='브랜드'||f==='발주서명'||f==='주의사항')?'text':'number';
+  input.placeholder=f==='기본_lt'?'LT (일)':f==='moq'?'MOQ (숫자)':f==='원가_위안'?'원가 (위안)':f==='최종원가'?'최종원가 (원)':f==='안전일수'?'안전일수 (일)':'새 값 입력';
+  input.value='';
+}
+async function bulkEditSave(){
+  const f=document.getElementById('bulk-field').value;
+  const v=document.getElementById('bulk-value').value.trim();
+  const msg=document.getElementById('bulk-msg'),btn=document.getElementById('bulk-save');
+  if(!f){msg.style.color='#e53935';msg.textContent='수정 항목을 선택해 주세요.';return;}
+  if(v===''){msg.style.color='#e53935';msg.textContent='변경 값을 입력해 주세요.';return;}
+  const nodes=[];gridApi.forEachNodeAfterFilter(n=>{if(n.isSelected())nodes.push(n);});
+  if(!nodes.length){msg.style.color='#e53935';msg.textContent='선택된 행이 없습니다.';return;}
+  const 바코드들=nodes.map(n=>n.data.바코드);
+  const 필드들={};
+  const isNum=(f==='기본_lt'||f==='원가_위안'||f==='최종원가'||f==='안전일수');
+  필드들[f]=isNum?parseFloat(v):v;
+  btn.disabled=true;msg.style.color='#888';msg.textContent=`${바코드들.length}개 저장 중…`;
+  try{
+    const d=await(await fetch('/api/재고현황/제품DB_일괄수정',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({바코드들,필드들})})).json();
+    if(d.success){
+      nodes.forEach(n=>{
+        const row=n.data;
+        if(필드들.moq!==undefined){row.moq=필드들.moq;const nums=String(필드들.moq).match(/\d+/g);row.발주확정용_moq=nums?Math.max(...nums.map(Number)):0;}
+        if(필드들.기본_lt!==undefined){row.기본_lt=필드들.기본_lt;}
+        if(필드들.원가_위안!==undefined)row.원가_위안=필드들.원가_위안;
+        if(필드들.최종원가!==undefined)row.최종원가=필드들.최종원가;
+        if(필드들.안전일수!==undefined){row.안전일수=필드들.안전일수;row.안전재고일수=필드들.안전일수;}
+        if(필드들.브랜드)row.브랜드=필드들.브랜드;
+        if(필드들.발주서명)row.발주서명=필드들.발주서명;
+        if(필드들.주의사항!==undefined)row.주의사항=필드들.주의사항;
+      });
+      gridApi.redrawRows({rowNodes:nodes});
+      msg.style.color='#2e7d32';msg.textContent=`${d.수정된수}개 행 수정 완료!`;setTimeout(bulkEditClose,1400);
+    }else{msg.style.color='#e53935';msg.textContent='오류: '+(d.error||'저장 실패');btn.disabled=false;}
+  }catch(e){msg.style.color='#e53935';msg.textContent='요청 실패: '+e.message;btn.disabled=false;}
+}
+function bulkEditClose(){document.getElementById('bulk-edit-overlay').classList.remove('show');}
+
+// ── 파일 업로드 / 분석 ────────────────────────────────────────
+const MATCHERS=[
+  {f:'사방넷',p:/사방넷/i,l:'사방넷단품대량수정',multi:false},
+  {f:'basic',p:/basic/i,l:'basic 운영파일',multi:false},
+  {f:'forecast',p:/forecast|A00412786/i,l:'Forecast',multi:false},
+  {f:'누아트sku',p:/nuart.*sku|nuartcompany|sku.*download/i,l:'nuartcompany SKU',multi:false},
+  {f:'po',p:/PO.{0,5}SKU|SKU.{0,5}LIST/i,l:'PO_SKU_LIST',multi:true},
+  {f:'주문서',p:/주문서/i,l:'주문서확인처리',multi:false},
+  {f:'재고현황표',p:/재고현황표/i,l:'재고현황표(선택)',multi:false},
+];
+let _files={po:[]};
+function dzOver(e){e.preventDefault();document.getElementById('drop-zone').classList.add('over');}
+function dzLeave(){document.getElementById('drop-zone').classList.remove('over');}
+function dzDrop(e){e.preventDefault();dzLeave();파일매칭(e.dataTransfer.files);}
+function 파일매칭(files){
+  _files={po:[]};const um=[];
+  for(const f of files){let hit=false;for(const m of MATCHERS){if(m.p.test(f.name)){if(m.multi)_files[m.f].push(f);else _files[m.f]=f;hit=true;break;}}if(!hit)um.push(f.name);}
+  document.getElementById('match-grid').innerHTML=MATCHERS.map(m=>{const v=_files[m.f];const ok=m.multi?v?.length>0:!!v;const nm=m.multi?(v?.length>0?v.map(x=>x.name).join('<br>'):'미매칭'):(v?v.name:'미매칭');return`<div class="match-row ${ok?'m-ok':'m-opt'}"><div class="m-lbl">${m.l}</div><div class="m-file">${nm}</div></div>`;}).join('')+(um.length?`<div class="m-warn">미매칭: ${um.join(', ')}</div>`:'');
+  document.getElementById('btn-run').disabled=MATCHERS.filter(m=>m.multi?_files[m.f]?.length>0:!!_files[m.f]).length===0;
+}
+async function 분석실행(제외=[],모달확인완료=false){
+  const fd=new FormData();
+  for(const m of MATCHERS){const v=_files[m.f];if(!v)continue;if(m.multi)v.forEach(f=>fd.append(m.f,f));else fd.append(m.f,v);}
+  fd.append('제외_날짜들',JSON.stringify(제외));
+  show('loading');hide('result');hide('empty');document.getElementById('btn-run').disabled=true;
+  try{
+    const d=await(await fetch('/api/재고현황/분석',{method:'POST',body:fd})).json();
+    if(!d.success){alert('오류: '+d.error);return;}
+    if(d.입고_그룹?.length&&!모달확인완료){hide('loading');document.getElementById('btn-run').disabled=false;모달열기(d.입고_그룹);return;}
+    setUpd(d.업데이트_시각);render(d);document.getElementById('upload-panel').classList.remove('open');
+  }catch(e){alert('요청 실패: '+e.message);}
+  finally{hide('loading');document.getElementById('btn-run').disabled=false;}
+}
+function 엑셀다운로드(){window.location.href='/api/재고현황/엑셀_다운로드';}
+
+async function 시트업데이트(){
+  const btn=document.getElementById('btn-sheets'),msg=document.getElementById('run-msg');
+  btn.disabled=true;msg.textContent='시트 읽는 중…';show('loading');
+  try{
+    const d=await(await fetch('/api/재고현황/시트업데이트',{method:'POST'})).json();
+    if(!d.success){alert('오류: '+d.error);return;}
+    setUpd(d.업데이트_시각);render(d);msg.textContent='완료!';setTimeout(()=>msg.textContent='',3000);
+  }catch(e){alert('실패: '+e.message);}finally{btn.disabled=false;hide('loading');}
+}
+
+// ── 모달 ─────────────────────────────────────────────────────
+function 모달열기(그룹들){
+  document.getElementById('modal-grps').innerHTML=그룹들.map(g=>`<div class="grp-item" data-date="${g.날짜}" data-choice=""><div class="grp-lbl">${g.날짜_표시||g.날짜} — ${g.개수}개</div><div class="grp-items">${g.항목들.map(i=>`<div>${i.바코드} ${i.제품명} (${i.발주번호})</div>`).join('')}</div><div class="grp-btns"><button onclick="grpSel(this,'yes')">✔ 입고 완료</button><button onclick="grpSel(this,'no')">✘ 미입고</button></div></div>`).join('');
+  document.getElementById('overlay').classList.add('show');
+}
+function grpSel(btn,v){btn.closest('.grp-btns').querySelectorAll('button').forEach(b=>b.classList.remove('yes','no'));btn.classList.add(v);btn.closest('.grp-item').dataset.choice=v;}
+function 모달닫기(){document.getElementById('overlay').classList.remove('show');}
+function 입고확인완료(){
+  const items=document.querySelectorAll('.grp-item');
+  if([...items].some(i=>!i.dataset.choice)){alert('모든 항목에 선택해 주세요.');return;}
+  const 제외=[...items].filter(i=>i.dataset.choice==='yes').map(i=>i.dataset.date);
+  모달닫기();분석실행(제외,true);
+}
+
+// ── 발주 ─────────────────────────────────────────────────────
+function 발주패널열기(){const p=document.getElementById('order-panel');p.classList.add('show');p.scrollIntoView({behavior:'smooth'});}
+async function 발주실행(){
+  const items=[];
+  if(gridApi)gridApi.getSelectedRows().forEach(row=>{const qty=Number(row.구매팀발주)||0;if(qty>0)items.push({barcode:row.바코드,quantity:qty});});
+  if(!items.length){alert('구매팀 발주수량을 입력하세요.');return;}
+  const btn=document.getElementById('btn-order');btn.disabled=true;
+  document.getElementById('order-msg').textContent='조회 중…';
+  document.getElementById('order-groups').innerHTML='';document.getElementById('dl-area').innerHTML='';
+  try{
+    const 조회=await(await fetch('/api/발주/조회',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items})})).json();
+    if(!조회.success){alert('조회 오류: '+조회.error);return;}
+    document.getElementById('order-groups').innerHTML=(조회.groups||[]).map(g=>`<div class="o-group"><div class="gt">${g.원본파일} — PO: ${g.po_prefix}(${g.po_번호_제안})</div><table><thead><tr><th>바코드</th><th>상품명</th><th style="text-align:right">수량</th></tr></thead><tbody>${(g.items||[]).map(i=>`<tr><td>${i.barcode}</td><td>${i.이름||''}</td><td style="text-align:right">${fmt(i.수량||i.quantity||0)}</td></tr>`).join('')}</tbody></table></div>`).join('')+(조회.미확인?.length?`<div class="unmatched">미매칭: ${조회.미확인.join(', ')}</div>`:'');
+    document.getElementById('order-msg').textContent='발주서 생성 중…';
+    const groups=(조회.groups||[]).map(g=>({원본파일:g.원본파일,po코드:`${g.po_prefix}(${g.po_번호_제안})`,items:g.items}));
+    if(!groups.length){document.getElementById('order-msg').textContent='매칭된 템플릿 없음';return;}
+    const res=await(await fetch('/api/발주/실행',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({발주_유형:document.getElementById('발주유형').value,한국_요청_도착일:document.getElementById('도착일').value.trim()||null,groups})})).json();
+    if(res.success){document.getElementById('dl-area').innerHTML='<div class="dl-links">'+(res.results||[]).map(f=>`<a href="/발주서/${f.파일}" download>📥 ${f.po코드}</a>`).join('')+'</div>';document.getElementById('order-msg').textContent='완료!';}
+    else document.getElementById('order-msg').textContent='오류: '+res.error;
+  }catch(e){document.getElementById('order-msg').textContent='실패: '+e.message;}finally{btn.disabled=false;}
+}
+
+async function 로컬시트초기화(){
+  if(!confirm('로컬 Excel 시트를 초기화합니다.'))return;
+  const fd=new FormData();fd.append('덮어쓰기','false');
+  for(const[field,label]of[['엔대시소스','엔대시 소스'],['주문프로그램','주문프로그램'],['재고현황표','재고현황표']]){const f=await pickFile(label,'.xlsx,.xlsm');if(f)fd.append(field,f);}
+  try{const d=await(await fetch('/api/재고현황/로컬시트_초기화',{method:'POST',body:fd})).json();if(d.success){alert('초기화 완료!\n'+d.파일);location.reload();}else alert('실패: '+d.error);}catch(e){alert('요청 실패: '+e.message);}
+}
+function pickFile(label,accept){return new Promise(r=>{const inp=document.createElement('input');inp.type='file';inp.accept=accept;inp.onchange=()=>r(inp.files[0]||null);inp.oncancel=()=>r(null);inp.click();});}
+
+function 패널토글(){document.getElementById('upload-panel').classList.toggle('open');}
+
+// ── 초기화 ────────────────────────────────────────────────────
+// ── 대시보드 ────────────────────────────────────────────────
+let _dashOpen=false;
+let _dCharts={};
+let _dashData=[];        // 전체 rows (현재 데이터)
+let _dashCat='전체';     // 선택된 카테고리
+let _dashGrid=null;      // 대시보드 AG Grid 인스턴스
+let _dashSnaps=[];       // 아카이브 스냅샷 [{날짜, rows}]
+let _archPanelOpen=false;
+
+function archPanelToggle(){
+  _archPanelOpen=!_archPanelOpen;
+  document.getElementById('arch-panel').style.display=_archPanelOpen?'block':'none';
+  document.getElementById('btn-arch-panel-toggle').textContent='과거 데이터 재분석 '+(_archPanelOpen?'▴':'▾');
+}
+
+function dashboardToggle(){
+  _dashOpen=!_dashOpen;
+  document.getElementById('dashboard').style.display=_dashOpen?'block':'none';
+  document.getElementById('btn-dashboard').style.background=_dashOpen?'#4a148c':'#6a1b9a';
+  document.querySelectorAll('.wrap:not(#dashboard)').forEach(el=>{ el.style.display=_dashOpen?'none':''; });
+  document.getElementById('fab').style.display=_dashOpen?'none':'';
+  if(_dashOpen) loadDashboard();
+}
+
+async function loadDashboard(){
+  // 현재 데이터 + 아카이브 스냅샷 병렬 로드
+  const [curR, archR, srcR] = await Promise.all([
+    fetch('/api/재고현황/데이터').then(r=>r.json()).catch(()=>({})),
+    fetch('/api/재고현황/아카이브_목록').then(r=>r.json()).catch(()=>({날짜들:[]})),
+    fetch('/api/재고현황/소스_아카이브_목록').then(r=>r.json()).catch(()=>({목록:[]})),
+  ]);
+
+  // 현재 데이터
+  _dashData = (curR.rows||[]);
+
+  // 카테고리 탭 생성
+  buildCatTabs();
+
+  // 아카이브 스냅샷 (최신 8개)
+  const 날짜들 = (archR.날짜들||[]).slice(0,8);
+  if(날짜들.length){
+    const snaps = await Promise.all(날짜들.map(d=>fetch(`/api/재고현황/아카이브/${d}`).then(r=>r.json()).catch(()=>null)));
+    _dashSnaps = 날짜들.map((d,i)=>({날짜:d,...(snaps[i]||{})})).filter(s=>s.rows);
+  }
+
+  // 소스 폴더 목록 (재분석용)
+  const sel=document.getElementById('arch-folder-sel');
+  sel.innerHTML='<option value="">— 날짜 선택 —</option>';
+  (srcR.목록||[]).forEach(item=>{
+    const opt=document.createElement('option');
+    opt.value=item.폴더명;
+    opt.textContent=`${item.날짜} (소스 ${item.소스_수}개)`;
+    sel.appendChild(opt);
+  });
+
+  renderDashboard();
+}
+
+// 대시보드 상위 카테고리 (TEAM_DEFS 와 동일 구조)
+const _DASH_CATS=[
+  {key:'전체',  label:'전체',   keywords:null},
+  {key:'ACC',   label:'ACC',    keywords:['태블릿','핸드폰','노트북','릴','워치','음향기기']},
+  {key:'전장품',label:'전장품', keywords:['전장품','전장']},
+  {key:'패션',  label:'패션',   keywords:['패션']},
+  {key:'잡화',  label:'잡화',   keywords:['잡화']},
+  {key:'신기종',label:'신기종', keywords:['신기종']},
+  {key:'기타',  label:'기타',   keywords:['기타']},
+];
+
+function buildCatTabs(){
+  const el=document.getElementById('dash-cat-tabs');
+  el.innerHTML=_DASH_CATS.map(c=>`<button class="dash-cat-tab${c.key===_dashCat?' active':''}"
+    onclick="dashCatSwitch('${c.key}')">${c.label}</button>`).join('');
+}
+
+function dashCatSwitch(key){
+  _dashCat=key;
+  document.querySelectorAll('.dash-cat-tab').forEach(b=>b.classList.toggle('active',b.textContent===(_DASH_CATS.find(c=>c.key===key)||{}).label));
+  renderDashboard();
+}
+
+function _filterRows(rows){
+  const def=_DASH_CATS.find(c=>c.key===_dashCat);
+  if(!def||!def.keywords) return rows;
+  const kws=def.keywords.map(k=>k.toLowerCase());
+  return rows.filter(r=>{
+    const d=String(r.대분류||'').toLowerCase();
+    return kws.some(k=>d.includes(k));
+  });
+}
+
+function renderDashboard(){
+  const rows=_filterRows(_dashData);
+  renderKPI(rows);
+  renderTrendCharts();
+  renderDashGrid(rows);
+}
+
+function renderKPI(rows){
+  const 위험=rows.filter(r=>r.재고상태==='위험').length;
+  const 주의=rows.filter(r=>r.재고상태==='주의').length;
+  const 정상=rows.filter(r=>r.재고상태==='정상').length;
+  const 판매합=rows.reduce((a,r)=>a+(r.쿠팡주간판매||0)+(r.일반채널판매||0),0);
+  const 발주합=rows.reduce((a,r)=>a+(r.발주량산출||0),0);
+  const cards=[
+    {lbl:'총 SKU',val:rows.length.toLocaleString(),cls:''},
+    {lbl:'위험',val:위험.toLocaleString(),cls:'kpi-danger'},
+    {lbl:'주의',val:주의.toLocaleString(),cls:'kpi-warn'},
+    {lbl:'이번주 판매합',val:판매합.toLocaleString(undefined,{maximumFractionDigits:0}),cls:''},
+    {lbl:'발주산출 합계',val:발주합.toLocaleString(undefined,{maximumFractionDigits:0}),cls:'kpi-ok'},
+  ];
+  document.getElementById('dash-kpi').innerHTML=cards.map(c=>
+    `<div class="kpi-card ${c.cls}"><div class="kpi-val">${c.val}</div><div class="kpi-lbl">${c.lbl}</div></div>`
+  ).join('');
+}
+
+function renderTrendCharts(){
+  if(!_dashSnaps.length) return;
+  const sorted=[..._dashSnaps].sort((a,b)=>a.날짜.localeCompare(b.날짜));
+  const labels=sorted.map(s=>s.날짜.slice(5)); // MM-DD
+  const _f=rows=>_dashCat==='전체'?rows:(rows||[]).filter(r=>r.대분류===_dashCat);
+
+  _dBuildChart('d-chart-combined',{
+    data:{
+      labels,
+      datasets:[
+        // ── 스택 막대 (왼쪽 Y) ──────────────────────────────
+        {type:'bar',label:'위험',stack:'st',yAxisID:'y',
+         data:sorted.map(s=>_f(s.rows).filter(r=>r.재고상태==='위험').length),
+         backgroundColor:'rgba(229,57,53,.75)',order:2},
+        {type:'bar',label:'주의',stack:'st',yAxisID:'y',
+         data:sorted.map(s=>_f(s.rows).filter(r=>r.재고상태==='주의').length),
+         backgroundColor:'rgba(251,140,0,.70)',order:2},
+        {type:'bar',label:'정상',stack:'st',yAxisID:'y',
+         data:sorted.map(s=>_f(s.rows).filter(r=>r.재고상태==='정상').length),
+         backgroundColor:'rgba(67,160,71,.25)',order:2},
+        // ── 라인 (오른쪽 Y) ────────────────────────────────
+        {type:'line',label:'재고합계',yAxisID:'y1',
+         data:sorted.map(s=>_f(s.rows).reduce((a,r)=>a+(r.재고합계||0),0)),
+         borderColor:'#00897b',borderWidth:2.5,pointRadius:3,tension:.3,order:1},
+        {type:'line',label:'쿠팡주간판매',yAxisID:'y1',
+         data:sorted.map(s=>_f(s.rows).reduce((a,r)=>a+(r.쿠팡주간판매||0),0)),
+         borderColor:'#1565c0',borderWidth:1.8,borderDash:[5,3],pointRadius:3,tension:.3,order:1},
+        {type:'line',label:'일반채널판매',yAxisID:'y1',
+         data:sorted.map(s=>_f(s.rows).reduce((a,r)=>a+(r.일반채널판매||0),0)),
+         borderColor:'#6a1b9a',borderWidth:1.8,borderDash:[5,3],pointRadius:3,tension:.3,order:1},
+      ]
+    },
+    options:{
+      interaction:{mode:'index',intersect:false},
+      scales:{
+        x:{stacked:true,ticks:{font:{size:11}}},
+        y:{
+          stacked:true,position:'left',beginAtZero:true,
+          title:{display:true,text:'제품 수',font:{size:11}},
+          ticks:{font:{size:11}},grid:{color:'rgba(0,0,0,.06)'}
+        },
+        y1:{
+          position:'right',beginAtZero:true,
+          title:{display:true,text:'수량',font:{size:11}},
+          ticks:{font:{size:11}},
+          grid:{drawOnChartArea:false}
+        }
+      },
+      plugins:{
+        legend:{position:'bottom',labels:{boxWidth:12,font:{size:11},padding:14}},
+        tooltip:{callbacks:{
+          label:ctx=>{
+            const v=ctx.parsed.y;
+            return` ${ctx.dataset.label}: ${Number(v).toLocaleString()}`;
+          }
+        }}
+      }
+    }
+  });
+}
+
+function _dBuildChart(id,cfg){
+  if(_dCharts[id]){_dCharts[id].destroy();delete _dCharts[id];}
+  const ctx=document.getElementById(id);if(!ctx)return;
+  _dCharts[id]=new Chart(ctx,cfg);
+}
+
+// ── 대시보드 AG Grid ─────────────────────────────────────────
+function renderDashGrid(rows){
+  const colDefs=[
+    {field:'재고상태',headerName:'상태',width:60,pinned:'left',
+     cellRenderer:p=>{const m={위험:'b-d',주의:'b-w',정상:'b-s',정보없음:'b-i'};return`<span class="badge ${m[p.value]||'b-i'}">${p.value||'-'}</span>`;}},
+    {field:'바코드',headerName:'바코드',width:120,pinned:'left'},
+    {field:'상품명',headerName:'상품명',flex:1,minWidth:140},
+    {field:'브랜드',headerName:'브랜드',width:70},
+    {field:'대분류',headerName:'대분류',width:70},
+    {field:'재고합계',headerName:'재고',width:65,type:'numericColumn'},
+    {field:'쿠팡주간판매',headerName:'쿠팡판매/주',width:80,type:'numericColumn'},
+    {field:'일반채널판매',headerName:'일반판매/주',width:80,type:'numericColumn'},
+    {field:'발주량산출',headerName:'발주산출',width:72,type:'numericColumn',
+     cellClass:p=>p.value<0?'short-warn-cell':''},
+    {field:'재고소진일',headerName:'소진(일)',width:68,type:'numericColumn',
+     cellClass:p=>{const v=p.value;return(!v||v<14)?'short-warn-cell':'';}},
+  ];
+
+  if(_dashGrid){
+    _dashGrid.setGridOption('rowData',rows);
+    return;
+  }
+
+  const gridDiv=document.getElementById('dashGrid');
+  const opts={
+    columnDefs:colDefs,
+    rowData:rows,
+    rowSelection:'multiple',
+    rowMultiSelectWithClick:true,
+    suppressRowDeselection:false,
+    defaultColDef:{sortable:true,filter:true,resizable:true},
+    animateRows:true,
+    onSelectionChanged: onDashSelectionChanged,
+  };
+  _dashGrid=agGrid.createGrid(gridDiv,opts);
+}
+
+function dashGridSearch(){
+  const q=document.getElementById('dash-search').value.trim().toLowerCase();
+  if(!_dashGrid)return;
+  _dashGrid.setGridOption('quickFilterText',q);
+}
+
+let _dashStatusFilter='전체';
+function dashStatusFilter(btn){
+  document.querySelectorAll('[data-dsf]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  _dashStatusFilter=btn.dataset.dsf;
+  if(!_dashGrid)return;
+  const rows=_filterRows(_dashData).filter(r=>_dashStatusFilter==='전체'||r.재고상태===_dashStatusFilter);
+  _dashGrid.setGridOption('rowData',rows);
+}
+
+// ── 선택 제품 상세 차트 ──────────────────────────────────────
+async function onDashSelectionChanged(){
+  if(!_dashGrid)return;
+  const sel=_dashGrid.getSelectedRows();
+  const label=document.getElementById('dash-sel-label');
+  if(!sel.length){label.textContent='';return;}
+  label.textContent=`${sel.length}개 선택`;
+  const barcodes=sel.map(r=>r.바코드).filter(Boolean);
+  if(!barcodes.length)return;
+
+  // 이력 조회
+  const r=await fetch(`/api/재고현황/바코드_이력?barcodes=${barcodes.join(',')}`).then(r=>r.json()).catch(()=>null);
+  if(!r||!r.success)return;
+  renderDetailCharts(sel,r.이력);
+}
+
+function renderDetailCharts(rows,이력){
+  const detail=document.getElementById('dash-detail');
+  const lbl=document.getElementById('dash-detail-label');
+  detail.style.display='block';
+  lbl.textContent=rows.length===1?rows[0].상품명:`${rows.length}개 제품 선택됨`;
+
+  // 각 바코드의 이력 합산 (다중 선택 시)
+  const 날짜셋=new Set();
+  Object.values(이력).forEach(arr=>arr.forEach(p=>날짜셋.add(p.날짜)));
+  const labels=[...날짜셋].sort().map(d=>d.slice(5));
+  const sorted날짜=[...날짜셋].sort();
+
+  function sumByDate(key){
+    return sorted날짜.map(d=>
+      Object.values(이력).reduce((tot,arr)=>{
+        const pt=arr.find(p=>p.날짜===d);
+        return tot+(pt?parseFloat(pt[key]||0):0);
+      },0)
+    );
+  }
+
+  // 재고/판매량 차트
+  _dBuildChart('d-detail-stock',{type:'line',data:{labels,datasets:[
+    {label:'재고합계',data:sumByDate('재고합계'),borderColor:'#00897b',tension:.3,yAxisID:'y'},
+    {label:'쿠팡주간판매',data:sumByDate('쿠팡주간판매'),borderColor:'#1565c0',tension:.3,yAxisID:'y1',borderDash:[4,3]},
+    {label:'일반채널판매',data:sumByDate('일반채널판매'),borderColor:'#6a1b9a',tension:.3,yAxisID:'y1',borderDash:[4,3]},
+  ]},options:{scales:{y:{position:'left',beginAtZero:true,title:{display:true,text:'재고'}},
+    y1:{position:'right',beginAtZero:true,grid:{drawOnChartArea:false},title:{display:true,text:'판매/주'}}},
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}}}});
+
+  // 발주/소진일 차트
+  const 소진일_data=sorted날짜.map(d=>{
+    let tot재고=0,tot판매=0;
+    Object.values(이력).forEach(arr=>{const pt=arr.find(p=>p.날짜===d);if(pt){tot재고+=parseFloat(pt.재고합계||0);tot판매+=(parseFloat(pt.쿠팡주간판매||0)+parseFloat(pt.일반채널판매||0))/7;}});
+    return tot판매>0?Math.round(tot재고/tot판매):null;
+  });
+
+  _dBuildChart('d-detail-order',{type:'line',data:{labels,datasets:[
+    {label:'발주량산출',data:sumByDate('발주량산출'),borderColor:'#e53935',tension:.3,yAxisID:'y'},
+    {label:'예상 소진일',data:소진일_data,borderColor:'#ff8f00',tension:.3,yAxisID:'y1',spanGaps:true},
+  ]},options:{scales:{y:{position:'left',title:{display:true,text:'발주량'}},
+    y1:{position:'right',grid:{drawOnChartArea:false},beginAtZero:true,title:{display:true,text:'소진(일)'}}},
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}}}});
+}
+
+function dashDetailClose(){
+  document.getElementById('dash-detail').style.display='none';
+  if(_dashGrid) _dashGrid.deselectAll();
+  document.getElementById('dash-sel-label').textContent='';
+}
+
+// ── 과거 재분석 ─────────────────────────────────────────────
+async function 과거분석실행(){
+  const 폴더명=document.getElementById('arch-folder-sel').value;
+  if(!폴더명){alert('날짜를 선택해주세요.');return;}
+  const msg=document.getElementById('arch-msg');
+  const btn=document.getElementById('btn-arch-run');
+  msg.textContent='분석 중…';btn.disabled=true;
+  try{
+    const r=await(await fetch('/api/재고현황/과거_분석',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({폴더명})})).json();
+    msg.textContent=r.success?`완료: ${(r.rows||[]).length}개 제품 분석됨`:'오류: '+(r.error||'실패');
+    if(r.success) await loadDashboard();
+  }catch(e){msg.textContent='오류: '+e.message;}
+  btn.disabled=false;
+}
+
+async function 일괄분석실행(덮어쓰기){
+  const msg=document.getElementById('bulk-msg');
+  const prog=document.getElementById('bulk-progress');
+  const bar=document.getElementById('bulk-bar');
+  const progText=document.getElementById('bulk-progress-text');
+  const resList=document.getElementById('bulk-result-list');
+  const btn1=document.getElementById('btn-bulk-arch');
+  const btn2=document.getElementById('btn-bulk-arch-force');
+  if(!덮어쓰기&&!confirm('미처리 날짜만 분석합니다. 진행할까요?'))return;
+  if(덮어쓰기&&!confirm('모든 날짜를 덮어쓰기 재분석합니다. 시간이 걸릴 수 있습니다. 진행할까요?'))return;
+  msg.textContent='';prog.style.display='block';bar.style.width='0%';resList.innerHTML='';
+  btn1.disabled=true;btn2.disabled=true;progText.textContent='처리 중…';
+  try{
+    const r=await(await fetch('/api/재고현황/일괄_아카이브_분석',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({덮어쓰기})})).json();
+    bar.style.width='100%';
+    if(r.success){
+      progText.textContent=`완료: ${r.완료||0}개 분석됨, ${r.건너뜀||0}개 건너뜀`;
+      resList.innerHTML=(r.결과||[]).map(item=>{
+        const color=item.skipped?'#aaa':item.error?'#e53935':'#2e7d32';
+        const label=item.skipped?`건너뜀`:item.error?`오류: ${item.error}`:`${item.행수}개`;
+        return `<span style="color:${color};margin-right:10px">${item.날짜}: ${label}</span>`;
+      }).join('');
+      await loadDashboard();
+    }else{progText.textContent='오류: '+(r.error||'실패');}
+  }catch(e){progText.textContent='오류: '+e.message;}
+  btn1.disabled=false;btn2.disabled=false;
+}
+
+// ── 발주 제안 ────────────────────────────────────────────────
+let _suggestOpen=false;
+let _suggestGridApi=null;
+
+function suggestPanelToggle(){
+  _suggestOpen=!_suggestOpen;
+  const panel=document.getElementById('suggest-panel');
+  const btn=document.getElementById('btn-suggest');
+  panel.style.display=_suggestOpen?'block':'none';
+  btn.style.background=_suggestOpen?'#bf360c':'#e65100';
+  if(_suggestOpen) buildSuggestGrid();
+}
+
+function _parseMOQ(val){
+  if(!val&&val!==0) return 1;
+  const nums=String(val).match(/\d+/g);
+  if(!nums) return 1;
+  return Math.max(1, Math.max(...nums.map(Number)));
+}
+
+function _calcSuggestQty(row){
+  const 주간판매=(row.쿠팡주간판매||0)+(row.일반채널판매||0);
+  const 일판매=주간판매/7;
+  const 재고=row.재고합계||0;
+  const lt=row.기본_lt||30;
+  const moq=_parseMOQ(row.moq||row.발주확정용_moq);
+
+  // 리드타임 기간 동안 팔릴 양 - 현재 재고 = 부족량
+  const 부족량=Math.max(0, 일판매*(lt+5) - 재고);
+  // 버퍼: 위험=2주, 주의=1주
+  const 버퍼=주간판매*(row.재고상태==='위험'?2:1);
+  const 필요량=부족량+버퍼;
+  if(필요량<=0) return moq;
+  return Math.max(moq, Math.ceil(필요량/moq)*moq);
+}
+
+function buildSuggestGrid(){
+  const 주의포함=document.getElementById('suggest-주의포함')?.checked!==false;
+  const allRows=typeof _all!=='undefined'?_all:[];
+  const rows=allRows
+    .filter(r=>r.재고상태==='위험'||(주의포함&&r.재고상태==='주의'))
+    .map(r=>({...r, 제안발주량:_calcSuggestQty(r)}))
+    .sort((a,b)=>{
+      // 위험 먼저, 같은 상태면 소진일 빠른 순
+      const ord={위험:0,주의:1};
+      const so=(ord[a.재고상태]??9)-(ord[b.재고상태]??9);
+      if(so!==0) return so;
+      const ad=a.재고소진일??9999, bd=b.재고소진일??9999;
+      return ad-bd;
+    });
+
+  // 상태바 업데이트
+  document.getElementById('sg-danger').textContent=rows.filter(r=>r.재고상태==='위험').length;
+  document.getElementById('sg-warn').textContent=rows.filter(r=>r.재고상태==='주의').length;
+  document.getElementById('sg-total').textContent=rows.reduce((s,r)=>s+(r.제안발주량||0),0).toLocaleString();
+  document.getElementById('suggest-summary').textContent=`총 ${rows.length}개 제품`;
+
+  const colDefs=[
+    {checkboxSelection:true,headerCheckboxSelection:true,width:34,pinned:'left',sortable:false,filter:false,resizable:false,suppressMovable:true},
+    {field:'재고상태',headerName:'상태',width:56,pinned:'left',
+     cellRenderer:p=>{const m={위험:'b-d',주의:'b-w'};return`<span class="badge ${m[p.value]||'b-i'}">${p.value||'-'}</span>`;}},
+    {field:'바코드',headerName:'바코드',width:115,pinned:'left'},
+    {field:'상품명',headerName:'상품명',flex:1,minWidth:150},
+    {field:'브랜드',headerName:'브랜드',width:68},
+    {field:'대분류',headerName:'대분류',width:65},
+    {field:'재고합계',headerName:'현재재고',width:72,type:'numericColumn'},
+    {field:'재고소진일',headerName:'소진(일)',width:65,type:'numericColumn',
+     cellClass:p=>{const v=p.value;return(!v||v<14)?'sg-danger':v<30?'sg-warn':'';}},
+    {field:'쿠팡주간판매',headerName:'쿠팡/주',width:65,type:'numericColumn',
+     valueFormatter:p=>p.value!=null?Number(p.value).toFixed(1):''},
+    {field:'일반채널판매',headerName:'일반/주',width:65,type:'numericColumn',
+     valueFormatter:p=>p.value!=null?Number(p.value).toFixed(1):''},
+    {field:'기본_lt',headerName:'LT(일)',width:58,type:'numericColumn'},
+    {field:'moq',headerName:'MOQ',width:68},
+    {field:'발주량산출',headerName:'부족량',width:65,type:'numericColumn',
+     cellClass:p=>p.value<0?'sg-danger':'',
+     valueFormatter:p=>p.value!=null?Number(p.value).toFixed(0):''},
+    {field:'제안발주량',headerName:'제안발주량',width:80,type:'numericColumn',
+     editable:true,cellClass:'sg-edit',
+     valueSetter:p=>{p.data.제안발주량=Number(p.newValue)||0;return true;}},
+    {field:'비고',headerName:'메모',width:110,editable:true,cellClass:'sg-edit'},
+  ];
+
+  if(_suggestGridApi){
+    _suggestGridApi.setGridOption('rowData',rows);
+    // 위험 행 전체 선택
+    _suggestGridApi.forEachNode(n=>{ if(n.data.재고상태==='위험') n.setSelected(true); });
+    return;
+  }
+
+  const gridDiv=document.getElementById('suggestGrid');
+  const opts={
+    columnDefs:colDefs,
+    rowData:rows,
+    rowSelection:'multiple',
+    rowMultiSelectWithClick:true,
+    defaultColDef:{sortable:true,filter:true,resizable:true},
+    stopEditingWhenCellsLoseFocus:true,
+    onCellValueChanged: _onSuggestCellChanged,
+  };
+  _suggestGridApi=agGrid.createGrid(gridDiv,opts);
+  // 위험 행 전체 선택
+  setTimeout(()=>{
+    _suggestGridApi.forEachNode(n=>{ if(n.data.재고상태==='위험') n.setSelected(true); });
+  },100);
+}
+
+function _onSuggestCellChanged(e){
+  // 합계 재계산
+  let tot=0;
+  _suggestGridApi.forEachNode(n=>tot+=(n.data.제안발주량||0));
+  document.getElementById('sg-total').textContent=tot.toLocaleString();
+}
+
+function applySuggestToGrid(){
+  if(!_suggestGridApi) return;
+  const selected=_suggestGridApi.getSelectedRows();
+  if(!selected.length){alert('반영할 항목을 선택해주세요.');return;}
+
+  // 메인 그리드에 구매팀발주 반영
+  const 맵=new Map(selected.map(r=>[r.바코드, r.제안발주량]));
+  let updated=0;
+  gridApi.forEachNode(node=>{
+    const qty=맵.get(node.data.바코드);
+    if(qty!=null){
+      node.data.구매팀발주=qty;
+      node.setDataValue('구매팀발주',qty);
+      // 서버에 저장
+      fetch('/api/재고현황/셀_저장',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({바코드:node.data.바코드,필드:'구매팀발주',값:qty})
+      }).catch(()=>{});
+      updated++;
+    }
+  });
+  alert(`${updated}개 제품의 구매팀발주 수량이 반영됐습니다.`);
+  // 상태바 재계산
+  updateStatusBar();
+}
+
+window.addEventListener('DOMContentLoaded', async()=>{
+  _ROW_H=parseInt(localStorage.getItem('재고현황_rowH')||'34');
+  document.querySelectorAll('.rh-group button').forEach(b=>b.classList.remove('active'));
+  const rhBtn=document.getElementById('rh-'+_ROW_H);if(rhBtn)rhBtn.classList.add('active');
+
+  initGrid();
+  show('loading');
+  try{
+    const d=await(await fetch('/api/재고현황/데이터')).json();
+    hide('loading');
+    if(d&&d.success&&d.rows?.length){_lastModified=d.last_modified||'';setUpd(d.업데이트_시각);render(d);}
+    else show('empty');
+  }catch{hide('loading');show('empty');}
+  startPolling();
+});
+</script>
+</body>
+</html>

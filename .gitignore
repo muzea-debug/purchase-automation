@@ -1,0 +1,28 @@
+# 민감 정보
+.env
+
+# 업로드/출력 임시 파일
+uploads/
+output/
+발주서_output/
+통합발주서원본_test/
+재고현황_아카이브/
+
+# 로컬 Excel 데이터
+구글 시트 대체용/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 에디터
+.vscode/
+.idea/

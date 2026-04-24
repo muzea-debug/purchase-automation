@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>원본 발주서 생성</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f0f2f5; font-family: "맑은 고딕", sans-serif; }
+    .header { background: #1a1a2e; color: white; padding: 16px 24px; }
+    .header span { color: #8888cc; font-size: 13px; }
+    .card { border: none; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+    .section-title { font-weight: bold; font-size: 14px; color: #333; border-left: 4px solid #4a4a8a; padding-left: 10px; margin-bottom: 16px; }
+    .product-row { background: #f8f9fa; border-radius: 8px; padding: 14px; margin-bottom: 10px; position: relative; }
+    .drop-zone { border: 2px dashed #aaa; border-radius: 8px; padding: 16px; text-align: center; cursor: pointer; background: #fafafa; transition: border-color .2s; }
+    .drop-zone:hover, .drop-zone.dragover { border-color: #4a4a8a; background: #f0f0ff; }
+    .drop-zone img { max-height: 80px; max-width: 100%; object-fit: contain; }
+    /* 포장 항목 */
+    .pack-item { background: #f8f9fa; border-radius: 8px; padding: 12px; margin-bottom: 10px; position: relative; border: 1px solid #e0e0e0; }
+    .pack-drop-zone { border: 2px dashed #aaa; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; background: #fafafa; min-height: 100px; transition: border-color .2s; }
+    .pack-drop-zone:hover, .pack-drop-zone.dragover { border-color: #4a4a8a; background: #f0f0ff; }
+    .pack-drop-zone img { max-height: 100px; max-width: 100%; object-fit: contain; }
+    .btn-add { background: #4a4a8a; color: white; border: none; }
+    .btn-add:hover { background: #6a6aaa; color: white; }
+    .btn-apply { background: #2e7d32; color: white; border: none; font-size: 13px; }
+    .btn-apply:hover { background: #43a047; color: white; }
+    .btn-remove { position: absolute; top: 8px; right: 8px; padding: 2px 8px; font-size: 12px; }
+    #submitBtn { background: #4a4a8a; color: white; font-size: 16px; font-weight: bold; padding: 12px 40px; }
+    #submitBtn:hover { background: #6a6aaa; }
+    #result { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="header d-flex align-items-center justify-content-between">
+  <div style="display:flex;align-items:center;gap:10px">
+    <strong>발주 자동화</strong>
+    <a href="/dashboard" style="padding:6px 14px; border-radius:6px; font-size:13px; font-weight:700; color:#7ec8ff; text-decoration:none; border:1px solid rgba(74,158,255,.35);">재고 대시보드</a>
+  </div>
+  <div style="display:flex; gap:4px;">
+    <a href="/" style="padding:6px 16px; border-radius:6px; font-size:13px; font-weight:600; background:#4a4a8a; color:#fff; text-decoration:none;">원본 발주서 생성</a>
+    <a href="/발주" style="padding:6px 16px; border-radius:6px; font-size:13px; font-weight:600; background:rgba(255,255,255,0.15); color:#ccc; text-decoration:none;">발주 실행</a>
+    <a href="/재고현황" style="padding:6px 16px; border-radius:6px; font-size:13px; font-weight:600; background:rgba(255,255,255,0.15); color:#ccc; text-decoration:none;">재고현황판</a>
+    <a href="/pi" style="padding:6px 16px; border-radius:6px; font-size:13px; font-weight:600; background:rgba(255,255,255,0.15); color:#ccc; text-decoration:none;">선금계약서 관리</a>
+  </div>
+</div>
+
+<div class="container py-4" style="max-width:900px;">
+  <form id="mainForm" enctype="multipart/form-data">
+
+    <!-- 기본 정보 -->
+    <div class="card mb-4 p-4">
+      <div class="section-title">기본 정보</div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">제조사 <span class="text-danger">*</span></label>
+          <input type="text" name="제조사" class="form-control" placeholder="예: 富坤电器">
+          <div style="margin-top:6px;font-size:12px;color:#555">
+            PI 계좌 연동:
+            <select id="acct-link-sel" style="margin-left:4px;border:1px solid #ddd;border-radius:4px;padding:2px 6px;font-size:12px" onchange="document.getElementById('계좌id_hidden').value=this.value">
+              <option value="">— 없음 —</option>
+            </select>
+            <button type="button" onclick="toggleNewAcctForm()" style="margin-left:6px;font-size:11px;padding:1px 7px;border:1px solid #6366f1;color:#6366f1;background:#fff;border-radius:4px;cursor:pointer">+ 신규</button>
+          </div>
+          <input type="hidden" name="계좌id" id="계좌id_hidden">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">브랜드 <span class="text-danger">*</span></label>
+          <select name="브랜드" class="form-select" onchange="브랜드변경(this)">
+            <option value="NUART">NUART (누아트)</option>
+            <option value="ILYON">ILYON (일리온)</option>
+            <option value="누아트스튜디오">누아트스튜디오</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">제품명 <span class="text-danger">*</span></label>
+          <input type="text" name="제품명" class="form-control" placeholder="예: 여행용 멀티 어댑터">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">시즌구분 <span class="text-danger">*</span></label>
+          <select name="시즌구분" class="form-select">
+            <option value="">선택하세요</option>
+            <option value="여름시즌">여름시즌</option>
+            <option value="겨울시즌">겨울시즌</option>
+            <option value="신기종">신기종</option>
+            <option value="비시즌">비시즌</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">카테고리1 (대분류) <span class="text-danger">*</span></label>
+          <select name="카테고리1" class="form-select" id="cat1_input" onchange="카테고리2업데이트()">
+            <option value="">선택하세요</option>
+            <option value="ACC">ACC</option>
+            <option value="전장품">전장품</option>
+            <option value="패션잡화">패션잡화</option>
+            <option value="신기종">신기종</option>
+            <option value="잡화">잡화</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">카테고리2 (소분류) <span class="text-muted small">(선택)</span></label>
+          <input type="text" name="카테고리2" class="form-control" placeholder="예: 케이블, 마우스패드" list="cat2_프리셋" id="cat2_input">
+          <datalist id="cat2_프리셋"></datalist>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">리드타임</label>
+          <input type="text" name="리드타임" class="form-control" placeholder="예: 25-30일">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">한국 요청 도착일</label>
+          <input type="text" name="한국_요청_도착일" class="form-control" placeholder="예: 2026-05-01">
+        </div>
+      </div>
+
+      <!-- 신규 계좌 등록 (전체 너비) -->
+      <div id="new-acct-form" style="display:none;margin-top:10px;background:#f8f8ff;border:1px solid #c7d2fe;border-radius:8px;padding:14px 18px;font-size:12px">
+        <div style="font-weight:600;margin-bottom:10px;color:#4338ca;font-size:13px">신규 계좌 등록</div>
+
+        <!-- 텍스트 붙여넣기 -->
+        <div style="margin-bottom:10px">
+          <label style="display:block;color:#555;margin-bottom:3px">Bank Information 텍스트 붙여넣기 (자동 파싱)</label>
+          <textarea id="na-paste" rows="3" placeholder="PI 하단 Bank information 블록을 그대로 붙여넣으세요..." style="width:100%;border:1px solid #a5b4fc;border-radius:4px;padding:5px 8px;font-size:11px;resize:vertical" oninput="naParseText()"></textarea>
+        </div>
+
+        <!-- 계좌 정보: 4열 그리드 -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          <div><label style="display:block;color:#555;margin-bottom:2px">중문 회사명</label>
+            <input id="na-중문" type="text" placeholder="예: 富坤电器有限公司" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">영문 회사명</label>
+            <input id="na-영문" type="text" placeholder="예: Fukun Electric" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">수취인명</label>
+            <input id="na-bene-name" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">수취인 주소</label>
+            <input id="na-bene-addr" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">국가</label>
+            <input id="na-country" type="text" placeholder="예: China" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">도시</label>
+            <input id="na-city" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">계좌번호</label>
+            <input id="na-acct-no" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">SWIFT / BIC</label>
+            <input id="na-swift" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">은행명</label>
+            <input id="na-bank" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">은행 주소</label>
+            <input id="na-bank-addr" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">Sort Code</label>
+            <input id="na-sort" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">Branch Code</label>
+            <input id="na-branch" type="text" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+        </div>
+
+        <!-- 중국 담당자 + 도장: 한 줄 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid #e0e7ff;align-items:end">
+          <div><label style="display:block;color:#555;margin-bottom:2px">중국 담당자 이름</label>
+            <input id="na-seller-name" type="text" placeholder="예: James" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">이메일</label>
+            <input id="na-seller-email" type="email" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">연락처</label>
+            <input id="na-seller-phone" type="text" placeholder="예: 13812345678" style="width:100%;border:1px solid #ddd;border-radius:4px;padding:3px 7px"></div>
+          <div><label style="display:block;color:#555;margin-bottom:2px">도장 이미지</label>
+            <input id="na-stamp" type="file" accept="image/*" style="width:100%;font-size:11px;border:1px solid #ddd;border-radius:4px;padding:2px 4px"></div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <button type="button" onclick="saveNewAcct()" style="font-size:12px;padding:4px 16px;background:#4338ca;color:#fff;border:none;border-radius:4px;cursor:pointer;white-space:nowrap">저장</button>
+            <button type="button" onclick="toggleNewAcctForm()" style="font-size:12px;padding:4px 10px;background:#fff;color:#555;border:1px solid #ddd;border-radius:4px;cursor:pointer;white-space:nowrap">취소</button>
+          </div>
+        </div>
+        <div style="margin-top:6px"><span id="na-msg" style="font-size:11px;color:#059669"></span></div>
+      </div>
+
+    </div>
+
+    <!-- ILYON 외박스 표기 (ILYON 선택 시만 표시) -->
+    <div class="card mb-4 p-4" id="ilyonSection" style="display:none; border-left: 4px solid #c0392b;">
+      <div class="section-title" style="border-color:#c0392b; color:#c0392b;">외박스 표기 (ILYON / 누아트스튜디오)</div>
+      <div class="row g-3">
+        <div class="col-md-7">
+          <label class="form-label">외박스 표기 문구 <span class="text-muted small">(xlsx M열에 삽입)</span></label>
+          <textarea name="외박스_텍스트" class="form-control" rows="3">※每个外箱上请填写'ILYON'公司名& 需要蓝色胶带</textarea>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">외박스 기본 이미지 <span class="text-success small">(미업로드 시 기본값 자동 적용)</span></label>
+          <div class="drop-zone" id="dz_ilyon"
+               ondragover="event.preventDefault(); this.classList.add('dragover')"
+               ondragleave="this.classList.remove('dragover')"
+               ondrop="ilyon이미지드롭(event)"
+               onclick="document.getElementById('ilyon_img').click()">
+            <div class="text-muted small">드래그 또는 클릭 (선택)</div>
+          </div>
+          <input type="file" id="ilyon_img" name="외박스_이미지" accept="image/*" style="display:none"
+                 onchange="ilyon이미지미리보기(this)">
+        </div>
+      </div>
+    </div>
+
+    <!-- 제품 목록 -->
+    <div class="card mb-4 p-4">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="section-title mb-0">제품 목록</div>
+        <button type="button" class="btn btn-apply btn-sm" onclick="일괄적용()">첫 번째 값 일괄 적용</button>
+      </div>
+      <!-- 공통 원가 (제품 전체에 적용) -->
+      <div class="row g-2 mb-3 p-2" style="background:#f0f4ff;border-radius:6px;border:1px solid #d0d8f0;">
+        <div class="col-auto" style="align-self:center;font-size:12px;font-weight:600;color:#4a4a8a;">공통 원가</div>
+        <div class="col-md-3">
+          <label class="form-label small mb-1">패키지 원가 (CNY)</label>
+          <input type="number" name="패키지원가" class="form-control form-control-sm" value="0" step="0.01">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label small mb-1">부자재 원가 (CNY)</label>
+          <input type="number" name="부자재원가" class="form-control form-control-sm" value="0" step="0.01">
+        </div>
+        <div class="col-auto" style="align-self:flex-end;padding-bottom:2px;font-size:11px;color:#888;">제품 전체에 공통 적용</div>
+      </div>
+      <div id="productList"></div>
+      <button type="button" class="btn btn-add mt-2" onclick="제품추가()">+ 제품 추가</button>
+    </div>
+
+    <!-- 포장 요구사항 -->
+    <div class="card mb-4 p-4">
+      <div class="section-title">포장 요구사항</div>
+      <div id="packList"></div>
+      <button type="button" class="btn btn-add mt-2" onclick="포장항목추가()">+ 항목 추가</button>
+    </div>
+
+    <!-- 제출 -->
+    <div class="text-center mb-4">
+      <button type="submit" id="submitBtn" class="btn">다운로드 / 저장</button>
+    </div>
+
+    <!-- 결과 -->
+    <div id="result" class="alert text-center fw-bold"></div>
+
+  </form>
+</div>
+
+<script>
+let 제품번호 = 0;
+let 포장번호 = 0;
+const _중복바코드 = new Set();  // 중복 확인된 바코드 id 추적
+
+// ── 바코드 중복확인 ──────────────────────────────────────────────
+async function 바코드중복확인(input, n) {
+  const val = input.value.trim();
+  const msg = document.getElementById(`bc_msg_${n}`);
+  if (!val) { input.classList.remove('is-invalid','is-valid'); msg.textContent=''; _중복바코드.delete(n); return; }
+
+  // 제품DB에서 MOQ/원가 자동채우기
+  try {
+    const dbRes = await fetch(`/api/발주서/제품DB조회?바코드=${encodeURIComponent(val)}`);
+    const dbData = await dbRes.json();
+    if (dbData.found) {
+      const moqEl = document.querySelector(`[name="moq_${n}"]`);
+      const costEl = document.querySelector(`[name="원가_${n}"]`);
+      const nameEl = document.querySelector(`[name="이름_${n}"]`);
+      if (moqEl && dbData.moq && !moqEl.value) moqEl.value = dbData.moq;
+      if (costEl && dbData.원가_위안 && (!costEl.value || costEl.value === '0')) costEl.value = dbData.원가_위안;
+      if (nameEl && dbData.상품명 && !nameEl.value) nameEl.value = dbData.상품명;
+    }
+  } catch(e) {}
+
+  try {
+    const res = await fetch(`/api/발주서/바코드중복확인?바코드=${encodeURIComponent(val)}`);
+    const data = await res.json();
+    if (data.중복) {
+      input.classList.add('is-invalid'); input.classList.remove('is-valid');
+      msg.style.color = '#dc3545';
+      msg.textContent = `중복값입니다 (${data.상품명})`;
+      _중복바코드.add(n);
+    } else {
+      input.classList.add('is-valid'); input.classList.remove('is-invalid');
+      msg.style.color = '#198754';
+      msg.textContent = '사용 가능';
+      _중복바코드.delete(n);
+    }
+  } catch(e) {
+    msg.style.color = '#888'; msg.textContent = '확인 실패';
+    _중복바코드.delete(n);
+  }
+}
+
+// ── 카테고리 동적 로드 (소분류 프리셋만 로드, 대분류는 고정) ────
+let _카테고리맵 = {};
+(async () => {
+  try {
+    const res = await fetch('/api/카테고리목록');
+    if (!res.ok) return;
+    const data = await res.json();
+    _카테고리맵 = data.카테고리맵 || {};
+    // 대분류 옵션은 추가하지 않음 (고정값만 사용)
+  } catch(e) {}
+})();
+
+function 카테고리2업데이트() {
+  const v = document.getElementById('cat1_input').value.trim();
+  const dl2 = document.getElementById('cat2_프리셋');
+  dl2.innerHTML = '';
+  const subs = _카테고리맵[v] || [];
+  [...subs].forEach(s => { const o=document.createElement('option'); o.value=s; dl2.appendChild(o); });
+}
+
+
+// ── 제품 추가 ────────────────────────────────────────────────────
+function 제품추가() {
+  제품번호++;
+  const n = 제품번호;
+  const html = `
+  <div class="product-row" id="row_${n}">
+    <button type="button" class="btn btn-sm btn-danger btn-remove" onclick="제품제거(${n})">삭제</button>
+    <div class="row g-2">
+      <div class="col-md-2">
+        <label class="form-label small">사진</label>
+        <div class="drop-zone" id="dz_${n}"
+             ondragover="event.preventDefault(); this.classList.add('dragover')"
+             ondragleave="this.classList.remove('dragover')"
+             ondrop="사진드롭(event, ${n})"
+             onclick="document.getElementById('photo_${n}').click()">
+          <div class="text-muted small">드래그 또는 클릭</div>
+        </div>
+        <input type="file" id="photo_${n}" name="제품_사진_${n}" accept="image/*" style="display:none"
+               onchange="사진미리보기(this, ${n})">
+      </div>
+      <div class="col-md-10">
+        <div class="row g-2">
+          <div class="col-md-4">
+            <label class="form-label small">ITEM명 (영문)</label>
+            <input type="text" name="item_${n}" class="form-control form-control-sm" placeholder="예: Travel Adapter">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small">MODEL NO.</label>
+            <input type="text" name="model_no_${n}" class="form-control form-control-sm">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label small">MOQ</label>
+            <input type="text" name="moq_${n}" class="form-control form-control-sm" placeholder="1000">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label small">원가 (CNY)</label>
+            <input type="number" name="원가_${n}" class="form-control form-control-sm" step="0.01" value="0">
+          </div>
+          <div class="col-12">
+            <label class="form-label small">한글 상품명 <span class="text-danger">*</span></label>
+            <input type="text" name="이름_${n}" class="form-control form-control-sm" placeholder="예: 누아트 여행용 멀티 어댑터, 화이트">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small">바코드 <span class="text-danger">*</span></label>
+            <input type="text" name="바코드_${n}" id="bc_${n}" class="form-control form-control-sm"
+                   onblur="바코드중복확인(this, ${n})">
+            <div id="bc_msg_${n}" style="font-size:11px; margin-top:2px;"></div>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small">수출가 (USD)</label>
+            <input type="number" name="수출_usd_${n}" class="form-control form-control-sm" step="0.0001" value="0">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById("productList").insertAdjacentHTML("beforeend", html);
+}
+
+function 제품제거(n) {
+  document.getElementById(`row_${n}`)?.remove();
+}
+
+// ── 일괄 적용 ────────────────────────────────────────────────────
+function 일괄적용() {
+  const rows = document.querySelectorAll("#productList .product-row");
+  if (rows.length < 2) return;
+
+  // 첫 번째 행 번호 추출
+  const firstId = rows[0].id.replace("row_", "");
+  const fields = ["item", "model_no", "moq", "원가", "수출_usd"];
+
+  const 첫값 = {};
+  fields.forEach(f => {
+    const el = document.querySelector(`[name="${f}_${firstId}"]`);
+    첫값[f] = el ? el.value : "";
+  });
+
+  // 두 번째 행부터 적용
+  for (let i = 1; i < rows.length; i++) {
+    const id = rows[i].id.replace("row_", "");
+    fields.forEach(f => {
+      const el = document.querySelector(`[name="${f}_${id}"]`);
+      if (el) el.value = 첫값[f];
+    });
+  }
+}
+
+// ── 사진 드래그/미리보기 ──────────────────────────────────────────
+function 사진미리보기(input, n) {
+  const file = input.files[0];
+  if (!file) return;
+  const dz = document.getElementById(`dz_${n}`);
+  const reader = new FileReader();
+  reader.onload = e => { dz.innerHTML = `<img src="${e.target.result}">`; };
+  reader.readAsDataURL(file);
+}
+
+function 사진드롭(e, n) {
+  e.preventDefault();
+  document.getElementById(`dz_${n}`).classList.remove("dragover");
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  const input = document.getElementById(`photo_${n}`);
+  input.files = dt.files;
+  사진미리보기(input, n);
+}
+
+// ── 포장 항목 ────────────────────────────────────────────────────
+// datalist 방식: 선택 또는 직접 입력 모두 가능, name 충돌 없음
+
+function 포장항목추가() {
+  포장번호++;
+  const n = 포장번호;
+
+  const html = `
+  <div class="pack-item" id="pack_${n}">
+    <button type="button" class="btn btn-sm btn-danger btn-remove" onclick="포장항목제거(${n})">삭제</button>
+    <div class="row g-2 align-items-start">
+      <div class="col-md-3">
+        <label class="form-label small fw-bold">구분</label>
+        <input type="text" name="포장_구분_${n}" class="form-control form-control-sm"
+               list="구분_프리셋" placeholder="선택 또는 직접 입력" autocomplete="off">
+        <label class="form-label small fw-bold mt-2">이미지 하단 텍스트</label>
+        <input type="text" name="포장_텍스트_${n}" class="form-control form-control-sm"
+               placeholder="예: 중앙 부착">
+        <div class="text-muted" style="font-size:11px; margin-top:4px;">
+          xlsx에 노랑 배경 / 흰 글자로 표시
+        </div>
+      </div>
+      <div class="col-md-9">
+        <label class="form-label small fw-bold">이미지</label>
+        <div class="pack-drop-zone" id="pdz_${n}"
+             ondragover="event.preventDefault(); this.classList.add('dragover')"
+             ondragleave="this.classList.remove('dragover')"
+             ondrop="포장이미지드롭(event, ${n})"
+             onclick="document.getElementById('pack_img_${n}').click()">
+          <div class="text-muted small">이미지를 드래그하거나 클릭해서 업로드</div>
+        </div>
+        <input type="file" id="pack_img_${n}" name="포장_이미지_${n}" accept="image/*" style="display:none"
+               onchange="포장이미지미리보기(this, ${n})">
+      </div>
+    </div>
+  </div>`;
+  document.getElementById("packList").insertAdjacentHTML("beforeend", html);
+}
+
+function 포장항목제거(n) {
+  document.getElementById(`pack_${n}`)?.remove();
+}
+
+function 포장이미지미리보기(input, n) {
+  const file = input.files[0];
+  if (!file) return;
+  const dz = document.getElementById(`pdz_${n}`);
+  const reader = new FileReader();
+  reader.onload = e => {
+    dz.innerHTML = `<img src="${e.target.result}">`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function 포장이미지드롭(e, n) {
+  e.preventDefault();
+  document.getElementById(`pdz_${n}`).classList.remove("dragover");
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  const input = document.getElementById(`pack_img_${n}`);
+  input.files = dt.files;
+  포장이미지미리보기(input, n);
+}
+
+// ── 폼 제출 ──────────────────────────────────────────────────────
+document.getElementById("mainForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  // 중복 바코드 차단
+  if (_중복바코드.size > 0) {
+    alert('중복된 바코드가 있습니다. 확인 후 수정해 주세요.');
+    return;
+  }
+  // 필수 카테고리 체크
+  const 시즌 = document.querySelector('[name="시즌구분"]').value.trim();
+  const cat1 = document.querySelector('[name="카테고리1"]').value.trim();
+  if (!시즌 || !cat1) {
+    alert('시즌구분, 카테고리1은 필수 입력 항목입니다.');
+    return;
+  }
+
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.textContent = "생성 중...";
+
+  const formData = new FormData(e.target);
+  try {
+    const res = await fetch("/api/발주서/생성", { method: "POST", body: formData });
+    const el = document.getElementById("result");
+    el.style.display = "block";
+
+    if (res.ok) {
+      // 파일 다운로드
+      const blob = await res.blob();
+      const cd = res.headers.get("Content-Disposition") || "";
+      const match = cd.match(/filename\*=UTF-8''(.+)/) || cd.match(/filename="?([^"]+)"?/);
+      const filename = match ? decodeURIComponent(match[1]) : "발주서.xlsx";
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+      el.className = "alert alert-success text-center fw-bold";
+      el.textContent = `다운로드 완료: ${filename}`;
+    } else {
+      const data = await res.json();
+      el.className = "alert alert-danger text-center";
+      el.innerHTML = data.errors.map(e => `• ${e}`).join("<br>");
+    }
+  } catch {
+    const el = document.getElementById("result");
+    el.style.display = "block";
+    el.className = "alert alert-danger";
+    el.textContent = "서버 오류가 발생했습니다.";
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "다운로드 / 저장";
+  }
+});
+
+// ── ILYON 조건부 섹션 ────────────────────────────────────────────
+function 브랜드변경(sel) {
+  const section = document.getElementById("ilyonSection");
+  const 표시 = ["ILYON", "누아트스튜디오"].includes(sel.value);
+  section.style.display = 표시 ? "block" : "none";
+
+  // 브랜드별 기본 텍스트 자동 변경
+  const textarea = document.querySelector('[name="외박스_텍스트"]');
+  if (sel.value === "ILYON") {
+    textarea.value = "※每个外箱上请填写'ILYON'公司名& 需要蓝色胶带";
+  } else if (sel.value === "누아트스튜디오") {
+    textarea.value = "※每个外箱上请填写'NUART'公司名& 需要红色胶带";
+  }
+}
+
+function ilyon이미지미리보기(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const dz = document.getElementById("dz_ilyon");
+  const reader = new FileReader();
+  reader.onload = e => { dz.innerHTML = `<img src="${e.target.result}">`; };
+  reader.readAsDataURL(file);
+}
+
+function ilyon이미지드롭(e) {
+  e.preventDefault();
+  document.getElementById("dz_ilyon").classList.remove("dragover");
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  const input = document.getElementById("ilyon_img");
+  input.files = dt.files;
+  ilyon이미지미리보기(input);
+}
+
+// 첫 제품 자동 추가 + 기본 포장 항목 1개
+제품추가();
+포장항목추가();
+</script>
+
+<!-- 포장 구분 프리셋 (datalist) -->
+<datalist id="구분_프리셋">
+  <option value="로고">
+  <option value="인증 정보">
+  <option value="OPP">
+  <option value="단박스">
+  <option value="아웃박스">
+  <option value="설명서">
+</datalist>
+
+<script>
+async function loadAcctDB(selectId) {
+  try {
+    var r = await fetch('/api/계좌/목록').then(r=>r.json());
+    var sel = document.getElementById('acct-link-sel');
+    if (sel) {
+      sel.innerHTML = '<option value="">— 없음 —</option>' +
+        (r.data||[]).map(a=>'<option value="'+a.id+'">'+(a.회사명_발주서||a.회사명_영문)+'</option>').join('');
+      if (selectId) {
+        sel.value = selectId;
+        document.getElementById('계좌id_hidden').value = selectId;
+      }
+    }
+  } catch(e) {}
+}
+
+function toggleNewAcctForm() {
+  var f = document.getElementById('new-acct-form');
+  f.style.display = f.style.display === 'none' ? 'block' : 'none';
+  document.getElementById('na-msg').textContent = '';
+}
+
+let _naParseTimer = null;
+function naParseText() {
+  clearTimeout(_naParseTimer);
+  _naParseTimer = setTimeout(async () => {
+    var text = document.getElementById('na-paste').value.trim();
+    if (!text) return;
+    try {
+      var r = await fetch('/api/계좌/텍스트_파싱', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({text}),
+      }).then(r=>r.json());
+      if (!r.success) return;
+      var d = r.data || {};
+      var set = (id, v) => { if (v && document.getElementById(id)) document.getElementById(id).value = v; };
+      set('na-영문',      d.회사명_영문 || d.beneficiary_name);
+      set('na-bene-name', d.beneficiary_name);
+      set('na-bene-addr', d.beneficiary_address);
+      set('na-country',   d.country);
+      set('na-city',      d.city);
+      set('na-acct-no',   d.account_number);
+      set('na-swift',     d.swift);
+      set('na-bank',      d.bank_name);
+      set('na-bank-addr', d.bank_address);
+      set('na-sort',      d.sort_code);
+      set('na-branch',    d.branch_code);
+    } catch(e) {}
+  }, 400);
+}
+
+async function saveNewAcct() {
+  var msg = document.getElementById('na-msg');
+  msg.style.color = '#059669';
+  var payload = {
+    회사명_중문:           document.getElementById('na-중문').value.trim(),
+    회사명_영문:           document.getElementById('na-영문').value.trim(),
+    beneficiary_name:      document.getElementById('na-bene-name').value.trim(),
+    beneficiary_address:   document.getElementById('na-bene-addr').value.trim(),
+    country:               document.getElementById('na-country').value.trim(),
+    city:                  document.getElementById('na-city').value.trim(),
+    account_number:        document.getElementById('na-acct-no').value.trim(),
+    swift:                 document.getElementById('na-swift').value.trim(),
+    bank_name:             document.getElementById('na-bank').value.trim(),
+    bank_address:          document.getElementById('na-bank-addr').value.trim(),
+    sort_code:             document.getElementById('na-sort').value.trim(),
+    branch_code:           document.getElementById('na-branch').value.trim(),
+    seller_name:           document.getElementById('na-seller-name').value.trim(),
+    seller_email:          document.getElementById('na-seller-email').value.trim(),
+    seller_phone:          document.getElementById('na-seller-phone').value.trim(),
+  };
+  if (!payload.회사명_영문 && !payload.회사명_중문 && !payload.beneficiary_name) {
+    alert('회사명(중문 또는 영문) 또는 수취인명을 입력하세요.'); return;
+  }
+  // 영문명 없으면 수취인명으로 대체 (id 생성에 사용)
+  if (!payload.회사명_영문) payload.회사명_영문 = payload.beneficiary_name || payload.회사명_중문;
+  try {
+    var r = await fetch('/api/계좌/저장', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload),
+    }).then(r=>r.json());
+    if (!r.success) throw new Error(r.error || '저장 실패');
+    var newId = r.id;
+    // 도장 이미지 업로드
+    var stampFile = document.getElementById('na-stamp').files[0];
+    if (stampFile) {
+      var fd = new FormData();
+      fd.append('file', stampFile);
+      await fetch('/api/계좌/도장_업로드/' + newId, {method:'POST', body:fd});
+    }
+    msg.textContent = '저장 완료!';
+    await loadAcctDB(newId);
+    setTimeout(()=>{ document.getElementById('new-acct-form').style.display='none'; msg.textContent=''; }, 1000);
+  } catch(e) {
+    msg.style.color = '#dc2626';
+    msg.textContent = '오류: ' + e.message;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', ()=>loadAcctDB());
+</script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!-- ── AI 챗봇 + 피드백 위젯 ── -->
+<style>
+#_cw-btn {
+  position:fixed; bottom:24px; right:24px; z-index:9000;
+  width:52px; height:52px; border-radius:50%;
+  background:#1a1a2e; border:none; cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,.35);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, transform .15s;
+}
+#_cw-btn:hover { background:#2d2d4e; transform:scale(1.07); }
+#_cw-btn svg { width:26px; height:26px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+#_cw-badge {
+  position:absolute; top:2px; right:2px;
+  background:#ef4444; color:#fff; font-size:10px; font-weight:700;
+  border-radius:50%; width:16px; height:16px;
+  display:none; align-items:center; justify-content:center;
+}
+#_cw-bubble {
+  position:fixed; bottom:88px; right:24px; z-index:9000;
+  width:280px; background:#1a1a2e; color:#fff;
+  border-radius:14px 14px 4px 14px;
+  padding:13px 14px 10px; box-shadow:0 4px 20px rgba(0,0,0,.3);
+  display:none; flex-direction:column; gap:6px;
+  animation:_cwSlideUp .25s ease;
+}
+@keyframes _cwSlideUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+._cw-bubble-top { display:flex; align-items:flex-start; gap:8px; }
+._cw-bubble-name { font-size:11px; font-weight:700; color:#7ec8ff; flex-shrink:0; }
+._cw-bubble-text { font-size:13px; line-height:1.55; flex:1; }
+._cw-bubble-nudge {
+  font-size:11px; color:#94a3b8; border-top:1px solid rgba(255,255,255,.1);
+  padding-top:7px; line-height:1.4;
+}
+._cw-bubble-close {
+  position:absolute; top:8px; right:10px;
+  background:none; border:none; color:#94a3b8; cursor:pointer; font-size:14px; line-height:1;
+}
+._cw-bubble-close:hover { color:#fff; }
+#_cw-panel {
+  position:fixed; bottom:86px; right:24px; z-index:9001;
+  width:360px; height:500px;
+  background:#fff; border-radius:14px;
+  box-shadow:0 8px 40px rgba(0,0,0,.22);
+  display:none; flex-direction:column; overflow:hidden;
+}
+#_cw-panel._cw-open { display:flex; }
+._cw-header {
+  background:#1a1a2e; color:#fff;
+  padding:12px 16px; display:flex; align-items:center; justify-content:space-between;
+  flex-shrink:0;
+}
+._cw-header-title { font-size:14px; font-weight:700; }
+._cw-header-sub { font-size:11px; color:#a0aec0; margin-top:1px; }
+._cw-close { background:none; border:none; color:#fff; cursor:pointer; font-size:18px; line-height:1; padding:0 2px; }
+._cw-tabs {
+  display:flex; border-bottom:1px solid #e5e7eb; flex-shrink:0;
+}
+._cw-tab {
+  flex:1; padding:9px 0; font-size:13px; font-weight:600; color:#6b7280;
+  background:none; border:none; cursor:pointer; border-bottom:2px solid transparent;
+  transition:color .15s, border-color .15s;
+}
+._cw-tab._cw-active { color:#1a1a2e; border-bottom-color:#1a1a2e; }
+
+/* 채팅 탭 */
+#_cw-chat-pane { display:flex; flex-direction:column; flex:1; overflow:hidden; }
+#_cw-messages {
+  flex:1; overflow-y:auto; padding:12px 14px; display:flex; flex-direction:column; gap:8px;
+}
+._cw-msg { max-width:85%; padding:8px 11px; border-radius:10px; font-size:13px; line-height:1.55; word-break:break-word; }
+._cw-msg.user { align-self:flex-end; background:#1a1a2e; color:#fff; border-bottom-right-radius:3px; }
+._cw-msg.bot  { align-self:flex-start; background:#f1f5f9; color:#1e293b; border-bottom-left-radius:3px; }
+._cw-msg.bot.loading { color:#94a3b8; font-style:italic; }
+._cw-input-row { display:flex; gap:6px; padding:10px 12px; border-top:1px solid #e5e7eb; flex-shrink:0; }
+#_cw-input {
+  flex:1; border:1px solid #d1d5db; border-radius:8px; padding:7px 10px;
+  font-size:13px; resize:none; height:36px; max-height:80px; overflow-y:auto;
+  font-family:inherit;
+}
+#_cw-input:focus { outline:none; border-color:#1a1a2e; }
+#_cw-send {
+  background:#1a1a2e; color:#fff; border:none; border-radius:8px;
+  padding:0 14px; font-size:13px; cursor:pointer; flex-shrink:0;
+  transition:background .15s;
+}
+#_cw-send:hover { background:#2d2d4e; }
+#_cw-send:disabled { background:#94a3b8; cursor:default; }
+
+/* 피드백 탭 */
+#_cw-fb-pane { display:none; flex-direction:column; flex:1; padding:14px; gap:10px; }
+#_cw-fb-pane._cw-visible { display:flex; }
+._cw-fb-label { font-size:12px; color:#64748b; line-height:1.5; }
+#_cw-fb-text {
+  flex:1; border:1px solid #d1d5db; border-radius:8px; padding:10px;
+  font-size:13px; font-family:inherit; resize:none;
+}
+#_cw-fb-text:focus { outline:none; border-color:#1a1a2e; }
+._cw-fb-footer { display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+#_cw-fb-msg { font-size:12px; color:#16a34a; display:none; }
+#_cw-fb-submit {
+  background:#1a1a2e; color:#fff; border:none; border-radius:8px;
+  padding:8px 18px; font-size:13px; font-weight:600; cursor:pointer;
+}
+#_cw-fb-submit:hover { background:#2d2d4e; }
+</style>
+
+<!-- 자동 말풍선 -->
+<div id="_cw-bubble">
+  <button class="_cw-bubble-close" onclick="_cwBubbleClose()">✕</button>
+  <div class="_cw-bubble-top">
+    <span class="_cw-bubble-name">소씽이</span>
+    <span class="_cw-bubble-text" id="_cw-bubble-text">…</span>
+  </div>
+  <div class="_cw-bubble-nudge">💬 중간중간 의견을 남겨주시면<br>다음 버전에는 더 편해져요~</div>
+</div>
+
+<!-- 플로팅 버튼 -->
+<button id="_cw-btn" onclick="_cwToggle()" title="AI 도우미">
+  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <div id="_cw-badge"></div>
+</button>
+
+<!-- 패널 -->
+<div id="_cw-panel">
+  <div class="_cw-header">
+    <div>
+      <div class="_cw-header-title">AI 도우미</div>
+      <div class="_cw-header-sub" id="_cw-page-label"></div>
+    </div>
+    <button class="_cw-close" onclick="_cwToggle()">✕</button>
+  </div>
+
+  <div class="_cw-tabs">
+    <button class="_cw-tab _cw-active" id="_cw-tab-chat" onclick="_cwTab('chat')">도움말 AI</button>
+    <button class="_cw-tab" id="_cw-tab-fb" onclick="_cwTab('fb')">개선 의견</button>
+  </div>
+
+  <!-- 채팅 -->
+  <div id="_cw-chat-pane">
+    <div id="_cw-messages"></div>
+    <div class="_cw-input-row">
+      <textarea id="_cw-input" placeholder="질문을 입력하세요…" rows="1"
+        onkeydown="_cwInputKey(event)" oninput="_cwAutoResize(this)"></textarea>
+      <button id="_cw-send" onclick="_cwSend()">전송</button>
+    </div>
+  </div>
+
+  <!-- 피드백 -->
+  <div id="_cw-fb-pane">
+    <div class="_cw-fb-label">
+      이 화면에서 불편한 점이나 개선되었으면 하는 부분을 자유롭게 적어주세요.<br>
+      의견은 로컬 파일에 누적 저장됩니다.
+    </div>
+    <textarea id="_cw-fb-text" placeholder="예) 발주 수량 일괄 입력 기능이 있으면 좋겠습니다."></textarea>
+    <div class="_cw-fb-footer">
+      <span id="_cw-fb-msg"></span>
+      <button id="_cw-fb-submit" onclick="_cwFbSubmit()">의견 제출</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const _PAGE = (document.querySelector('meta[name="page-id"]') || {}).content || '';
+  const _PAGE_NAMES = {
+    '발주_실행': '발주 실행',
+    '재고현황': '재고현황판',
+    'dashboard': '재고 대시보드',
+    'pi_관리': '선금계약서 관리',
+    '발주서_생성': '원본 발주서 생성',
+  };
+
+  let _history = [];
+  let _open = false;
+  let _greeted = false;
+  let _bubbleReply = '';
+
+  document.getElementById('_cw-page-label').textContent =
+    (_PAGE_NAMES[_PAGE] || _PAGE || '현재 화면') + ' 안내';
+
+  // ── 말풍선 클릭 → 패널 열기 ──
+  document.getElementById('_cw-bubble').addEventListener('click', function (e) {
+    if (e.target.classList.contains('_cw-bubble-close')) return;
+    _cwBubbleClose();
+    if (!_open) _cwToggle();
+  });
+
+  window._cwBubbleClose = function () {
+    document.getElementById('_cw-bubble').style.display = 'none';
+  };
+
+  window._cwToggle = function () {
+    _open = !_open;
+    document.getElementById('_cw-panel').classList.toggle('_cw-open', _open);
+    if (_open) {
+      _cwBadge(false);
+      _cwBubbleClose();
+      // 말풍선에서 이미 받은 인사말이 있으면 패널에 그대로 표시
+      if (!_greeted) {
+        _greeted = true;
+        if (_bubbleReply) {
+          _cwAppendMsg('bot', _bubbleReply);
+        } else {
+          _cwAutoGreetInPanel();
+        }
+      }
+      setTimeout(() => document.getElementById('_cw-input').focus(), 80);
+    }
+  };
+
+  // 페이지 로드 후 1.5초 뒤 자동 말풍선
+  setTimeout(_cwFetchGreet, 1500);
+
+  async function _cwFetchGreet() {
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: '__intro__', page: _PAGE, history: [] }),
+      });
+      const data = await res.json();
+      if (data.success && data.reply) {
+        _bubbleReply = data.reply;
+        _history.push({ role: 'assistant', content: data.reply });
+        document.getElementById('_cw-bubble-text').textContent = data.reply;
+        document.getElementById('_cw-bubble').style.display = 'flex';
+      }
+    } catch (e) { /* 조용히 실패 */ }
+  }
+
+  async function _cwAutoGreetInPanel() {
+    const loading = _cwAppendMsg('bot', '…', true);
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: '__intro__', page: _PAGE, history: [] }),
+      });
+      const data = await res.json();
+      loading.remove();
+      const reply = data.success ? data.reply : '안녕하세요! 소씽이입니다. 궁금한 점을 물어보세요.';
+      _cwAppendMsg('bot', reply);
+      _history.push({ role: 'assistant', content: reply });
+    } catch (e) {
+      loading.remove();
+      _cwAppendMsg('bot', '안녕하세요! 소씽이입니다. 궁금한 점을 물어보세요.');
+    }
+  }
+
+  window._cwTab = function (tab) {
+    const isChat = tab === 'chat';
+    document.getElementById('_cw-tab-chat').classList.toggle('_cw-active', isChat);
+    document.getElementById('_cw-tab-fb').classList.toggle('_cw-active', !isChat);
+    document.getElementById('_cw-chat-pane').style.display = isChat ? 'flex' : 'none';
+    const fb = document.getElementById('_cw-fb-pane');
+    fb.style.display = isChat ? 'none' : 'flex';
+    if (!isChat) document.getElementById('_cw-fb-text').focus();
+  };
+
+  window._cwInputKey = function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); _cwSend(); }
+  };
+
+  window._cwAutoResize = function (el) {
+    el.style.height = '36px';
+    el.style.height = Math.min(el.scrollHeight, 80) + 'px';
+  };
+
+  window._cwSend = async function () {
+    const inp = document.getElementById('_cw-input');
+    const msg = inp.value.trim();
+    if (!msg) return;
+    inp.value = ''; inp.style.height = '36px';
+    document.getElementById('_cw-send').disabled = true;
+
+    _cwAppendMsg('user', msg);
+    _history.push({ role: 'user', content: msg });
+
+    const loading = _cwAppendMsg('bot', '…', true);
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg, page: _PAGE, history: _history.slice(-10) }),
+      });
+      const data = await res.json();
+      loading.remove();
+      if (data.success) {
+        _cwAppendMsg('bot', data.reply);
+        _history.push({ role: 'assistant', content: data.reply });
+        if (!_open) _cwBadge(true);
+      } else {
+        _cwAppendMsg('bot', '오류: ' + (data.error || '알 수 없는 오류'));
+      }
+    } catch (e) {
+      loading.remove();
+      _cwAppendMsg('bot', '네트워크 오류가 발생했습니다.');
+    }
+    document.getElementById('_cw-send').disabled = false;
+    inp.focus();
+  };
+
+  window._cwFbSubmit = async function () {
+    const txt = document.getElementById('_cw-fb-text').value.trim();
+    const msg = document.getElementById('_cw-fb-msg');
+    if (!txt) { msg.textContent = '내용을 입력해주세요.'; msg.style.color = '#dc2626'; msg.style.display = 'inline'; return; }
+    try {
+      const res = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ page: _PAGE_NAMES[_PAGE] || _PAGE, content: txt }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById('_cw-fb-text').value = '';
+        msg.textContent = '의견이 저장되었습니다. 감사합니다!';
+        msg.style.color = '#16a34a';
+      } else {
+        msg.textContent = data.error || '저장 실패';
+        msg.style.color = '#dc2626';
+      }
+    } catch (e) {
+      msg.textContent = '오류: ' + e.message;
+      msg.style.color = '#dc2626';
+    }
+    msg.style.display = 'inline';
+    setTimeout(() => { msg.style.display = 'none'; }, 4000);
+  };
+
+  function _cwAppendMsg(role, text, isLoading) {
+    const box = document.getElementById('_cw-messages');
+    const div = document.createElement('div');
+    div.className = '_cw-msg ' + role + (isLoading ? ' loading' : '');
+    div.textContent = text;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    return div;
+  }
+
+  function _cwBadge(show) {
+    _newMsg = show;
+    const b = document.getElementById('_cw-badge');
+    b.style.display = show ? 'flex' : 'none';
+  }
+
+  // 초기 탭 상태
+  document.getElementById('_cw-chat-pane').style.display = 'flex';
+  document.getElementById('_cw-fb-pane').style.display = 'none';
+})();
+</script>
