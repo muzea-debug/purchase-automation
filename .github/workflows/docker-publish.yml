@@ -23,3 +23,15 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/purchase-automation:latest
+
+      - name: Save image as tar
+        run: docker save muzea/purchase-automation:latest -o purchase-automation.tar
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-build
+          name: Latest Build
+          files: purchase-automation.tar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
