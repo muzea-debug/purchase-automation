@@ -22,4 +22,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/발주자동화:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/purchase-automation:latest
